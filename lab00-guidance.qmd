@@ -1,0 +1,27 @@
+---
+title: "Lab 00 Guidance"
+---
+
+## Best practice advice for labs
+
+There are several recommendations you should follow to get the most out of these exercises and this module as a whole.
+
+-   **Set up separate script for each lab** (e.g. an R script) to organize and document your work
+
+-   **Answer each question formally** and fully
+
+-   **Use a fully commented, reproducible script style** with a Header, Contents, and clickable Section blocks. This will help you practice Best Practice (see what I did there?), and will make the script useful to yourself in the future as a reference (e.g., the next time you want to set up a K means analysis script...)
+
+-   **Type 100% of your own code:** do not copy and paste anything (practice, practice + troubleshooting error messages for typos and other issues)
+
+-   Consider writing your lab scripts using **R Markdown**
+
+-   Consider setting up a **Github repository** for your lab scripts
+
+<br><br>
+
+## Harper Adams Data Science
+
+![](img/HDS.png){fig-alt="Harper Data Science" width="125"}
+
+This module is a part of the [MSc in Data Science for Global Agriculture, Food, and Environment](https://www.harper-adams.ac.uk/courses/postgraduate/201194/data-science-for-global-agriculture-food-and-environment "MSc in Data Science") at [Harper Adams University](https://www.harper-adams.ac.uk/ "Harper Adams University"), led by [Ed Harris](https://www.harper-adams.ac.uk/general/staff/profile/201620/Edwin-Harris/ "Ed's Faculty page").

@@ -1,0 +1,71 @@
+---
+title: "Schedule"
+---
+
+## Calendar of resources
+
+The material in this module is designed to be experienced in an intensive one week format followed by an assessment meant to showcase data science skills (e.g. a github project website that could be part of your cv). For enrolled students, the work will be supported with several live sessions during the main week of delivery.
+
+<br>
+
++-----------+----------------------------+------------------------------+---------------------------+
+| Day       | Topics                     | Labs                         | Readings                  |
++===========+============================+==============================+===========================+
+| Monday    | 00 Module overview         | Lab guidance                 | James et al. 2021 Ch 1,2  |
+|           |                            |                              |                           |
+|           | 01 Introduction            | Lab 01 Linear algebra fun    | Efron 2020                |
+|           |                            |                              |                           |
+|           | 02 Statistical learning    | Lab 02 R programming refresh |                           |
++-----------+----------------------------+------------------------------+---------------------------+
+| Tuesday   | 03 Linear regression       | Lab 03 Linear regression     | James et al. 2021 Ch 3,4  |
+|           |                            |                              |                           |
+|           | 04 Classification          | Lab 04 Classification        | Melesse 2018              |
++-----------+----------------------------+------------------------------+---------------------------+
+| Wednesday | 05 Bootstrapping           | Lab 05 Resampling            | James et al. 2021 Ch 5,6  |
+|           |                            |                              |                           |
+|           | 06 Model selection         | Lab 06 Model selection       | Aho 2014                  |
++-----------+----------------------------+------------------------------+---------------------------+
+| Thursday  | 07 Non-linear models       | Lab 07 Non-linear models     | James et al. 2021 Ch 7,8  |
+|           |                            |                              |                           |
+|           | 08 Decision trees          | Lab 08 Decision trees        | Barnard 2019              |
+|           |                            |                              |                           |
+|           |                            |                              | Otukei 2010               |
++-----------+----------------------------+------------------------------+---------------------------+
+| Friday    | 09 Support vector machines | Lab 09 SVM                   | James et al. 2021 Ch 9,12 |
+|           |                            |                              |                           |
+|           | 10 Unsupervised learning   | Lab 10 Unsupervised learning | Ebrahimi 2017             |
+|           |                            |                              |                           |
+|           |                            |                              | Howell 2020               |
++-----------+----------------------------+------------------------------+---------------------------+
+
+<br>
+
+## References
+
+**Textbook**: [James et al. 2021 Introduction to statistical learning 2ed](https://www.statlearning.com/)
+
+all refs zip
+
+Aho, K., Derryberry, D., Peterson, T., 2014. Model selection for ecologists: the worldviews of AIC and BIC. Ecology 95, 631--636.
+
+Barnard, D.M., Germino, M.J., Pilliod, D.S., Arkle, R.S., Applestein, C., Davidson, B.E., Fisk, M.R., 2019. Cannot see the random forest for the decision trees: selecting predictive models for restoration ecology. Restoration Ecology 27, 1053--1063.
+
+Ebrahimi, M.A., Khoshtaghaza, M.H., Minaei, S., Jamshidi, B., 2017. Vision-based pest detection based on SVM classification method. Computers and Electronics in Agriculture 137, 52--58.
+
+Efron, B., 2020. Prediction, Estimation, and Attribution. Journal of the American Statistical Association 115, 636--655.
+
+Howell, O., Wenping, C., Marsland, R., Mehta, P., 2020. Machine learning as ecology. J. Phys. A: Math. Theor. 53, 334001.
+
+James, G., Witten, D., Hastie, T., Tibshirani, R., 2021. An Introduction to Statistical Learning: with Applications in R, Springer Texts in Statistics 2ed. Springer-Verlag, New York.
+
+Melesse, S., Sobratee, N., Workneh, T., 2016. Application of logistic regression statistical technique to evaluate tomato quality subjected to different pre- and post-harvest treatments. Biological Agriculture & Horticulture 32, 277--287.
+
+Otukei, J.R., Blaschke, T., 2010. Land cover change assessment using decision trees, support vector machines and maximum likelihood classification algorithms. International Journal of Applied Earth Observation and Geoinformation, Supplement Issue on "Remote Sensing for Africa -- A Special Collection from the African Association for Remote Sensing of the Environment (AARSE)" 12, S27--S31.
+
+<br><br>
+
+## Harper Adams Data Science
+
+![](img/HDS.png){fig-alt="Harper Data Science" width="125"}
+
+This module is a part of the [MSc in Data Science for Global Agriculture, Food, and Environment](https://www.harper-adams.ac.uk/courses/postgraduate/201194/data-science-for-global-agriculture-food-and-environment "MSc in Data Science") at [Harper Adams University](https://www.harper-adams.ac.uk/ "Harper Adams University"), led by [Ed Harris](https://www.harper-adams.ac.uk/general/staff/profile/201620/Edwin-Harris/ "Ed's Faculty page").

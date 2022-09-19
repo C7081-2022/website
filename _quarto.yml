@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "C7081-2022 Statistical analysis for data science"
+  sidebar:
+    logo: "img/C7081-pad.png"
+    style: "docked"
+    search: true
+    contents: 
+      - section: "Information"
+        contents:
+          - index.qmd
+          - schedule.qmd
+      - section: "Labs"
+        contents:
+          - lab00-guidance.qmd
+          - lab01-lin-alg.qmd
+
+format:
+  html:
+    theme: sandstone
+    css: styles.css
+    toc: true
+
+editor: visual
+
