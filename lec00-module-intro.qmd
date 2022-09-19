@@ -1,0 +1,48 @@
+---
+format: 
+  revealjs:
+    theme: blood
+editor: visual
+---
+
+## 
+
+<center>
+C7081 Statistical Analysis for Data Science
+
+Ed Harris
+
+![](img/title-slide.png){width=80%}
+
+</center>
+
+## Module overview
+
+<br>
+
+:::: {.columns}
+
+::: {.column width="50%"}
+>"I am always ready to learn although I do not always like being taught."
+
+-Winston Churchill
+
+:::
+
+::: {.column width="50%"}
+![](img/Churchill.png){width=50%}
+:::
+
+::::
+
+## Module overview
+
+<br>
+
+- One week intensive format
+
+- Daily catch-up meetings
+
+- Recorded lectures, readings
+
+- Labs are critical

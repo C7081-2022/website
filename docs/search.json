@@ -60,7 +60,7 @@
     "href": "lab00-guidance.html",
     "title": "Lab 00 Guidance",
     "section": "",
-    "text": "There are several recommendations you should follow to get the most out of these exercises and this module as a whole.\n\nSet up separate script for each lab (e.g. an R script) to organize and document your work\nAnswer each question formally and fully\nUse a fully commented, reproducible script style with a Header, Contents, and clickable Section blocks. This will help you practice Best Practice (see what I did there?), and will make the script useful to yourself in the future as a reference (e.g., the next time you want to set up a K means analysis script…)\nType 100% of your own code: do not copy and paste anything (practice, practice + troubleshooting error messages for typos and other issues)\nConsider writing your lab scripts using R Markdown\nConsider setting up a Github repository for your lab scripts"
+    "text": "There are several recommendations you should follow to get the most out of these exercises and this module as a whole.\n\nSet up a separate script for each lab (e.g. an R script) to organize and document your work\nAnswer each question formally and fully\nUse a fully commented, reproducible script style with a Header, Contents, and clickable Section blocks. This will help you practice Best Practice (see what I did there?), and will make the script useful to yourself in the future as a reference (e.g., the next time you want to set up a K means analysis script…)\nType 100% of your own code: do not copy and paste anything (practice, practice + troubleshooting error messages for typos and other issues)\nConsider writing your lab scripts using R Markdown\nConsider setting up a Github repository for your lab scripts"
   },
   {
     "objectID": "lab00-guidance.html#harper-adams-data-science",
@@ -117,5 +117,33 @@
     "title": "Lab 01 Linear alg.",
     "section": "5 Exercises",
     "text": "5 Exercises\n\n5.1 The bird table\nOn a sunny day, two tables are standing in an English country garden. On each table birds of unknown species are sitting having the time of their lives. A bird from the first table says to those on the second table: “Hi – if one of you come to our table then there will be the same number of us on each table”. “Yeah, right”, says a bird from the second table, “but if one of you comes to our table, then we will be twice as many on our table as on yours”.\nQuestion: How many birds are on each table?\n\nWrite up two equations with two unknowns\nSolve these equations using the methods you have learned from linear algebra\nSimply finding the solution by trial–and–error is invalid"
+  },
+  {
+    "objectID": "lec00-module-intro.html#c7081-statistical-analysis-for-data-science",
+    "href": "lec00-module-intro.html#c7081-statistical-analysis-for-data-science",
+    "title": "c7081 Lec00 Module Introduction",
+    "section": "C7081 Statistical Analysis for Data Science",
+    "text": "C7081 Statistical Analysis for Data Science\n\nEd Harris"
+  },
+  {
+    "objectID": "lec00-module-intro.html#section",
+    "href": "lec00-module-intro.html#section",
+    "title": "C7081-2022 Statistical analysis for data science",
+    "section": "",
+    "text": "C7081 Statistical Analysis for Data Science\nEd Harris"
+  },
+  {
+    "objectID": "lec00-module-intro.html#module-overview",
+    "href": "lec00-module-intro.html#module-overview",
+    "title": "C7081-2022 Statistical analysis for data science",
+    "section": "Module overview",
+    "text": "Module overview\n\n\n\n\n“I am always ready to learn although I do not always like being taught.”\n\n-Winston Churchill"
+  },
+  {
+    "objectID": "lec00-module-intro.html#module-overview-1",
+    "href": "lec00-module-intro.html#module-overview-1",
+    "title": "C7081-2022 Statistical analysis for data science",
+    "section": "Module overview",
+    "text": "Module overview\n\n\nOne week intensive format\nDaily catch-up meetings\nRecorded lectures, readings\nLabs are critical"
   }
 ]

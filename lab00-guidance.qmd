@@ -6,7 +6,7 @@ title: "Lab 00 Guidance"
 
 There are several recommendations you should follow to get the most out of these exercises and this module as a whole.
 
--   **Set up separate script for each lab** (e.g. an R script) to organize and document your work
+-   **Set up a separate script for each lab** (e.g. an R script) to organize and document your work
 
 -   **Answer each question formally** and fully
 
