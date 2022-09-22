@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.179">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -98,10 +98,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -148,6 +150,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <a href="./" class="sidebar-logo-link">
       <img src="./img/C7081-pad.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -186,12 +191,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab00-guidance.html" class="sidebar-item-text sidebar-link">Lab 00 Guidance</a>
+  <a href="./lab00-welcome.html" class="sidebar-item-text sidebar-link">Lab Welcome</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab00-guidance.html" class="sidebar-item-text sidebar-link">Lab Guidance</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab01-lin-alg.html" class="sidebar-item-text sidebar-link active">Lab 01 Linear alg.</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab02-R-practice.html" class="sidebar-item-text sidebar-link">Lab 02 R practice</a>
   </div>
 </li>
       </ul>
@@ -295,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>Vectors in R are always printed in the ‘row format’, regardless of math notation.</p>
@@ -358,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 </section>
@@ -386,7 +401,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 </section>
@@ -497,7 +512,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="description" class="level3">
 <h3 class="anchored" data-anchor-id="description">3.1 Description</h3>
 <p>Matrices are described by the number of rows and columns they have. We may say a matrix <span class="math inline">\(A\)</span> to have dimensions <span class="math inline">\(r \times c\)</span>, (rows <span class="math inline">\(\times\)</span> columns).</p>
-$ A =
+<p>$ A =</p>
 <span class="math display">\[\begin{bmatrix} a_{11} &amp; a_{12} &amp; \dots &amp; a_{1c} \\ a_{21} &amp; a_{22} &amp; \dots &amp; a_{2c} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{r1} &amp; a_{r2} &amp; \dots &amp; a_{rc} \end{bmatrix}\]</span>
 <p>$</p>
 <div class="cell">
@@ -528,12 +543,12 @@ $ A =
 <h3 class="anchored" data-anchor-id="multiplying-matrices">3.2 Multiplying matrices</h3>
 <p>For a number <span class="math inline">\(\alpha\)</span> and a matrix <span class="math inline">\(A\)</span>, the product of <span class="math inline">\(\alpha A\)</span> is the matrix obtained by multiplying each element of <span class="math inline">\(A\)</span> to <span class="math inline">\(\alpha\)</span>.</p>
 <p><span class="math inline">\(\alpha = 3\)</span></p>
-$A =
+<p>$A =</p>
 <span class="math display">\[\begin{bmatrix} 1 &amp; 3 \\  2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix}\]</span>
 <p>$</p>
-$3
+<p>$3 </p>
 <span class="math display">\[\begin{bmatrix} 1 &amp; 3 \\  2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix}\]</span>
-=
+<p>=</p>
 <span class="math display">\[\begin{bmatrix} 3 &amp; 9 \\  6 &amp; 12 \\ 3 &amp; 3 \end{bmatrix}\]</span>
 <p>$</p>
 <div class="cell">
@@ -552,9 +567,9 @@ $3
 <section id="transpose-for-matrices" class="level3">
 <h3 class="anchored" data-anchor-id="transpose-for-matrices">3.3 Transpose for matrices</h3>
 <p>Matrix trasposition works similarly to vector transpostiion and is also denoted by <span class="math inline">\(\intercal\)</span></p>
-$
+<p>$</p>
 <span class="math display">\[\begin{bmatrix} 1 &amp; 3 \\  2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix}\]</span>
-^ =
+<p>^ =</p>
 <span class="math display">\[\begin{bmatrix} 1 &amp; 2 &amp; 1 \\  3 &amp; 4 &amp; 1 \end{bmatrix}\]</span>
 <p>$</p>
 <div class="cell">
@@ -571,13 +586,13 @@ $
 <section id="sum-of-matrices" class="level3">
 <h3 class="anchored" data-anchor-id="sum-of-matrices">3.4 Sum of matrices</h3>
 <p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be matrices of dimensions <span class="math inline">\(r \times c\)</span>. We sum the matrices together element-wise. The matrices must be of exactly the same dimensions.</p>
-$
+<p>$</p>
 <span class="math display">\[\begin{bmatrix} 1 &amp; 3 \\  2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix}\]</span>
 <ul>
 <li><span class="math display">\[\begin{bmatrix} 7 &amp; 1 \\  1 &amp; 1 \\ 4 &amp; 4 \end{bmatrix}\]</span>
-=
+<p>=</p>
 <span class="math display">\[\begin{bmatrix} 8 &amp; 4 \\  3 &amp; 5 \\ 5 &amp; 5 \end{bmatrix}\]</span>
-$</li>
+<p>$</p></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding matrices in R</span></span>
@@ -596,11 +611,10 @@ $</li>
 <section id="multiplying-matrix-x-vector" class="level3">
 <h3 class="anchored" data-anchor-id="multiplying-matrix-x-vector">3.5 Multiplying matrix x vector</h3>
 <p>Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(r \times c\)</span> matrix and ;et <span class="math inline">\(B\)</span> be a column vector with <span class="math inline">\(c\)</span> dimensions Note the number of elements in one dimension (here <span class="math inline">\(c\)</span>) bust be the same.</p>
-$
+<p>$</p>
 <span class="math display">\[\begin{bmatrix} a_{11} &amp; a_{12} &amp; \dots &amp; a_{1c} \\ a_{21} &amp; a_{22} &amp; \dots &amp; a_{2c} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{r1} &amp; a_{r2} &amp; \dots &amp; a_{rc} \end{bmatrix}\]</span>
-
 <span class="math display">\[\begin{bmatrix} b_{1} \\  b_{2} \\  \vdots \\ b_{c} \end{bmatrix}\]</span>
-=
+<p>=</p>
 <span class="math display">\[\begin{bmatrix} a_{11} b_{1} + a_{12} b_{2} +  \dots + a_{1c}b_{c} \\ a_{21} b_{1} + a_{22} b_{2} + \dots + a_{2c} b_{c} \\ \vdots  \\ a_{r1} b_{1} + a_{r2} b_{2} +  \dots   + a_{rc} b_{c} \end{bmatrix}\]</span>
 <p>$</p>
 <p><span class="math inline">\(\begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix} \times \begin{bmatrix} 7 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \cdot 7 + 3 \cdot 1 \\ 2 \cdot 7 + 4 \cdot 1 \\ 1 \cdot 7 + 1 \cdot 1 \end{bmatrix}\begin{bmatrix} 10 \\ 18 \\ 8 \end{bmatrix}\)</span></p>
@@ -754,9 +768,9 @@ $
 <p><span class="math inline">\(B\)</span> is the inverse of <span class="math inline">\(A\)</span>, written as <span class="math inline">\(B = A^{−1}\)</span> and</p>
 <p><span class="math inline">\(A\)</span> is the inverse of <span class="math inline">\(B\)</span>, written as <span class="math inline">\(A = B^{−1}\)</span></p>
 <p>Numeric example</p>
-$ A =
+<p>$ A =</p>
 <span class="math display">\[\begin{bmatrix} 1 &amp; 3 \\  2 &amp; 4 \end{bmatrix}\]</span>
-B =
+<p>B =</p>
 <span class="math display">\[\begin{bmatrix} -2 &amp; 1.5 \\  1 &amp; -0.5 \end{bmatrix}\]</span>
 <p>$</p>
 <p>We can show <span class="math inline">\(AB = BA = I\)</span>, thus <span class="math inline">\(B=A^{-1}\)</span></p>
@@ -831,7 +845,7 @@ B =
 <p>Now we can graphically represent these equations, which are two lines and which demonstrate the solutions</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>The lines represent the solved equations above, and it can be seen that they cross at a single point, the solutions for <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, <span class="math inline">\(x_1 = 1\)</span> and <span class="math inline">\(x_2=2\)</span>, respectively.</p>
@@ -882,7 +896,7 @@ B =
 <p>We can plot these values and note that the relationship is approvimately linear (i.e., a straight line can be drawn that comes close to all the values)</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>We can notate the linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> with</p>
@@ -976,6 +990,119 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

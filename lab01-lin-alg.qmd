@@ -235,7 +235,7 @@ a %*% b
 
 ### 2.6 Magnitude (aka the "norm") of a vector
 
-There are several ways to measure the "bigness" of a vector, sometimes called the norms. Although we will not go into detail here, there are two types of norm to be aware of.  These may seem a little esoteric for our purposes here, but they are used "under the bonnet" for many statistical and machine learning calculations (thus, you may encounter them and should probably be aware of them).
+There are several ways to measure the "bigness" of a vector, sometimes called the norms. Although we will not go into detail here, there are two types of norm to be aware of. These may seem a little esoteric for our purposes here, but they are used "under the bonnet" for many statistical and machine learning calculations (thus, you may encounter them and should probably be aware of them).
 
 **L1 norm** (aka the outer norm) - this is the overall absolute magnitude of vector values
 
@@ -250,7 +250,6 @@ Take a vector $a = (2, -4, 5)$
 $||a||_1 = \sum(|a_1|+ \dots + |a_n|)$
 
 $||a||_1 = (2 + 4 + 5) = 11$
-
 
 #### L2 norm
 
@@ -282,7 +281,7 @@ norm(matrix(b), type = "2") # L2
 
 ### 2.7 Special vectors
 
-There are a few special cases of vectors we may encounter (but which are certainly there "doing work" for us), like the 0-vector and the 1-vector.  These are simply vectors where all values assume either zero or one, respectively.  These are often used in linear models to encode data for matrix calculations (but we will leave it at that for now).
+There are a few special cases of vectors we may encounter (but which are certainly there "doing work" for us), like the 0-vector and the 1-vector. These are simply vectors where all values assume either zero or one, respectively. These are often used in linear models to encode data for matrix calculations (but we will leave it at that for now).
 
 ```{r}
 # 0-matrix, n=10
@@ -295,11 +294,11 @@ rep(1, 8)
 
 ### 2.8 Orthogonal vectors
 
-Orthogonal vectors are used in a number of statistical methods, e.g. multivariate statistics like principal component analysis (PCA).  Here, orthogonal means perpendicular.  We determine orthogonality by taking the inner product of two vectors.
+Orthogonal vectors are used in a number of statistical methods, e.g. multivariate statistics like principal component analysis (PCA). Here, orthogonal means perpendicular. We determine orthogonality by taking the inner product of two vectors.
 
 Take two vectors $a$ and $b$, they are orthogonal if and only if
 
-$a \perp b \iff  a \cdot b = 0$
+$a \perp b \iff a \cdot b = 0$
 
 ```{r}
 a <- c(3,-3)
@@ -312,9 +311,14 @@ sum(a*b) # yep, a and b are orthogonal!
 
 ### 3.1 Description
 
-Matrices are described by the number of rows and columns they have.  We may say a matrix $A$ to have dimensions $r \times c$, (rows $\times$ columns). 
+Matrices are described by the number of rows and columns they have. We may say a matrix $A$ to have dimensions $r \times c$, (rows $\times$ columns).
 
-$ A = \begin{bmatrix} a_{11} & a_{12} & \dots & a_{1c} \\ a_{21} & a_{22} & \dots & a_{2c} \\ \vdots & \vdots & \ddots & \vdots \\ a_{r1} & a_{r2} & \dots & a_{rc} \end{bmatrix} $
+\$ A =
+
+```{=tex}
+\begin{bmatrix} a_{11} & a_{12} & \dots & a_{1c} \\ a_{21} & a_{22} & \dots & a_{2c} \\ \vdots & \vdots & \ddots & \vdots \\ a_{r1} & a_{r2} & \dots & a_{rc} \end{bmatrix}
+```
+\$
 
 ```{r}
 # make matrix, vector assembled "by column"
@@ -338,9 +342,24 @@ For a number $\alpha$ and a matrix $A$, the product of $\alpha A$ is the matrix 
 
 $\alpha = 3$
 
-$A = \begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix} $
+\$A =
 
-$3 \times \begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix} = \begin{bmatrix} 3 & 9 \\  6 & 12 \\ 3 & 3 \end{bmatrix} $
+```{=tex}
+\begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix}
+```
+\$
+
+\$3 \times 
+
+```{=tex}
+\begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix}
+```
+=
+
+```{=tex}
+\begin{bmatrix} 3 & 9 \\  6 & 12 \\ 3 & 3 \end{bmatrix}
+```
+\$
 
 ```{r}
 # matrix multiplication in R
@@ -353,8 +372,17 @@ alpha*A
 
 Matrix trasposition works similarly to vector transpostiion and is also denoted by $\intercal$
 
+\$
 
-$\begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix} ^ \intercal = \begin{bmatrix} 1 & 2 & 1 \\  3 & 4 & 1 \end{bmatrix} $
+```{=tex}
+\begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix}
+```
+\^ \intercal =
+
+```{=tex}
+\begin{bmatrix} 1 & 2 & 1 \\  3 & 4 & 1 \end{bmatrix}
+```
+\$
 
 ```{r}
 # Matrix transpose in R
@@ -364,9 +392,24 @@ t(A)
 
 ### 3.4 Sum of matrices
 
-Let $A$ and $B$ be matrices of dimensions $r \times c$.  We sum the matrices together element-wise.  The matrices must be of exactly the same dimensions.
+Let $A$ and $B$ be matrices of dimensions $r \times c$. We sum the matrices together element-wise. The matrices must be of exactly the same dimensions.
 
-$\begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix} + \begin{bmatrix} 7 & 1 \\  1 & 1 \\ 4 & 4 \end{bmatrix} = \begin{bmatrix} 8 & 4 \\  3 & 5 \\ 5 & 5 \end{bmatrix} $
+\$
+
+```{=tex}
+\begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix}
+```
+-   
+
+    ```{=tex}
+    \begin{bmatrix} 7 & 1 \\  1 & 1 \\ 4 & 4 \end{bmatrix}
+    ```
+    =
+
+    ```{=tex}
+    \begin{bmatrix} 8 & 4 \\  3 & 5 \\ 5 & 5 \end{bmatrix}
+    ```
+    \$
 
 ```{r}
 # Adding matrices in R
@@ -380,9 +423,24 @@ A +B
 
 Let $A$ be an $r \times c$ matrix and ;et $B$ be a column vector with $c$ dimensions Note the number of elements in one dimension (here $c$) bust be the same.
 
-$ \begin{bmatrix} a_{11} & a_{12} & \dots & a_{1c} \\ a_{21} & a_{22} & \dots & a_{2c} \\ \vdots & \vdots & \ddots & \vdots \\ a_{r1} & a_{r2} & \dots & a_{rc} \end{bmatrix} \times \begin{bmatrix} b_{1} \\  b_{2} \\  \vdots \\ b_{c} \end{bmatrix} = \begin{bmatrix} a_{11} b_{1} + a_{12} b_{2} +  \dots + a_{1c}b_{c} \\ a_{21} b_{1} + a_{22} b_{2} + \dots + a_{2c} b_{c} \\ \vdots  \\ a_{r1} b_{1} + a_{r2} b_{2} +  \dots   + a_{rc} b_{c} \end{bmatrix}$ 
+\$
 
-$\begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix} \times \begin{bmatrix} 7  \\  1  \end{bmatrix} = \begin{bmatrix} 1 \cdot 7 + 3 \cdot 1 \\  2 \cdot 7 + 4 \cdot 1 \\ 1 \cdot 7 + 1 \cdot 1 \end{bmatrix}\begin{bmatrix} 10 \\  18 \\ 8 \end{bmatrix}$
+```{=tex}
+\begin{bmatrix} a_{11} & a_{12} & \dots & a_{1c} \\ a_{21} & a_{22} & \dots & a_{2c} \\ \vdots & \vdots & \ddots & \vdots \\ a_{r1} & a_{r2} & \dots & a_{rc} \end{bmatrix}
+```
+\times
+
+```{=tex}
+\begin{bmatrix} b_{1} \\  b_{2} \\  \vdots \\ b_{c} \end{bmatrix}
+```
+=
+
+```{=tex}
+\begin{bmatrix} a_{11} b_{1} + a_{12} b_{2} +  \dots + a_{1c}b_{c} \\ a_{21} b_{1} + a_{22} b_{2} + \dots + a_{2c} b_{c} \\ \vdots  \\ a_{r1} b_{1} + a_{r2} b_{2} +  \dots   + a_{rc} b_{c} \end{bmatrix}
+```
+\$
+
+$\begin{bmatrix} 1 & 3 \\ 2 & 4 \\ 1 & 1 \end{bmatrix} \times \begin{bmatrix} 7 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \cdot 7 + 3 \cdot 1 \\ 2 \cdot 7 + 4 \cdot 1 \\ 1 \cdot 7 + 1 \cdot 1 \end{bmatrix}\begin{bmatrix} 10 \\ 18 \\ 8 \end{bmatrix}$
 
 ```{r}
 # Matrix x vector multiplication in R
@@ -432,17 +490,17 @@ Vectors can be treated as matrices and in R can be coerced to matrix objects, wh
 
 ### 3.8 Special matrics
 
-– **Square matrix** An n × n matrix
+-- **Square matrix** An n × n matrix
 
-– **Symmetric matrix** A is  if $A = A^\intercal$.
+-- **Symmetric matrix** A is if $A = A^\intercal$.
 
-– **0-matrix** A matrix with 0 on all entries, often written simply as 0.
+-- **0-matrix** A matrix with 0 on all entries, often written simply as 0.
 
-– **1-matrix** A matrix with 1 on all entries, often written simply as J.
+-- **1-matrix** A matrix with 1 on all entries, often written simply as J.
 
-– **Diagonal matrix** A square matrix with 0 on all off–diagonal entries and elements d1, d2, ... , dn on the diagonal, often written diag{d1, d2, ... , dn}
+-- **Diagonal matrix** A square matrix with 0 on all off--diagonal entries and elements d1, d2, ... , dn on the diagonal, often written diag{d1, d2, ... , dn}
 
-– **Identity matrix** is one with with all 1s on the diagonal, denoted I and satisfies that IA = AI = A.
+-- **Identity matrix** is one with with all 1s on the diagonal, denoted I and satisfies that IA = AI = A.
 
 ```{r}
 # 0-matrix
@@ -469,19 +527,29 @@ diag(A)
 
 The inverse of an $n × n$ matrix $A$ is the $n × n$ matrix $B$ (which is which when multiplied with A gives the identity matrix I. That is, $AB = BA = I$.
 
-Thus 
+Thus
 
-$B$ is  the inverse of $A$, written as $B = A^{−1}$ and  
+$B$ is the inverse of $A$, written as $B = A^{−1}$ and
 
-$A$ is  the inverse of $B$, written as $A = B^{−1}$
+$A$ is the inverse of $B$, written as $A = B^{−1}$
 
 Numeric example
 
-$ A = \begin{bmatrix} 1 & 3 \\  2 & 4 \end{bmatrix} B = \begin{bmatrix} -2 & 1.5 \\  1 & -0.5 \end{bmatrix}$
+\$ A =
+
+```{=tex}
+\begin{bmatrix} 1 & 3 \\  2 & 4 \end{bmatrix}
+```
+B =
+
+```{=tex}
+\begin{bmatrix} -2 & 1.5 \\  1 & -0.5 \end{bmatrix}
+```
+\$
 
 We can show $AB = BA = I$, thus $B=A^{-1}$
 
-```{r} 
+```{r}
 # Inverse of matrices
 
 (A <- matrix(c(1,3,2,4), ncol=2, byrow=T))
@@ -493,12 +561,7 @@ B%*%A == diag(1,2)
 
 ```
 
-
-– Only square matrices can have an inverse, but not all square matrices
-have an inverse.
-– When the inverse exists, it is unique.
-– Finding the inverse of a large matrix A is numerically complicated (but
-computers do it for us).
+-- Only square matrices can have an inverse, but not all square matrices have an inverse. -- When the inverse exists, it is unique. -- Finding the inverse of a large matrix A is numerically complicated (but computers do it for us).
 
 ```{r}
 # Solving the inverse of a matrix in R using solve()
@@ -515,7 +578,7 @@ A %*% B
 
 ### 4.1 Solving linear equations
 
-Matrix math is related to math that can be used to solve linear equation systems.  This is a very large topic and we will only briefly touch upon it, but it is core in statistics and in machine learning.  We can sometimes ignore the details, but awareness of this area of math will likely be beneficial.
+Matrix math is related to math that can be used to solve linear equation systems. This is a very large topic and we will only briefly touch upon it, but it is core in statistics and in machine learning. We can sometimes ignore the details, but awareness of this area of math will likely be beneficial.
 
 Consider these two linear equations
 
@@ -523,15 +586,15 @@ $x_1 + 3x_2 = 7$
 
 $2x_1 + 4x_2 = 10$
 
-We can write this "system" of equations in matrix form, from which is derived the notation for statistical linear models.  Let's define the matrices $A$, $x$ and $b$ as:
+We can write this "system" of equations in matrix form, from which is derived the notation for statistical linear models. Let's define the matrices $A$, $x$ and $b$ as:
 
-$\begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix} \begin{bmatrix}  x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix}  7 \\ 10 \end{bmatrix}$, i.e. $Ax = b$
+$\begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 7 \\ 10 \end{bmatrix}$, i.e. $Ax = b$
 
 Because $A^{-1}A = I$ and $Ix=x$:
 
-$x = A^{-1}b = \begin{bmatrix} -2 & 1.5 \\ 1 & -0.5  \end{bmatrix} \begin{bmatrix} 7 \\ 10  \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$
+$x = A^{-1}b = \begin{bmatrix} -2 & 1.5 \\ 1 & -0.5 \end{bmatrix} \begin{bmatrix} 7 \\ 10 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$
 
-This way of thinking is the fountation of the linear model and we can exploit it to isolate and "solve" for the x values.  E.g. we can isolate and solve for $x_2$ as:
+This way of thinking is the fountation of the linear model and we can exploit it to isolate and "solve" for the x values. E.g. we can isolate and solve for $x_2$ as:
 
 $x_2 = \frac{7}{3}-\frac{1}{3}x_1$, $x_2 = \frac{10}{4}-\frac{2}{4}x_1$
 
@@ -554,19 +617,17 @@ abline(a=10/4, b=-2/4, col="red", lwd=2)
 
 The lines represent the solved equations above, and it can be seen that they cross at a single point, the solutions for $x_1$ and $x_2$, $x_1 = 1$ and $x_2=2$, respectively.
 
-
 ```{r}
 A <- matrix(c(1, 2, 3, 4), ncol = 2)
 b <- c(7, 10)
 (x <- solve(A) %*% b)
 ```
 
-
 While in this example we see exactly 1 solution, there are several possibilities in general:
 
-1. Exactly one solution – when the lines intersect in one point
-2. No solutions – when the lines are parallel but not identical
-3. Infinitely many solutions – when the lines coincide.
+1.  Exactly one solution -- when the lines intersect in one point
+2.  No solutions -- when the lines are parallel but not identical
+3.  Infinitely many solutions -- when the lines coincide.
 
 ### 4.2 Matrix equalities
 
@@ -612,7 +673,6 @@ abline(a=10/4, b=-2/4, col="red", lwd=2)
 
 ```
 
-
 We can notate the linear relationship between $x$ and $y$ with
 
 $y_i = \beta_0 +\beta_1x_i$ for $i = 1, \dots, 5$
@@ -623,15 +683,15 @@ $y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_5 \end{bmatrix} \approx \begin{bm
 
 Given that we have vectors $y$ and $x$, how can we find the vector $\mathbf{\beta}$ to satisfy this equality such that $y=X \beta$?
 
-Actually, the answer is no because this would require the points to lie on an exactly straight line!  However, it may be useful to find an *estimate* of $\beta$ such that $\mathbf{X \beta}$ is "as close to $y$ as possible".  Let's call this estimate $\hat{\beta}$
+Actually, the answer is no because this would require the points to lie on an exactly straight line! However, it may be useful to find an *estimate* of $\beta$ such that $\mathbf{X \beta}$ is "as close to $y$ as possible". Let's call this estimate $\hat{\beta}$
 
-To do this we would like to find $\hat{\beta}$ that minimizes the equation 
+To do this we would like to find $\hat{\beta}$ that minimizes the equation
 
-$e=y- \mathbf{X \beta}$ 
+$e=y- \mathbf{X \beta}$
 
 The solution to this problem is the basis of linear regression and other linear statistical models:
 
-$\hat{\beta} =  (X^\intercal X)^{-1} X^\intercal y$
+$\hat{\beta} = (X^\intercal X)^{-1} X^\intercal y$
 
 ```{r}
 y <- c(3.7, 4.2,4.9,5.7,6.0)
@@ -651,16 +711,15 @@ X
 
 ### 5.1 The bird table
 
-On a sunny day, two tables are standing in an English country garden. On each table birds of unknown species are sitting having the time of their lives. A bird from the first table says to those on the second table: “Hi – if one of you come to our table then there will be the same number of us on each table”. “Yeah, right”, says a bird from the second table, “but if one of you comes to our table, then we will be twice as many on our table as on yours”.
+On a sunny day, two tables are standing in an English country garden. On each table birds of unknown species are sitting having the time of their lives. A bird from the first table says to those on the second table: "Hi -- if one of you come to our table then there will be the same number of us on each table". "Yeah, right", says a bird from the second table, "but if one of you comes to our table, then we will be twice as many on our table as on yours".
 
-Question: How many birds are on each table? 
+Question: How many birds are on each table?
 
-- Write up two equations with two unknowns
+-   Write up two equations with two unknowns
 
-- Solve these equations using the methods you have learned from linear algebra
+-   Solve these equations using the methods you have learned from linear algebra
 
-- Simply finding the solution by trial–and–error is invalid
-
+-   Simply finding the solution by trial--and--error is invalid
 
 ## Resources
 

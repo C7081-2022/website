@@ -16,7 +16,9 @@ website:
       - section: "Labs"
         contents:
           - lab00-guidance.qmd
+          - lab00-welcome.qmd
           - lab01-lin-alg.qmd
+          - lab02-R-practice.qmd
 
 format:
   html:
