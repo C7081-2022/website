@@ -4,16 +4,13 @@ title: "Lab Welcome"
 
 ## Lab welcome exercise
 
-This is a simple activity with a few parts to help get you into the mindset of practicing working with data.  We will be doing work to allow you to use some specific skills, but the real point of this exercise is to begin to think about beginning to **take responsibility for information you construct using data**.
+This is a simple activity with a few parts to help get you into the mindset of practicing working with data. We will be doing work to allow you to use some specific skills, but the real point of this exercise is to begin to think about beginning to **take responsibility for information you construct using data**.
 
 ## 1 BMI data
 
-<center>
+<center>![BMI chart](img/bmi.jpg){width="400px"}</center>
 
-![BMI chart](img/bmi.jpg){width="400px"}
-</center>
-
-The Body Mass Index (BMI) is a numerical scale intended as a rough guideline to body weight relative to body size.  There are a number of assumptions underlying the scale, and the BMI is considered imperfect, but is in wide use.
+The Body Mass Index (BMI) is a numerical scale intended as a rough guideline to body weight relative to body size. There are a number of assumptions underlying the scale, and the BMI is considered imperfect, but is in wide use.
 
 The BMI is calculated thus:
 
@@ -23,22 +20,19 @@ You can [calculate your own BMI here](https://www.nhs.uk/live-well/healthy-weigh
 
 ## 2 Data should be tidy
 
-<center>
+<center>![Data should be tidy, like your room](img/tidy.png){width="200px"}</center>
 
-![Data should be tidy, like your room](img/tidy.png){width="200px"}
-</center>
-
-The concept of tidy data is popular and widely considered best practice.  The concept has been summarized in a highly cited paper by [Wickham (2014)](https://www.jstatsoft.org/article/view/v059i10).
+The concept of tidy data is popular and widely considered best practice. The concept has been summarized in a highly cited paper by [Wickham (2014)](https://www.jstatsoft.org/article/view/v059i10).
 
 The essence of the **Tidy Data concept** is:
 
-- Simple data structure, one observation per row
+-   Simple data structure, one observation per row
 
-- Simple variable names (informative, short, no spaces, weird characters)
+-   Simple variable names (informative, short, no spaces, weird characters)
 
-- Data explanation or "**Data Dictionary**" present
+-   Data explanation or "**Data Dictionary**" present
 
-- No extraneous information (like figures, summaries) embedded with the data storage
+-   No extraneous information (like figures, summaries) embedded with the data storage
 
 ## 3 Exercises
 
@@ -50,51 +44,56 @@ The data look like this:
 
 ![bmi_f.txt](data/bmi_f.txt)
 
-- ID, subject ID within each file
-- steps, # steps / wk past 16 weeks
-- bmi, bmi measure
-- sex is indicated implicitly by males and females data being separated in different files
+-   ID, subject ID within each file
+-   steps, \# steps / wk past 16 weeks
+-   bmi, bmi measure
+-   sex is indicated implicitly by males and females data being separated in different files
 
 Your task:
 
-- **Convert the data to a tidy data format in a single .xlsx file**
-- **Do this using only R code**
-- Data dictionary may be added with code or "manually"
-- We will scrutinize and discuss
-
+-   **Convert the data to a tidy data format in a single .xlsx file**
+-   **Do this using only R code**
+-   Data dictionary may be added with code or "manually"
+-   We will scrutinize and discuss
 
 ### 3.2 Analyse BMI data
 
-- Receive individual “instructions”
-- Perform analysis ~30 mins
-- Do not speak to others
-- We will discuss of findings as a group
+**Consider three specific hypotheses: **
+
+1. that there is a statistically significant difference in the average number of steps taken by men and women
+
+2. that there is a negative correlation between the number of steps and the BMI for women
+
+3. that this correlation is positive for men
+
+
+-   Perform analysis \~30 mins
+-   Do not speak to others
+-   We will discuss of findings as a group
 
 ### 3.3 Make a data report using markdown
 
-- Markdown is a language
-- R markdown is “R flavoured Markdown”
-- Format a “dynamic” report using R Markdown
+-   Markdown is a language
+-   R markdown is "R flavoured Markdown"
+-   Format a "dynamic" report using R Markdown
 
-The task here is to create a very brief report of your BMI analysis and findings, using R Markdown.  The point here is really just to practice markdown and think of how to communicate results to others. 
+The task here is to create a very brief report of your BMI analysis and findings, using R Markdown. The point here is really just to practice markdown and think of how to communicate results to others.
 
-A markdown document is “freeform” ; the structure I suggest here is a minimal example for good practice.
+A markdown document is "freeform" ; the structure I suggest here is a minimal example for good practice.
 
-**Title** + other details - descriptive title, set in the YAML (“YAML ain’t Markup Language”: recursive acronym…) header
-**Summary** of major findings - written LAST
+**Title** + other details - descriptive title, set in the YAML ("YAML ain't Markup Language": recursive acronym...) header **Summary** of major findings - written LAST
 
 **Background** - like the introduction section in a scientific paper. The most important part is a list of OBJECTIVES
 
 **Results** Graphs, stats results, terse, clear, technical style
 
-**Bibliography** (if relevant) References are usually  cited in Background, or possibly in Results if there are methods citations
+**Bibliography** (if relevant) References are usually cited in Background, or possibly in Results if there are methods citations
 
-- Make your own report (~45 mins)
-- Start a new R Markdown document in RStudio, HTML output (NB pdf, word options)
-- Structured your doc with the sections: Title, Summary, Background, Results, Bibliography
-- There are usually several “unseen” sections that may contain your R code in code chunks
-- We will discuss and critique resulting reports and code (~45 mins)
-
+-   Make your own report (\~45 mins)
+-   Start a new R Markdown document in RStudio, HTML output (NB pdf, word options)
+-   Structured your doc with the sections: Title, Summary, Background, Results, Bibliography
+-   There are usually several "unseen" sections that may contain your R code in code chunks
+-   We will discuss and critique resulting reports and code (\~45 mins)
 
 ## Resources
 
