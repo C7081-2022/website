@@ -23,6 +23,8 @@ website:
           - lab04-classification.qmd
           - lab05-resampling.qmd
           - lab06-mod-selection.qmd
+          - lab07-non-linear.qmd
+          - lab08-trees.qmd
 
 format:
   html:
