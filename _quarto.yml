@@ -19,6 +19,10 @@ website:
           - lab00-welcome.qmd
           - lab01-lin-alg.qmd
           - lab02-R-practice.qmd
+          - lab03-lin-reg.qmd
+          - lab04-classification.qmd
+          - lab05-resampling.qmd
+          - lab06-mod-selection.qmd
 
 format:
   html:

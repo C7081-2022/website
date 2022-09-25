@@ -2,7 +2,7 @@
 title: "Lab 02 R practice"
 ---
 
-The purpose of this lab is to practice some R basics that we will begin using right away.  If you are already proficient in R and need no practice, feel free to skip ahead to the Exercises to test yourself. 
+The purpose of this lab is to practice some R basics that we will begin using right away. If you are already proficient in R and need no practice, feel free to skip ahead to the Exercises to test yourself.
 
 ## 1 Basic commands
 
@@ -16,8 +16,8 @@ x
 ```
 
 ### `<-` value assignment
-We can also "save things" (i.e. assign values) using `=` rather than `<-`, though the "arrow" syntax is the standard style in `R`:
 
+We can also "save things" (i.e. assign values) using `=` rather than `<-`, though the "arrow" syntax is the standard style in `R`:
 
 ```{r}
 x = c(1,6,2)
@@ -25,13 +25,13 @@ x
 y = c(1,4,3) # why doesn't this "print out"?
 ```
 
-### `length()` 
+### `length()`
 
 Hitting the up arrow multiple times will display the previous commands, which can then be edited. This is useful since one often wishes to repeat a similar command. In addition, typing `?funcname` will always cause R to open a new help file window with additional information about the function `funcname.` We can tell R to add two sets of numbers together. It will then add the first number from `x` to the first number from y, and so on. However, x and y should be the same length. We can check their length using the `length()` function.
 
 ### `ls()` , `rm()`
 
-The ls() function allows us to look at a list of all of the objects, such as data and functions, that we have saved so far. The rm() function can be used to delete any that we don’t want.
+The ls() function allows us to look at a list of all of the objects, such as data and functions, that we have saved so far. The rm() function can be used to delete any that we don't want.
 
 ```{r}
 ls()
@@ -39,7 +39,7 @@ rm(x,y)
 ls()
 ```
 
-It’s also possible to remove all objects at once without explicitly naming them (handy of you have more than few data objects in you Global Environment):
+It's also possible to remove all objects at once without explicitly naming them (handy of you have more than few data objects in you Global Environment):
 
 ```{r}
 x = c(1,6,2)
@@ -70,7 +70,7 @@ Note that we could just as well omit explicitly typing `data=`, `nrow=`, and `nc
 x <- matrix ( c(1 ,2 ,3 ,4) ,2 ,2)
 ```
 
-and this would have the same effect. However, it can sometimes be useful to specify the names of the arguments passed in, since otherwise R will assume that the function arguments are passed into the function in the same order that is given in the function’s help ﬁle. As this example illustrates, by default `R` creates matrices by successively ﬁlling in columns. Alternatively, the `byrow=TRUE` option can be used to populate the matrix in order of the rows.
+and this would have the same effect. However, it can sometimes be useful to specify the names of the arguments passed in, since otherwise R will assume that the function arguments are passed into the function in the same order that is given in the function's help ﬁle. As this example illustrates, by default `R` creates matrices by successively ﬁlling in columns. Alternatively, the `byrow=TRUE` option can be used to populate the matrix in order of the rows.
 
 ```{r}
 x <- matrix ( c(1 ,2 ,3 ,4) ,2 ,2, byrow=TRUE)
@@ -95,7 +95,7 @@ y <- x+ rnorm(50 , mean =50 , sd =.1)
 cor(x, y)
 ```
 
-### `set.seed` makes 'pseudo-random' events repeatable 
+### `set.seed` makes 'pseudo-random' events repeatable
 
 By default, `rnorm()` creates standard normal random variables with a mean of 0 and a standard deviation of 1. However, the mean and standard devi- ation can be altered using the `mean` and `sd` arguments, as illustrated above. Sometimes we want our code to reproduce the exact same set of random numbers; we can use the `set.seed()` function to do this. The `set.seed()` function takes an (arbitrary) integer argument.
 
@@ -140,7 +140,6 @@ plot(x,y, xlab=" this is the x- axis",
 
 We will often want to save the output of an R plot. The command that we use to do this will depend on the ﬁle type that we would like to create. For instance, to create a pdf, we use the `pdf()` function, and to create a jpeg, we use the `jpeg()` function, `png()`, etc.
 
-
 ```{r}
 # This code will output a graph file to your working directory
 png("MyFigure.png") # think of this as opening the file
@@ -172,11 +171,11 @@ x
 
 We will now create some more sophisticated plots. The `contour()` function produces a contour plot in order to represent three-dimensional data; it is like a topographical map. It takes three arguments:
 
-1.	A vector of the `x` values (the ﬁrst dimension),
+1.  A vector of the `x` values (the ﬁrst dimension),
 
-2.	A vector of the `y` values (the second dimension), and
+2.  A vector of the `y` values (the second dimension), and
 
-3.	A matrix whose elements correspond to the `z` value (the third dimension) for each pair of (`x`,`y`) coordinates.
+3.  A matrix whose elements correspond to the `z` value (the third dimension) for each pair of (`x`,`y`) coordinates.
 
 As with the `plot()` function, there are many other inputs that can be used to ﬁne tune the output of the `contour()` function. To learn more about these, take a look at the help ﬁle by typing `?contour`.
 
@@ -192,6 +191,7 @@ contour (x,y, fa , nlevels = 15)
 
 
 ```
+
 ### `image()` and `persp()`
 
 The `image()` function works the same way as `contour()`, except that it produces a color-coded plot whose colors depend on the `z` value. This is known as a *heatmap*, and is sometimes used to plot temperature in weather forecasts. Alternatively, `persp()` can be used to produce a three-dimensional plot. The arguments `theta` and `phi` control the angles at which the plot is viewed.
@@ -205,12 +205,12 @@ persp(x, y, fa, theta =30, phi = 70) # too much
 persp(x, y, fa, theta =30, phi = 40) # juust right
 
 ```
+
 ## 4 Data operations
 
 ### Indexing values
 
 We often wish to examine part of a set of data. Suppose that our data is stored in the matrix A.
-
 
 ```{r}
 A <- matrix(1:16, 4, 4)
@@ -231,6 +231,7 @@ A[1:3, 2:4]
 A[1:2,]
 A[,1:2]
 ```
+
 The last two examples include either no index for the columns or no index for the rows. These indicate that `R` should include all columns or all rows, respectively. `R` treats a single row or column of a matrix as a vector.
 
 ```{r}
@@ -256,11 +257,10 @@ dim(A)
 ### Loading data
 
 For most analyses, the ﬁrst step involves importing a data set into R. The `read.table()` function is one of the primary ways to do this. The help ﬁle contains details about how to use this function. We can use the function `write.table()` to export data.
- 
-Before attempting to load a data set, we must make sure that `R` knows
-to search for the data in the proper directory. For example on a Windows system one could select the directory using the `Change dir...` option under the `File` menu. However, the details of how to do this depend on the operating system (e.g. Windows, Mac, Unix) that is being used. 
 
-Here you will begin by loading in the `Auto` data set, which is part of the R library `{ISLR2}`, but to illustrate the read.table() function we load it now from a text ﬁle. The following command will load the Auto.data ﬁle into R and store it as an object called Auto, in a format referred to as a data frame. 
+Before attempting to load a data set, we must make sure that `R` knows to search for the data in the proper directory. For example on a Windows system one could select the directory using the `Change dir...` option under the `File` menu. However, the details of how to do this depend on the operating system (e.g. Windows, Mac, Unix) that is being used.
+
+Here you will begin by loading in the `Auto` data set, which is part of the R library `{ISLR2}`, but to illustrate the read.table() function we load it now from a text ﬁle. The following command will load the Auto.data ﬁle into R and store it as an object called Auto, in a format referred to as a data frame.
 
 ### `Auto` data
 
@@ -281,13 +281,13 @@ Peek at the data (note the view may wrap around the lines)
 
 Note that data like these are usually simply a text ﬁle, which you could alternatively open on your computer using a standard text editor. **It is often a good idea to view a data set using a text editor or other software such as Excel before loading it into R...**
 
-This particular data set has probably not loaded correctly for you on the first try, because 
+This particular data set has probably not loaded correctly for you on the first try, because
 
-- `R` has assumed that the variable names are part of the data and so has included them in the ﬁrst row. 
+-   `R` has assumed that the variable names are part of the data and so has included them in the ﬁrst row.
 
-- The data set also includes a number of missing observations, indicated by a question mark ?. 
+-   The data set also includes a number of missing observations, indicated by a question mark ?.
 
-- There is a problematic character (at least one...) in the name variable on row 12.
+-   There is a problematic character (at least one...) in the name variable on row 12.
 
 Missing values are a common occurrence in real data sets. Using the argument `header=T` (or `header=TRUE`) in the `read.table()` function tells `R` that the ﬁrst line of the ﬁle contains the variable names, and using the option `na.strings` tells R that any time it sees a particular character or set of characters (such as a question mark), it should be treated as a missing element of the data matrix.
 
@@ -322,9 +322,11 @@ Auto <- ISLR2::Auto
 # Error in plot(cylinders, mpg) : object 'cylinders' not found
 
 ```
+
 ```{r}
 plot( Auto$cylinders,  Auto$mpg )
 ```
+
 ### `attach()`
 
 To refer to a variable explicitly, we can type the data set and the variable name joined with a `$` (cash) symbol. Alternatively, we can use the `attach()` function in order to tell R to make the variables in this data frame available by name.
@@ -356,14 +358,12 @@ plot(cylinders, mpg, col ="goldenrod", varwidth = T ,
 
 The `hist()` function can be used to plot a histogram. Note that indexing the base color pallette numerically is possible, such that `col=2` has the same effect as `col="red"`.
 
-
 ```{r}
 hist(mpg)
 hist(mpg, col = 2)
 hist(mpg, col = 2, breaks = 15)
 
 ```
-
 
 ### `pairs()`
 
@@ -372,6 +372,7 @@ The `pairs()` function creates a scatterplot matrix i.e. a scatterplot for every
 ```{r}
 pairs(~ mpg + displacement + horsepower + weight + acceleration, Auto )
 ```
+
 ### `identify()`
 
 In conjunction with the `plot()` function, `identify()` provides a useful interactive method for identifying the value for a particular variable for points on a plot. We pass in three arguments to `identify()`: the x-axis variable, the y-axis variable, and the variable whose values we would like to see printed for each point. Then clicking on a given point in the plot will cause R to print the value of the variable of interest. Right-clicking on the plot will exit the `identify()` function (control-click on a Mac). The numbers printed under the `identify()` function correspond to the rows for the selected points.
@@ -383,6 +384,7 @@ plot(horsepower, mpg)
 # identify(horsepower, mpg, name)
 
 ```
+
 ### `summary()`
 
 The `summary()` function produces a numerical summary of each variable in a particular data set.
@@ -401,8 +403,82 @@ summary(mpg)
 
 Once we have ﬁnished using R, we type `q()` in order to shut it down, or quit. When exiting R, we have the option to save the current workspace so that all objects (such as data sets) that we have created in this R session will be available next time. Before exiting `R`, we may want to save a record of all of the commands that we typed in the most recent session; this can be accomplished using the `savehistory()` function. Next time we enter `R`, we can load that history using the `loadhistory()` function (useful in some circumstances).
 
-
 <br><br>
+
+## 5 Exercises
+
+### Exercise 1
+
+This exercise relates to [the `College` data set csv file](data/College.csv). It contains a number of variables for 777 different universities in the US. The variables are
+
+-   Private : Public/private indicator
+-   Apps : Number of applications received
+-   Accept : Number of applicants accepted
+-   Enroll : Number of new students enrolled
+-   Top10perc : New students from top 10% of high school class
+-   Top25perc : New students from top 25% of high school class
+-   F.Undergrad : Number of full-time undergraduates
+-   P.Undergrad : Number of part-time undergraduates
+-   Outstate : Out-of-state tuition
+-   Room.Board : Room and board costs
+-   Books : Estimated book costs
+-   Personal : Estimated personal spending
+-   PhD : Percent of faculty with Ph.D.'s
+-   Terminal : Percent of faculty with terminal degree
+-   S.F.Ratio : Student/faculty ratio
+-   perc.alumni : Percent of alumni who donate
+-   Expend : Instructional expenditure per student
+-   Grad.Rate : Graduation rate
+
+Before reading the data into `R`, it can be viewed in Excel or a text editor.
+
+#### 1.1
+
+Use the read.csv() function to read the data into `R`. Call the loaded data college. Make sure that you have the directory set to the correct location for the data.
+
+#### 1.2
+
+Look at the data using the `View()` function. You should notice that the first column is just the name of each university. We don't really want R to treat this as data. However, it may be handy to have these names for later. Try the following commands:
+
+```{r}
+# try this
+# rownames(college) <- college[, 1]
+# View(college) 
+```
+
+You should see that there is now a row.names column with the name of each university recorded. This means that R has given each row a name corresponding to the appropriate university. R will not try to perform calculations on the row names. However, we still need to eliminate the first column in the data where the names are stored. Try
+
+```{r}
+# try this
+# college <- college[, 1]
+# View(college) 
+```
+
+Now you should see that the first data column is `Private.` Note that another column labeled row.names now appears before the `Private` column. However, this is not a data column but rather the name that `R` is giving to each row.
+
+#### 1.3
+
+Use the `summary()` function to produce a numerical summary of the variables in the data set.
+
+#### 1.4
+
+Use the `pairs()` function to produce a scatterplot matrix of the first ten columns or variables of the data. Recall that you can reference the first ten columns of a matrix `A` using `A[,1:10]`.
+
+#### 1.5
+
+Use the `plot()` function to produce side-by-side boxplots of `Outstate` versus `Private`. Briefly interpret the information the graph conveys.
+
+#### 1.6
+
+Create a new qualitative variable, called `Elite`, by binning the `Top10perc` variable. We are going to divide universities into two groups based on whether or not the proportion of students coming from the top 10% of their high school classes exceeds 50%.
+
+#### 1.7
+
+Use the `summary()` function to see how many elite universities there are. Now use the `plot()` function to produce side-by-side boxplots of `Outstate` versus `Elite`. Briefly interpret the information the graph conveys.
+
+#### 1.8
+
+Use the `hist()` function to produce some histograms with differing numbers of bins for a few of the quantitative variables. You may find the command `par(mfrow = c(2, 2))` useful: it will divide the print window into four regions so that four plots can be made simultaneously. Modifying the arguments to this function will divide the screen in other ways.
 
 ## Harper Adams Data Science
 
