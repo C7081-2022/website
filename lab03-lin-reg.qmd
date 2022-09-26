@@ -279,16 +279,15 @@ The following questions involve the use of simple linear regression on the `Auto
 
 Use the `lm()` function to perform a simple linear regression with `mpg` as the response and `horsepower` as the predictor. Use the `summary()` function to print the results. Comment on the output. For example:
 
--	Is there a relationship between the predictor and the response?
+-   Is there a relationship between the predictor and the response?
 
--	How strong is the relationship between the predictor and the response?
+-   How strong is the relationship between the predictor and the response?
 
-- Is the relationship between the predictor and the response positive or negative?
+-   Is the relationship between the predictor and the response positive or negative?
 
-- What is the predicted `mpg` associated with a `horsepower` of 98? 
+-   What is the predicted `mpg` associated with a `horsepower` of 98?
 
-- What are the associated 95% confidence and prediction intervals?
-
+-   What are the associated 95% confidence and prediction intervals?
 
 #### 1.2
 
@@ -298,11 +297,9 @@ Plot the response and the predictor. Use the `abline(`) function to display the 
 
 Use the `plot()` function to produce diagnostic plots of the least squares regression fit. Comment on any problems you see with the fit.
 
-
---- 
+------------------------------------------------------------------------
 
 The following questions involve the use of simple linear regression on the `Auto` data set.
-
 
 #### 1.4
 
@@ -314,13 +311,13 @@ Compute the matrix of correlations between the variables using the function `cor
 
 #### 1.6
 
-Use the `lm()` function to perform a multiple linear regression with mpg as the response and all other variables except name as the predictors. Use the `summary()` function to print the results. Comment on the output. 
+Use the `lm()` function to perform a multiple linear regression with mpg as the response and all other variables except name as the predictors. Use the `summary()` function to print the results. Comment on the output.
 
-- Is there a relationship between the predictors and the re- sponse?
+-   Is there a relationship between the predictors and the re- sponse?
 
-- Which predictors appear to have a statistically significant relationship to the response?
+-   Which predictors appear to have a statistically significant relationship to the response?
 
-- What does the coeﬃcient for the year variable suggest?
+-   What does the coeﬃcient for the year variable suggest?
 
 #### 1.7
 
@@ -332,8 +329,7 @@ Use the `*` and `:` symbols to fit linear regression models with interaction e�
 
 #### 1.9
 
-Try a few different transformations of the variables, such as `log(X)`,	`X`, `X^2`. Comment on your findings.
-
+Try a few different transformations of the variables, such as `log(X)`, `X`, `X^2`. Comment on your findings.
 
 ## Resources
 

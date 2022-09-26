@@ -58,14 +58,13 @@ Your task:
 
 ### 3.2 Analyse BMI data
 
-**Consider three specific hypotheses: **
+**Consider three specific hypotheses:**
 
-1. that there is a statistically significant difference in the average number of steps taken by men and women
+1.  that there is a statistically significant difference in the average number of steps taken by men and women
 
-2. that there is a negative correlation between the number of steps and the BMI for women
+2.  that there is a negative correlation between the number of steps and the BMI for women
 
-3. that this correlation is positive for men
-
+3.  that this correlation is positive for men
 
 -   Perform analysis \~30 mins
 -   Do not speak to others

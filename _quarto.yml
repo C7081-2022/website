@@ -25,6 +25,8 @@ website:
           - lab06-mod-selection.qmd
           - lab07-non-linear.qmd
           - lab08-trees.qmd
+          - lab09-svm.qmd
+          - lab10-unsupervised.qmd
 
 format:
   html:

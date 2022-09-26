@@ -39,7 +39,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "The material in this module is designed to be experienced in an intensive one week format followed by an assessment meant to showcase data science skills (e.g. a github project website that could be part of your cv). For enrolled students, the work will be supported with several live sessions during the main week of delivery.\n\n\n\n\nDay\nTopics\nLabs\nReadings\n\n\n\n\nInduction\n welcome activity \nLab welcome exercise\n\n\n\nMon\n*lecture videos password: data4life\n 00 Module overview\n 01 Introduction 1.1 1.2\n 02 Statistical learning 2.1 2.2\nLab guidance\nLab 01 Linear algebra fun\nLab 02 R programming refresh\nJames et al. 2021 Ch 1,2\nEfron 2020\n\n\nTues\n 03 Linear regression 3.1 3.2\n 04 Classification 4.1 4.2\nLab 03 Linear regression\nLab 04 Classification\nJames et al. 2021 Ch 3,4\nMelesse 2018\n\n\nWed\n 05 Bootstrapping 5.1 5.2\n 06 Model selection 6.1 6.2 6.3\nLab 05 Resampling\nLab 06 Model selection\nJames et al. 2021 Ch 5,6\nAho 2014\n\n\nThurs\n 07 Non-linear models 7.1 7.2\n 08 Decision trees 8.1 8.2 8.3 8.4\nLab 07 Non-linear models\nLab 08 Decision trees\nJames et al. 2021 Ch 7,8\nBarnard 2019\nOtukei 2010\n\n\nFri\n 09 Support vector machines 9.1 9.2\n 10 Unsupervised learning 10.1 10.2 10.3\nLab 09 SVM\nLab 10 Unsupervised learning\nJames et al. 2021 Ch 9,12\nEbrahimi 2017\nHowell 2020"
+    "text": "The material in this module is designed to be experienced in an intensive one week format followed by an assessment meant to showcase data science skills (e.g. a github project website that could be part of your cv). For enrolled students, the work will be supported with several live sessions during the main week of delivery.\n\n\n\n\nDay\nTopics\nLabs\nReadings\n\n\n\n\nInduction\n welcome activity \nLab welcome exercise\n\n\n\nMon\nlive:\n am\n*lecture videos password: data4life\n 00 Module overview\n 01 Introduction 1.1 1.2\n 02 Statistical learning 2.1 2.2\nLab guidance\nLab 01 Linear algebra fun\nLab 02 R programming refresh\nJames et al. 2021 Ch 1,2\nEfron 2020\n\n\nTues\n 03 Linear regression 3.1 3.2\n 04 Classification 4.1 4.2\nLab 03 Linear regression\nLab 04 Classification\nJames et al. 2021 Ch 3,4\nMelesse 2018\n\n\nWed\n 05 Bootstrapping 5.1 5.2\n 06 Model selection 6.1 6.2 6.3\nLab 05 Resampling\nLab 06 Model selection\nJames et al. 2021 Ch 5,6\nAho 2014\n\n\nThurs\n 07 Non-linear models 7.1 7.2\n 08 Decision trees 8.1 8.2 8.3 8.4\nLab 07 Non-linear models\nLab 08 Decision trees\nJames et al. 2021 Ch 7,8\nBarnard 2019\nOtukei 2010\n\n\nFri\n 09 Support vector machines 9.1 9.2\n 10 Unsupervised learning 10.1 10.2 10.3\nLab 09 SVM\nLab 10 Unsupervised learning\nJames et al. 2021 Ch 9,12\nEbrahimi 2017\nHowell 2020"
   },
   {
     "objectID": "schedule.html#references",
@@ -179,7 +179,7 @@
     "href": "lab00-welcome.html#exercises",
     "title": "Lab Welcome",
     "section": "3 Exercises",
-    "text": "3 Exercises\n\n3.1 Make tidy data\nUse the following tab-delimited data files: bmi_f.txt bmi_m.txt\nThe data look like this:\n\n\n\nbmi_f.txt\n\n\n\nID, subject ID within each file\nsteps, # steps / wk past 16 weeks\nbmi, bmi measure\nsex is indicated implicitly by males and females data being separated in different files\n\nYour task:\n\nConvert the data to a tidy data format in a single .xlsx file\nDo this using only R code\nData dictionary may be added with code or “manually”\nWe will scrutinize and discuss\n\n\n\n3.2 Analyse BMI data\nConsider three specific hypotheses: \n\nthat there is a statistically significant difference in the average number of steps taken by men and women\nthat there is a negative correlation between the number of steps and the BMI for women\nthat this correlation is positive for men\n\n\nPerform analysis ~30 mins\nDo not speak to others\nWe will discuss of findings as a group\n\n\n\n3.3 Make a data report using markdown\n\nMarkdown is a language\nR markdown is “R flavoured Markdown”\nFormat a “dynamic” report using R Markdown\n\nThe task here is to create a very brief report of your BMI analysis and findings, using R Markdown. The point here is really just to practice markdown and think of how to communicate results to others.\nA markdown document is “freeform” ; the structure I suggest here is a minimal example for good practice.\nTitle + other details - descriptive title, set in the YAML (“YAML ain’t Markup Language”: recursive acronym…) header Summary of major findings - written LAST\nBackground - like the introduction section in a scientific paper. The most important part is a list of OBJECTIVES\nResults Graphs, stats results, terse, clear, technical style\nBibliography (if relevant) References are usually cited in Background, or possibly in Results if there are methods citations\n\nMake your own report (~45 mins)\nStart a new R Markdown document in RStudio, HTML output (NB pdf, word options)\nStructured your doc with the sections: Title, Summary, Background, Results, Bibliography\nThere are usually several “unseen” sections that may contain your R code in code chunks\nWe will discuss and critique resulting reports and code (~45 mins)"
+    "text": "3 Exercises\n\n3.1 Make tidy data\nUse the following tab-delimited data files: bmi_f.txt bmi_m.txt\nThe data look like this:\n\n\n\nbmi_f.txt\n\n\n\nID, subject ID within each file\nsteps, # steps / wk past 16 weeks\nbmi, bmi measure\nsex is indicated implicitly by males and females data being separated in different files\n\nYour task:\n\nConvert the data to a tidy data format in a single .xlsx file\nDo this using only R code\nData dictionary may be added with code or “manually”\nWe will scrutinize and discuss\n\n\n\n3.2 Analyse BMI data\nConsider three specific hypotheses:\n\nthat there is a statistically significant difference in the average number of steps taken by men and women\nthat there is a negative correlation between the number of steps and the BMI for women\nthat this correlation is positive for men\n\n\nPerform analysis ~30 mins\nDo not speak to others\nWe will discuss of findings as a group\n\n\n\n3.3 Make a data report using markdown\n\nMarkdown is a language\nR markdown is “R flavoured Markdown”\nFormat a “dynamic” report using R Markdown\n\nThe task here is to create a very brief report of your BMI analysis and findings, using R Markdown. The point here is really just to practice markdown and think of how to communicate results to others.\nA markdown document is “freeform” ; the structure I suggest here is a minimal example for good practice.\nTitle + other details - descriptive title, set in the YAML (“YAML ain’t Markup Language”: recursive acronym…) header Summary of major findings - written LAST\nBackground - like the introduction section in a scientific paper. The most important part is a list of OBJECTIVES\nResults Graphs, stats results, terse, clear, technical style\nBibliography (if relevant) References are usually cited in Background, or possibly in Results if there are methods citations\n\nMake your own report (~45 mins)\nStart a new R Markdown document in RStudio, HTML output (NB pdf, word options)\nStructured your doc with the sections: Title, Summary, Background, Results, Bibliography\nThere are usually several “unseen” sections that may contain your R code in code chunks\nWe will discuss and critique resulting reports and code (~45 mins)"
   },
   {
     "objectID": "lab00-welcome.html#resources",
@@ -551,5 +551,47 @@
     "title": "Lab 08 Decision trees",
     "section": "5 Bayesian additive reg trees",
     "text": "5 Bayesian additive reg trees\n\n{BART} and gbart()\nIn this section we use the {BART} package, and within it the gbart() function, to fit a Bayesian additive regression tree model to the Boston housing data set. The gbart() function is designed for quantitative outcome variables. For binary outcomes, lbart() and pbart() are available.\nTo run the gbart() function, we must first create matrices of predictors for the training and test data. We run {BART} with default settings.\n\nlibrary(BART) \n\nWarning: package 'BART' was built under R version 4.1.3\n\n\nLoading required package: nlme\n\n\nLoading required package: nnet\n\n\nLoading required package: survival\n\nx <- Boston[ , 1:12]\ny <- Boston [, \"medv\"]\n\n# train and test partitions\nxtrain <- x[train, ]\nytrain <- y[train]\nxtest <- x[-train, ]\nytest <- y[-train]\n\nset.seed(1)\nbartfit <- gbart(xtrain, ytrain, x.test = xtest )\n\n*****Calling gbart: type=1\n*****Data:\ndata:n,p,np: 253, 12, 253\ny1,yn: 0.213439, -5.486561\nx1,x[n*p]: 0.109590, 20.080000\nxp1,xp[np*p]: 0.027310, 7.880000\n*****Number of Trees: 200\n*****Number of Cut Points: 100 ... 100\n*****burn,nd,thin: 100,1000,1\n*****Prior:beta,alpha,tau,nu,lambda,offset: 2,0.95,0.795495,3,3.71636,21.7866\n*****sigma: 4.367914\n*****w (weights): 1.000000 ... 1.000000\n*****Dirichlet:sparse,theta,omega,a,b,rho,augment: 0,0,1,0.5,1,12,0\n*****printevery: 100\n\nMCMC\ndone 0 (out of 1100)\ndone 100 (out of 1100)\ndone 200 (out of 1100)\ndone 300 (out of 1100)\ndone 400 (out of 1100)\ndone 500 (out of 1100)\ndone 600 (out of 1100)\ndone 700 (out of 1100)\ndone 800 (out of 1100)\ndone 900 (out of 1100)\ndone 1000 (out of 1100)\ntime: 2s\ntrcnt,tecnt: 1000,1000\n\n\n\n# compute the test error\nyhat.bart <- bartfit$yhat.test.mean\nmean((ytest - yhat.bart )^2)\n\n[1] 15.94718\n\n\nOn this data set, the test error of {BART} is lower than the test error of random forests and boosting.\nNow we can check how many times each variable appeared in the collection of trees.\n\nord <- order(bartfit$varcount.mean, decreasing = T)\nbartfit$varcount.mean[ord]\n\n    nox   lstat     tax     rad      rm   indus    chas ptratio     age      zn \n 22.952  21.329  21.250  20.781  19.890  19.825  19.051  18.976  18.274  15.952 \n    dis    crim \n 14.457  11.007"
+  },
+  {
+    "objectID": "lab09-svm.html#exercises",
+    "href": "lab09-svm.html#exercises",
+    "title": "Lab 09 SVM",
+    "section": "6 Exercises",
+    "text": "6 Exercises\n\nExercise 1"
+  },
+  {
+    "objectID": "lab09-svm.html#resources",
+    "href": "lab09-svm.html#resources",
+    "title": "Lab 09 SVM",
+    "section": "Resources",
+    "text": "Resources"
+  },
+  {
+    "objectID": "lab09-svm.html#harper-adams-data-science",
+    "href": "lab09-svm.html#harper-adams-data-science",
+    "title": "Lab 09 SVM",
+    "section": "Harper Adams Data Science",
+    "text": "Harper Adams Data Science\n\nThis module is a part of the MSc in Data Science for Global Agriculture, Food, and Environment at Harper Adams University, led by Ed Harris."
+  },
+  {
+    "objectID": "lab10-unsupervised.html#exercises",
+    "href": "lab10-unsupervised.html#exercises",
+    "title": "Lab 10 Unsupervised",
+    "section": "6 Exercises",
+    "text": "6 Exercises\n\nExercise 1"
+  },
+  {
+    "objectID": "lab10-unsupervised.html#resources",
+    "href": "lab10-unsupervised.html#resources",
+    "title": "Lab 10 Unsupervised",
+    "section": "Resources",
+    "text": "Resources"
+  },
+  {
+    "objectID": "lab10-unsupervised.html#harper-adams-data-science",
+    "href": "lab10-unsupervised.html#harper-adams-data-science",
+    "title": "Lab 10 Unsupervised",
+    "section": "Harper Adams Data Science",
+    "text": "Harper Adams Data Science\n\nThis module is a part of the MSc in Data Science for Global Agriculture, Food, and Environment at Harper Adams University, led by Ed Harris."
   }
 ]
