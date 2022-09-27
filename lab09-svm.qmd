@@ -142,8 +142,7 @@ Now the observations are just barely linearly separable. We fit the support vect
 ```{r}
 dat <- data.frame(x = x, y = as.factor(y)) 
 svmfit <- svm(y ~ ., data = dat, kernel = "linear", cost = 1e5 )
-
-=======
+```
 
 In this case three additional observations are misclassified.
 
@@ -162,7 +161,6 @@ Now the observations are just barely linearly separable. We fit the support vect
 dat <- data.frame(x = x, y = as.factor(y)) 
 svmfit <- svm(y ~ ., data = dat, kernel = "linear", cost = 1e5 )
 
->>>>>>> Stashed changes
 plot(svmfit , dat) 
 ```
 
@@ -279,7 +277,6 @@ SVMs and support vector classifiers output class labels for each observation. Ho
 In essence, the sign of the fitted value determines on which side of the decision boundary the observation lies. Therefore, the relationship between the fitted value and the class prediction for a given observation is simple: if the fitted value exceeds zero then the observation is assigned to one class, and if it is less than zero then it is assigned to the other. In order to obtain the fitted values for a given SVM model fit, we use `decision.values = TRUE` when fitting `svm()`. Then the `predict()` function will output the fitted values.
 
 ```{r}
-<<<<<<< Updated upstream
 svmfit.opt <- svm(y ~ ., data = dat[train, ], 
 kernel = "radial", gamma = 2, cost = 1, decision.values = T)
 
@@ -290,18 +287,6 @@ fitted <- attributes(
 
 
 
-
-
-
-=======
-svmfit.opt <- svm(y ~., data = dat[train, ], 
-kernel= "radial", gamma = 2, cost = 1, decision.values = T)
-fitted <- attributes(
-  predict(svmfit.opt, dat[train,], decision.values = TRUE)
-  )$decision.values
-```
-
->>>>>>> Stashed changes
 ## 6 Exercises
 
 ### Exercise 1
