@@ -90,7 +90,11 @@ bestmod <- tune.out$best.model
 summary(bestmod) 
 ```
 
+<<<<<<< Updated upstream
 ### Testing with ``predict()`
+=======
+### Testing with \``predict()`
+>>>>>>> Stashed changes
 
 The `predict()` function can be used to predict the class label on a set of test observations, at any given value of the cost parameter. We begin by generating a test data set.
 
@@ -120,6 +124,7 @@ ypred <- predict(svmfit, testdat)
 
 table(predict = ypred, truth = testdat$y) # not as good
 ```
+<<<<<<< Updated upstream
 
 In this case three additional observations are misclassified.
 
@@ -138,6 +143,26 @@ Now the observations are just barely linearly separable. We fit the support vect
 dat <- data.frame(x = x, y = as.factor(y)) 
 svmfit <- svm(y ~ ., data = dat, kernel = "linear", cost = 1e5 )
 
+=======
+
+In this case three additional observations are misclassified.
+
+### Linear separation
+
+Now consider a situation in which the two classes are linearly separable. Then we can find a separating hyperplane using the svm() function. We first further separate the two classes in our simulated data so that they are linearly separable:
+
+```{r}
+x[y == 1, ] <- x[y == 1, ] + 0.5
+plot (x, col = (y + 5) / 2, pch = 16)
+```
+
+Now the observations are just barely linearly separable. We fit the support vector classifier and plot the resulting hyperplane, using a very large value of cost so that no observations are misclassified.
+
+```{r}
+dat <- data.frame(x = x, y = as.factor(y)) 
+svmfit <- svm(y ~ ., data = dat, kernel = "linear", cost = 1e5 )
+
+>>>>>>> Stashed changes
 plot(svmfit , dat) 
 ```
 
@@ -153,8 +178,12 @@ Using `cost = 1`, we misclassify a training observation, but we also obtain a mu
 
 ## 2 Non-linear SVM
 
+<<<<<<< Updated upstream
 In order to fit an SVM using a non-linear kernel, we once again use the `svm()`
 function. However, now we use a diﬀerent value of the parameter `kernel`.
+=======
+In order to fit an SVM using a non-linear kernel, we once again use the `svm()` function. However, now we use a diﬀerent value of the parameter `kernel`.
+>>>>>>> Stashed changes
 
 To fit an SVM with a polynomial kernel we use `kernel = "polynomial"`, and to fit an SVM with a radial kernel we use `kernel = "radial"`. In the former case we also use the degree argument to specify a `degree` for the polynomial kernel (the degree of "bendiness" in the separator), and in the latter case we use `gamma` to specify a value of $\gamma$ for the radial basis kernel. For details on these, see James et al. 2021 Ch 9.
 
@@ -197,8 +226,12 @@ plot(svmfit, dat[train, ])
 
 ### Tune it
 
+<<<<<<< Updated upstream
 We can perform cross-validation using `tune()` to select the best choice of
 $\gamma$ and `cost` for an SVM with a radial kernel:
+=======
+We can perform cross-validation using `tune()` to select the best choice of $\gamma$ and `cost` for an SVM with a radial kernel:
+>>>>>>> Stashed changes
 
 ```{r}
 set.seed(1)
@@ -237,11 +270,16 @@ rocplot <- function(pred, truth , ...) {
   }
 ```
 
+<<<<<<< Updated upstream
 SVMs and support vector classifiers output class labels for each observation. However, it is also possible to obtain fitted values for each observation, which are the numerical scores used to obtain the class labels. For instance, in the case of a support vector classifier, the fitted value for an observation $X = (X_1, X_2,. .., X_p)^T$ takes the form $\hat\beta_0 + \hat\beta_1X_1 + \hat\beta_2X_2 +  + \hat\beta_pX_p$. 
+=======
+SVMs and support vector classifiers output class labels for each observation. However, it is also possible to obtain fitted values for each observation, which are the numerical scores used to obtain the class labels. For instance, in the case of a support vector classifier, the fitted value for an observation $X = (X_1, X_2,. .., X_p)^T$ takes the form $\hat\beta_0 + \hat\beta_1X_1 + \hat\beta_2X_2 + + \hat\beta_pX_p$.
+>>>>>>> Stashed changes
 
 In essence, the sign of the fitted value determines on which side of the decision boundary the observation lies. Therefore, the relationship between the fitted value and the class prediction for a given observation is simple: if the fitted value exceeds zero then the observation is assigned to one class, and if it is less than zero then it is assigned to the other. In order to obtain the fitted values for a given SVM model fit, we use `decision.values = TRUE` when fitting `svm()`. Then the `predict()` function will output the fitted values.
 
 ```{r}
+<<<<<<< Updated upstream
 svmfit.opt <- svm(y ~ ., data = dat[train, ], 
 kernel = "radial", gamma = 2, cost = 1, decision.values = T)
 
@@ -255,6 +293,15 @@ fitted <- attributes(
 
 
 
+=======
+svmfit.opt <- svm(y ~., data = dat[train, ], 
+kernel= "radial", gamma = 2, cost = 1, decision.values = T)
+fitted <- attributes(
+  predict(svmfit.opt, dat[train,], decision.values = TRUE)
+  )$decision.values
+```
+
+>>>>>>> Stashed changes
 ## 6 Exercises
 
 ### Exercise 1

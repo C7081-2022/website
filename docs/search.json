@@ -635,6 +635,7 @@
     "title": "BMI data swag",
     "section": "Matt’s summary",
     "text": "Matt’s summary\n\npaste('Your R-sqared is: ', round(summary(lm0)$r.squared, 2))\n\n[1] \"Your R-sqared is:  0.08\""
+<<<<<<< Updated upstream
   },
   {
     "objectID": "lab09-svm.html",
@@ -656,5 +657,7 @@
     "title": "Lab 09 SVM",
     "section": "3 ROC curves",
     "text": "3 ROC curves\nThe {ROCR} package can be used to produce ROC curves (see ch 9 in James et al. 2021). We first write a short function to plot an ROC curve given a vector containing a numerical score for each observation, pred, and a vector containing the class label for each observation, truth.\n\nlibrary(ROCR)\n\nWarning: package 'ROCR' was built under R version 4.1.3\n\nrocplot <- function(pred, truth , ...) {\n  predob <- prediction (pred , truth )\n  perf <- performance (predob , \" tpr \", \" fpr \")\n  plot (perf , ...)\n  }\n\nSVMs and support vector classifiers output class labels for each observation. However, it is also possible to obtain fitted values for each observation, which are the numerical scores used to obtain the class labels. For instance, in the case of a support vector classifier, the fitted value for an observation \\(X = (X_1, X_2,. .., X_p)^T\\) takes the form \\(\\hat\\beta_0 + \\hat\\beta_1X_1 + \\hat\\beta_2X_2 + + \\hat\\beta_pX_p\\).\nIn essence, the sign of the fitted value determines on which side of the decision boundary the observation lies. Therefore, the relationship between the fitted value and the class prediction for a given observation is simple: if the fitted value exceeds zero then the observation is assigned to one class, and if it is less than zero then it is assigned to the other. In order to obtain the fitted values for a given SVM model fit, we use decision.values = TRUE when fitting svm(). Then the predict() function will output the fitted values.\n\nsvmfit.opt <- svm(y ~ ., data = dat[train, ], \nkernel = \"radial\", gamma = 2, cost = 1, decision.values = T)\n\nfitted <- attributes(\n  predict(svmfit.opt, dat[ train, ], decision.values = TRUE)\n  )$decision.values"
+=======
+>>>>>>> Stashed changes
   }
 ]
