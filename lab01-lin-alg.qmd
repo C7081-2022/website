@@ -536,17 +536,17 @@ Because $A^{-1}A = I$ and $Ix=x$:
 
 $x = A^{-1}b = \begin{bmatrix} -2 & 1.5 \\ 1 & -0.5 \end{bmatrix} \begin{bmatrix} 7 \\ 10 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$
 
-This way of thinking is the fountation of the linear model and we can exploit it to isolate and "solve" for the x values. E.g. we can isolate and solve for $x_2$ as:
+This way of thinking is the foundation of the linear model and we can exploit it to isolate and "solve" for the x values. E.g. we can isolate and solve for $x_2$ as:
 
-<<<<<<< Updated upstream
+
 Eq 1 (rerarranged): $x_2 = \frac{7}{3}-\frac{1}{3}x_1$
 
 Eq 2 (rerarranged): $x_2 = \frac{10}{4}-\frac{2}{4}x_1$
-=======
+
 $x_2 = \frac{7}{3}-\frac{1}{3}x_1$
 
 $x_2 = \frac{10}{4}-\frac{2}{4}x_1$
->>>>>>> Stashed changes
+
 
 Now we can graphically represent these equations, which are two lines and which demonstrate the solutions
 

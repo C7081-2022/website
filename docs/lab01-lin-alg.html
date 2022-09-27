@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.179">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -350,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>Vectors in R are always printed in the ‘row format’, regardless of math notation.</p>
@@ -413,7 +413,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 </section>
@@ -441,7 +441,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 </section>
@@ -552,7 +552,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="description" class="level3">
 <h3 class="anchored" data-anchor-id="description">3.1 Description</h3>
 <p>Matrices are described by the number of rows and columns they have. We may say a matrix <span class="math inline">\(A\)</span> to have dimensions <span class="math inline">\(r \times c\)</span>, (rows <span class="math inline">\(\times\)</span> columns).</p>
-<p>$ A =</p>
+$ A =
 <span class="math display">\[\begin{bmatrix} a_{11} &amp; a_{12} &amp; \dots &amp; a_{1c} \\ a_{21} &amp; a_{22} &amp; \dots &amp; a_{2c} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{r1} &amp; a_{r2} &amp; \dots &amp; a_{rc} \end{bmatrix}\]</span>
 <p>$</p>
 <div class="cell">
@@ -583,14 +583,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="multiplying-matrices">3.2 Multiplying matrices</h3>
 <p>For a number <span class="math inline">\(\alpha\)</span> and a matrix <span class="math inline">\(A\)</span>, the product of <span class="math inline">\(\alpha A\)</span> is the matrix obtained by multiplying each element of <span class="math inline">\(A\)</span> to <span class="math inline">\(\alpha\)</span>.</p>
 <p><span class="math inline">\(\alpha = 3\)</span></p>
-<p>$A =</p>
-<span class="math display">\[\begin{bmatrix} 1 &amp; 3 \\  2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix}\]</span>
-<p>$</p>
-<p>$3 </p>
-<span class="math display">\[\begin{bmatrix} 1 &amp; 3 \\  2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix}\]</span>
-<p>=</p>
-<span class="math display">\[\begin{bmatrix} 3 &amp; 9 \\  6 &amp; 12 \\ 3 &amp; 3 \end{bmatrix}\]</span>
-<p>$</p>
+<p><span class="math inline">\(A = \begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix}\)</span></p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream $3 ======= <span class="math inline">\(3 \times\begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix} = \begin{bmatrix} 3 &amp; 9 \\ 6 &amp; 12 \\ 3 &amp; 3 \end{bmatrix}\)</span> &gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix multiplication in R</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">3</span></span>
@@ -607,11 +601,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="transpose-for-matrices" class="level3">
 <h3 class="anchored" data-anchor-id="transpose-for-matrices">3.3 Transpose for matrices</h3>
 <p>Matrix trasposition works similarly to vector transpostiion and is also denoted by <span class="math inline">\(\intercal\)</span></p>
-<p>$</p>
-<span class="math display">\[\begin{bmatrix} 1 &amp; 3 \\  2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix}\]</span>
-<p>^ =</p>
-<span class="math display">\[\begin{bmatrix} 1 &amp; 2 &amp; 1 \\  3 &amp; 4 &amp; 1 \end{bmatrix}\]</span>
-<p>$</p>
+<p><span class="math inline">\(\begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix}^ \intercal = \begin{bmatrix} 1 &amp; 2 &amp; 1 \\ 3 &amp; 4 &amp; 1 \end{bmatrix}\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix transpose in R</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">byrow=</span>T, <span class="at">ncol=</span><span class="dv">2</span>)</span>
@@ -626,14 +616,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="sum-of-matrices" class="level3">
 <h3 class="anchored" data-anchor-id="sum-of-matrices">3.4 Sum of matrices</h3>
 <p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be matrices of dimensions <span class="math inline">\(r \times c\)</span>. We sum the matrices together element-wise. The matrices must be of exactly the same dimensions.</p>
-<p>$</p>
-<span class="math display">\[\begin{bmatrix} 1 &amp; 3 \\  2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix}\]</span>
-<ul>
-<li><span class="math display">\[\begin{bmatrix} 7 &amp; 1 \\  1 &amp; 1 \\ 4 &amp; 4 \end{bmatrix}\]</span>
-<p>=</p>
-<span class="math display">\[\begin{bmatrix} 8 &amp; 4 \\  3 &amp; 5 \\ 5 &amp; 5 \end{bmatrix}\]</span>
-<p>$</p></li>
-</ul>
+<p><span class="math inline">\(\begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix} - \begin{bmatrix} 7 &amp; 1 \\ 1 &amp; 1 \\ 4 &amp; 4 \end{bmatrix} = \begin{bmatrix} 8 &amp; 4 \\ 3 &amp; 5 \\ 5 &amp; 5 \end{bmatrix}\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding matrices in R</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">byrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
@@ -650,13 +633,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="multiplying-matrix-x-vector" class="level3">
 <h3 class="anchored" data-anchor-id="multiplying-matrix-x-vector">3.5 Multiplying matrix x vector</h3>
-<p>Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(r \times c\)</span> matrix and ;et <span class="math inline">\(B\)</span> be a column vector with <span class="math inline">\(c\)</span> dimensions Note the number of elements in one dimension (here <span class="math inline">\(c\)</span>) bust be the same.</p>
-<p>$</p>
-<span class="math display">\[\begin{bmatrix} a_{11} &amp; a_{12} &amp; \dots &amp; a_{1c} \\ a_{21} &amp; a_{22} &amp; \dots &amp; a_{2c} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{r1} &amp; a_{r2} &amp; \dots &amp; a_{rc} \end{bmatrix}\]</span>
-<span class="math display">\[\begin{bmatrix} b_{1} \\  b_{2} \\  \vdots \\ b_{c} \end{bmatrix}\]</span>
-<p>=</p>
-<span class="math display">\[\begin{bmatrix} a_{11} b_{1} + a_{12} b_{2} +  \dots + a_{1c}b_{c} \\ a_{21} b_{1} + a_{22} b_{2} + \dots + a_{2c} b_{c} \\ \vdots  \\ a_{r1} b_{1} + a_{r2} b_{2} +  \dots   + a_{rc} b_{c} \end{bmatrix}\]</span>
-<p>$</p>
+<p>Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(r \times c\)</span> matrix and let <span class="math inline">\(B\)</span> be a column vector with <span class="math inline">\(c\)</span> dimensions Note the number of elements in one dimension (here <span class="math inline">\(c\)</span>) must be the same.</p>
+<p><span class="math inline">\(\begin{bmatrix} a_{11} &amp; a_{12} &amp; \dots &amp; a_{1c} \\ a_{21} &amp; a_{22} &amp; \dots &amp; a_{2c} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{r1} &amp; a_{r2} &amp; \dots &amp; a_{rc} \end{bmatrix} \times \begin{bmatrix} b_{1} \\ b_{2} \\ \vdots \\ b_{c} \end{bmatrix} = \begin{bmatrix} a_{11} b_{1} + a_{12} b_{2} + \dots + a_{1c}b_{c} \\ a_{21} b_{1} + a_{22} b_{2} + \dots + a_{2c} b_{c} \\ \vdots \\ a_{r1} b_{1} + a_{r2} b_{2} + \dots + a_{rc} b_{c} \end{bmatrix}\)</span></p>
+<p>For example:</p>
 <p><span class="math inline">\(\begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 4 \\ 1 &amp; 1 \end{bmatrix} \times \begin{bmatrix} 7 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \cdot 7 + 3 \cdot 1 \\ 2 \cdot 7 + 4 \cdot 1 \\ 1 \cdot 7 + 1 \cdot 1 \end{bmatrix}\begin{bmatrix} 10 \\ 18 \\ 8 \end{bmatrix}\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix x vector multiplication in R</span></span>
@@ -808,9 +787,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math inline">\(B\)</span> is the inverse of <span class="math inline">\(A\)</span>, written as <span class="math inline">\(B = A^{−1}\)</span> and</p>
 <p><span class="math inline">\(A\)</span> is the inverse of <span class="math inline">\(B\)</span>, written as <span class="math inline">\(A = B^{−1}\)</span></p>
 <p>Numeric example</p>
-<p>$ A =</p>
+$ A =
 <span class="math display">\[\begin{bmatrix} 1 &amp; 3 \\  2 &amp; 4 \end{bmatrix}\]</span>
-<p>B =</p>
+<p>$</p>
+$ B =
 <span class="math display">\[\begin{bmatrix} -2 &amp; 1.5 \\  1 &amp; -0.5 \end{bmatrix}\]</span>
 <p>$</p>
 <p>We can show <span class="math inline">\(AB = BA = I\)</span>, thus <span class="math inline">\(B=A^{-1}\)</span></p>
@@ -880,9 +860,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math inline">\(\begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 4 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 7 \\ 10 \end{bmatrix}\)</span>, i.e.&nbsp;<span class="math inline">\(Ax = b\)</span></p>
 <p>Because <span class="math inline">\(A^{-1}A = I\)</span> and <span class="math inline">\(Ix=x\)</span>:</p>
 <p><span class="math inline">\(x = A^{-1}b = \begin{bmatrix} -2 &amp; 1.5 \\ 1 &amp; -0.5 \end{bmatrix} \begin{bmatrix} 7 \\ 10 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}\)</span></p>
-<p>This way of thinking is the fountation of the linear model and we can exploit it to isolate and “solve” for the x values. E.g. we can isolate and solve for <span class="math inline">\(x_2\)</span> as:</p>
+<p>This way of thinking is the foundation of the linear model and we can exploit it to isolate and “solve” for the x values. E.g. we can isolate and solve for <span class="math inline">\(x_2\)</span> as:</p>
 <p>Eq 1 (rerarranged): <span class="math inline">\(x_2 = \frac{7}{3}-\frac{1}{3}x_1\)</span></p>
 <p>Eq 2 (rerarranged): <span class="math inline">\(x_2 = \frac{10}{4}-\frac{2}{4}x_1\)</span></p>
+<p><span class="math inline">\(x_2 = \frac{7}{3}-\frac{1}{3}x_1\)</span></p>
+<p><span class="math inline">\(x_2 = \frac{10}{4}-\frac{2}{4}x_1\)</span></p>
 <p>Now we can graphically represent these equations, which are two lines and which demonstrate the solutions</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="cn">NULL</span>, <span class="at">y=</span><span class="cn">NULL</span>,</span>
@@ -897,7 +879,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">7</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">b=</span><span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
 <span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">10</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">b=</span><span class="sc">-</span><span class="dv">2</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>The lines represent the solved equations above, and it can be seen that they cross at a single point, the solutions for <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, <span class="math inline">\(x_1 = 1\)</span> and <span class="math inline">\(x_2=2\)</span>, respectively.</p>
@@ -924,8 +906,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math inline">\((A + B)^\intercal = A^\intercal + B^\intercal\)</span></p>
 <p><span class="math inline">\((AB)^\intercal = B^\intercal A^\intercal\)</span></p>
 <p><span class="math inline">\(A(B + C) = AB + AC\)</span></p>
-<p><span class="math inline">\(AB = AC 6) B = C\)</span></p>
-<p>In generel <span class="math inline">\(AB \neq BA\)</span></p>
+<p><span class="math inline">\(AB = AC \not\Rightarrow B = C\)</span></p>
+<p><span class="math inline">\(AB \neq BA\)</span> (in general)</p>
 <p><span class="math inline">\(AI = IA = A\)</span></p>
 <p>If <span class="math inline">\(\alpha\)</span> is a number then <span class="math inline">\(\alpha AB = A(\alpha B)\)</span></p>
 </section>
@@ -948,7 +930,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can plot these values and note that the relationship is approvimately linear (i.e., a straight line can be drawn that comes close to all the values)</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>We can notate the linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> with</p>
@@ -995,12 +977,13 @@ x 0.61</code></pre>
 <h2 class="anchored" data-anchor-id="exercises">5 Exercises</h2>
 <section id="the-bird-table" class="level3">
 <h3 class="anchored" data-anchor-id="the-bird-table">5.1 The bird table</h3>
-<p>On a sunny day, two tables are standing in an English country garden. On each table birds of unknown species are sitting having the time of their lives. A bird from the first table says to those on the second table: “Hi – if one of you come to our table then there will be the same number of us on each table”. “Yeah, right”, says a bird from the second table, “but if one of you comes to our table, then we will be twice as many on our table as on yours”.</p>
+<p>On a sunny day, two tables are standing in an English country garden. On each table are *birds of unknown species are sitting having the time of their lives. A bird from the first table says to those on the second table: “Hi – if one of you come to our table then there will be the same number of us on each table”. “Yeah, right”, says a bird from the second table, “but if one of you comes to our table, then we will be twice as many on our table as on yours”.</p>
+<p>*(because this is a maths question, here we have the ability to assume by birds we may mean something theoretical, and the count of which may assume any value from the infinite set of integers positive or negative…)</p>
 <p>Question: How many birds are on each table?</p>
 <ul>
 <li><p>Write up two equations with two unknowns</p></li>
 <li><p>Solve these equations using the methods you have learned from linear algebra</p></li>
-<li><p>Simply finding the solution by trial–and–error is invalid</p></li>
+<li><p>Simply finding the solution by trial–and–error is invalid (and will probably lead to frustration, especially if the question is taken literally - i.e., USE THE TOOLS we practiced)</p></li>
 </ul>
 </section>
 </section>
