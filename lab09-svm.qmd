@@ -22,7 +22,7 @@ x[y == 1, ] <- x[ y == 1, ] + 1
 plot(x, col = (3 - y), pch=16)
 ```
 
-They are not. Next, we fit the support vector classifier. Note that in order for the `svm()` function to perform classification (as opposed to SVM-based regression), we must encode the response as a factor variable. We now create a data frame with the response coded as a factor.
+They are not (i.e. you cannot separate the classes by drawing a straight line between them). Next, we fit the support vector classifier. Note that in order for the `svm()` function to perform classification (as opposed to SVM-based regression), we must encode the response as a factor variable. We now create a data frame with the response coded as a factor.
 
 ```{r}
 dat <- data.frame(x = x, y = as.factor(y)) 
@@ -43,6 +43,7 @@ Note that the two arguments to the SVM `plot()` function are the output of the c
 
 ```{r}
 svmfit$index
+
 ```
 
 We can obtain some basic information about the support vector classifier fit using the `summary()` command:
@@ -62,7 +63,7 @@ plot(svmfit, dat)
 svmfit$index
 ```
 
-Now that a smaller value of the cost parameter is being used, we obtain a larger number of support vectors, because the margin is now wider. Unfortunately, the s`vm()` function does not explicitly output the coeﬃcients of the linear decision boundary obtained when the support vector classifier is fit, nor does it output the width of the margin
+Now that a smaller value of the cost parameter is being used, we obtain a larger number of support vectors, because the margin is now wider. Unfortunately, the `svm()` function does not explicitly output the coefficients of the linear decision boundary obtained when the support vector classifier is fit, nor does it output the width of the margin.
 
 ### tune()
 
@@ -83,18 +84,16 @@ summary(tune.out)
 
 ### Turn on `tune.out`
 
-We see that `cost = 0.1` results in the lowest cross-validation error rate. The `tune()` function stores the best model obtained, which can be accessed as follows:
+We see that `cost = 0.1` (1e-01) results in the lowest cross-validation error rate. The `tune()` function stores the best model obtained, which can be accessed as follows:
 
 ```{r}
 bestmod <- tune.out$best.model
 summary(bestmod) 
 ```
 
-<<<<<<< Updated upstream
-### Testing with ``predict()`
-=======
-### Testing with \``predict()`
->>>>>>> Stashed changes
+
+### Testing with `predict()`
+
 
 The `predict()` function can be used to predict the class label on a set of test observations, at any given value of the cost parameter. We begin by generating a test data set.
 
@@ -111,7 +110,7 @@ Now we predict the class labels of these test observations. Here we use the best
 ypred <- predict(bestmod, testdat)
 
 #our own confusion matrix
-table(predict = ypred, truth = testdat$y)  #not bad!
+table(predict = ypred, truth = testdat$y)  #not bad
 
 ```
 
@@ -124,9 +123,10 @@ ypred <- predict(svmfit, testdat)
 
 table(predict = ypred, truth = testdat$y) # not as good
 ```
-<<<<<<< Updated upstream
+
 
 In this case three additional observations are misclassified.
+
 
 ### Linear separation
 
@@ -142,26 +142,9 @@ Now the observations are just barely linearly separable. We fit the support vect
 ```{r}
 dat <- data.frame(x = x, y = as.factor(y)) 
 svmfit <- svm(y ~ ., data = dat, kernel = "linear", cost = 1e5 )
-```
+summary(svmfit) 
 
-In this case three additional observations are misclassified.
-
-### Linear separation
-
-Now consider a situation in which the two classes are linearly separable. Then we can find a separating hyperplane using the svm() function. We first further separate the two classes in our simulated data so that they are linearly separable:
-
-```{r}
-x[y == 1, ] <- x[y == 1, ] + 0.5
-plot (x, col = (y + 5) / 2, pch = 16)
-```
-
-Now the observations are just barely linearly separable. We fit the support vector classifier and plot the resulting hyperplane, using a very large value of cost so that no observations are misclassified.
-
-```{r}
-dat <- data.frame(x = x, y = as.factor(y)) 
-svmfit <- svm(y ~ ., data = dat, kernel = "linear", cost = 1e5 )
-
-plot(svmfit , dat) 
+plot(svmfit, dat) 
 ```
 
 No training errors were made and only three support vectors were used. However, we can see from the figure that the margin is very narrow (because the observations that are not support vectors, indicated as circles, are very close to the decision boundary). It seems likely that this model will perform poorly on test data. We now try a smaller value of `cost`:
@@ -176,12 +159,8 @@ Using `cost = 1`, we misclassify a training observation, but we also obtain a mu
 
 ## 2 Non-linear SVM
 
-<<<<<<< Updated upstream
-In order to fit an SVM using a non-linear kernel, we once again use the `svm()`
-function. However, now we use a diﬀerent value of the parameter `kernel`.
-=======
 In order to fit an SVM using a non-linear kernel, we once again use the `svm()` function. However, now we use a diﬀerent value of the parameter `kernel`.
->>>>>>> Stashed changes
+
 
 To fit an SVM with a polynomial kernel we use `kernel = "polynomial"`, and to fit an SVM with a radial kernel we use `kernel = "radial"`. In the former case we also use the degree argument to specify a `degree` for the polynomial kernel (the degree of "bendiness" in the separator), and in the latter case we use `gamma` to specify a value of $\gamma$ for the radial basis kernel. For details on these, see James et al. 2021 Ch 9.
 
@@ -224,12 +203,10 @@ plot(svmfit, dat[train, ])
 
 ### Tune it
 
-<<<<<<< Updated upstream
+
 We can perform cross-validation using `tune()` to select the best choice of
 $\gamma$ and `cost` for an SVM with a radial kernel:
-=======
-We can perform cross-validation using `tune()` to select the best choice of $\gamma$ and `cost` for an SVM with a radial kernel:
->>>>>>> Stashed changes
+
 
 ```{r}
 set.seed(1)
@@ -261,31 +238,139 @@ The `{ROCR}` package can be used to produce ROC curves (see ch 9 in James et al.
 ```{r}
 library(ROCR)
 
-rocplot <- function(pred, truth , ...) {
-  predob <- prediction (pred , truth )
-  perf <- performance (predob , " tpr ", " fpr ")
-  plot (perf , ...)
+# make function we will use below
+rocplot <- function(pred, truth , ...){
+  predob <- prediction (pred, truth)
+  perf <- performance (predob , "tpr", "fpr")
+  plot (perf, ...)
   }
 ```
 
-<<<<<<< Updated upstream
-SVMs and support vector classifiers output class labels for each observation. However, it is also possible to obtain fitted values for each observation, which are the numerical scores used to obtain the class labels. For instance, in the case of a support vector classifier, the fitted value for an observation $X = (X_1, X_2,. .., X_p)^T$ takes the form $\hat\beta_0 + \hat\beta_1X_1 + \hat\beta_2X_2 +  + \hat\beta_pX_p$. 
-=======
+
 SVMs and support vector classifiers output class labels for each observation. However, it is also possible to obtain fitted values for each observation, which are the numerical scores used to obtain the class labels. For instance, in the case of a support vector classifier, the fitted value for an observation $X = (X_1, X_2,. .., X_p)^T$ takes the form $\hat\beta_0 + \hat\beta_1X_1 + \hat\beta_2X_2 + + \hat\beta_pX_p$.
->>>>>>> Stashed changes
+
 
 In essence, the sign of the fitted value determines on which side of the decision boundary the observation lies. Therefore, the relationship between the fitted value and the class prediction for a given observation is simple: if the fitted value exceeds zero then the observation is assigned to one class, and if it is less than zero then it is assigned to the other. In order to obtain the fitted values for a given SVM model fit, we use `decision.values = TRUE` when fitting `svm()`. Then the `predict()` function will output the fitted values.
 
 ```{r}
 svmfit.opt <- svm(y ~ ., data = dat[train, ], 
-kernel = "radial", gamma = 2, cost = 1, decision.values = T)
+                  kernel = "radial", gamma = 2, cost = 1, 
+                  decision.values = TRUE)
 
+# another utility function
 fitted <- attributes(
-  predict(svmfit.opt, dat[ train, ], decision.values = TRUE)
+  predict(svmfit.opt, dat[train, ], decision.values = TRUE)
   )$decision.values
 ```
 
+Now we can produce the ROC plot. Note we use the negative of the fitted values so that negative values correspond to class 1 and positive values to class 2.
 
+```{r}
+par(mfrow = c(1, 1))
+
+# gamma = 2
+rocplot(-fitted, dat[train, "y"], main = "Training Data")
+
+svmfit.flex <- svm(y ~ ., data = dat [train, ], 
+                   kernel = "radial", gamma = 50 , 
+                   cost = 1, decision.values = T)
+
+fitted <- attributes(
+  predict(svmfit.flex, dat[train, ], decision.values = T)
+  )$decision.values
+
+# gamma = 50
+rocplot(-fitted, dat[train, "y"], add = T, col = "red")
+
+legend(x = .6, y=.8,
+       legend = c('gamma = 2', 'gamma = 50'),
+       bty = 'n', col = c(1,2), lty = 1)
+```
+The SVM appears to be producing accurate predictionsmade much better here by increasing $\gamma$ to produce a more flexible fit and generate further improvements in accuracy.
+
+### Train & TEST
+
+However, these ROC curves are all on the training data. We are really more interested in the level of prediction accuracy on the test data. When we compute the ROC curves on the test data, the model with $\gamma$ = 2 appears to provide the most accurate results.
+
+```{r}
+fitted <- attributes(
+  predict(svmfit.opt, dat[-train, ], decision.values = T)
+  )$decision.values
+
+rocplot(-fitted, dat[-train , "y"], main = "Test Data")
+
+fitted <- attributes(
+  predict(svmfit.flex, dat[-train, ], decision.values = T)
+  )$decision.values
+
+rocplot(-fitted, dat[-train , "y"], add = T, col = "red")
+
+legend(x = .6, y=.8,
+       legend = c('gamma = 2', 'gamma = 50'),
+       bty = 'n', col = c(1,2), lty = 1)
+```
+## 4 SVM with multiple classes
+
+If the response is a factor containing more than two levels, then the `svm()` function will perform multi-class classification using the one-versus-one approach. We explore that setting here by generating a third class of observations and fit an SVM to the data:
+
+```{r}
+par(mfrow=c(1,2))
+
+set.seed(1)
+x <- rbind(x, matrix(rnorm(50 * 2), ncol = 2))
+y <- c(y, rep(0, 50))
+x[y == 0 , 2] <- x[y == 0 , 2] + 2
+
+dat <- data.frame(x = x, y = as.factor(y)) 
+par(mfrow = c(1 , 1))
+plot(x, col = ( y + 1), pch = 16)
+
+# Fit svm
+svmfit <- svm (y ~., data = dat, kernel = "radial",
+               cost = 10 , gamma = 1)
+plot (svmfit, dat) 
+
+```
+The `{e1071}` library can also be used to perform support vector regression, if the response vector that is passed in to `svm()` is numerical rather than a factor.
+
+## 5 Gene expression example
+
+We now examine the `Khan` data set, which consists of a number of tissue samples corresponding to four distinct types of small round blue cell tu- mors. For each tissue sample, gene expression measurements are available. The data set consists of training data, `xtrain` and `ytrain`, and testing data, `xtest` and `ytest`.
+
+We examine the dimension of the data:
+
+```{r}
+library(ISLR2)
+
+names(Khan) 
+dim(Khan$xtrain) # lots of features/loci
+dim(Khan$xtest) # each row is a patient
+
+length(Khan$ytrain)
+length(Khan$ytest)
+```
+This data set consists of expression measurements for 2,308 genes. The training and test sets consist of 63 and 20 observations respectively.
+
+```{r}
+table(Khan$ytrain)
+table(Khan$ytest)
+```
+
+We will explore a support vector approach to predict cancer subtype using gene expression measurements. In this data set, there are a very large number of features relative to the number of observations. This suggests that we should use a linear kernel, because the additional flexibility that will result from using a polynomial or radial kernel is unnecessary.
+
+```{r}
+dat <- data.frame(
+  x = Khan$xtrain,
+  y = as.factor(Khan$ytrain )
+  )
+
+out <- svm(y ~ ., data = dat, kernel = "linear", cost = 10)
+summary(out)
+
+table(out$fitted, dat$y) # Boom
+```
+
+We see that there are no training errors. In fact, this is not surprising, because the large number of variables relative to the number of observations makes it easy to find *hyperplanes* that fully separate the classes. We are most interested not in the support vector classifier’s performance on the training observations, but rather its performance on the test observations...
 
 ## 6 Exercises
 

@@ -266,14 +266,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#svm" id="toc-svm" class="nav-link" data-scroll-target="#svm"><code>svm()</code></a></li>
   <li><a href="#tune" id="toc-tune" class="nav-link" data-scroll-target="#tune">tune()</a></li>
   <li><a href="#turn-on-tune.out" id="toc-turn-on-tune.out" class="nav-link" data-scroll-target="#turn-on-tune.out">Turn on <code>tune.out</code></a></li>
+  <li><a href="#testing-with-predict" id="toc-testing-with-predict" class="nav-link" data-scroll-target="#testing-with-predict">Testing with <code>predict()</code></a></li>
   <li><a href="#linear-separation" id="toc-linear-separation" class="nav-link" data-scroll-target="#linear-separation">Linear separation</a></li>
-  <li><a href="#linear-separation-1" id="toc-linear-separation-1" class="nav-link" data-scroll-target="#linear-separation-1">Linear separation</a></li>
   </ul></li>
   <li><a href="#non-linear-svm" id="toc-non-linear-svm" class="nav-link" data-scroll-target="#non-linear-svm">2 Non-linear SVM</a>
   <ul class="collapse">
   <li><a href="#tune-it" id="toc-tune-it" class="nav-link" data-scroll-target="#tune-it">Tune it</a></li>
   </ul></li>
-  <li><a href="#roc-curves" id="toc-roc-curves" class="nav-link" data-scroll-target="#roc-curves">3 ROC curves</a></li>
+  <li><a href="#roc-curves" id="toc-roc-curves" class="nav-link" data-scroll-target="#roc-curves">3 ROC curves</a>
+  <ul class="collapse">
+  <li><a href="#train-test" id="toc-train-test" class="nav-link" data-scroll-target="#train-test">Train &amp; TEST</a></li>
+  </ul></li>
+  <li><a href="#svm-with-multiple-classes" id="toc-svm-with-multiple-classes" class="nav-link" data-scroll-target="#svm-with-multiple-classes">4 SVM with multiple classes</a></li>
+  <li><a href="#gene-expression-example" id="toc-gene-expression-example" class="nav-link" data-scroll-target="#gene-expression-example">5 Gene expression example</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">6 Exercises</a>
   <ul class="collapse">
   <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
@@ -322,7 +327,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="lab09-svm_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>They are not. Next, we fit the support vector classifier. Note that in order for the <code>svm()</code> function to perform classification (as opposed to SVM-based regression), we must encode the response as a factor variable. We now create a data frame with the response coded as a factor.</p>
+<p>They are not (i.e.&nbsp;you cannot separate the classes by drawing a straight line between them). Next, we fit the support vector classifier. Note that in order for the <code>svm()</code> function to perform classification (as opposed to SVM-based regression), we must encode the response as a factor variable. We now create a data frame with the response coded as a factor.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">as.factor</span>(y)) </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span>
@@ -383,7 +388,7 @@ Levels:
 <pre><code> [1]  1  2  3  4  5  7  9 10 12 13 14 15 16 17 18 20</code></pre>
 </div>
 </div>
-<p>Now that a smaller value of the cost parameter is being used, we obtain a larger number of support vectors, because the margin is now wider. Unfortunately, the s<code>vm()</code> function does not explicitly output the coeﬃcients of the linear decision boundary obtained when the support vector classifier is fit, nor does it output the width of the margin</p>
+<p>Now that a smaller value of the cost parameter is being used, we obtain a larger number of support vectors, because the margin is now wider. Unfortunately, the <code>svm()</code> function does not explicitly output the coefficients of the linear decision boundary obtained when the support vector classifier is fit, nor does it output the width of the margin.</p>
 </section>
 <section id="tune" class="level3">
 <h3 class="anchored" data-anchor-id="tune">tune()</h3>
@@ -423,7 +428,7 @@ Parameter tuning of 'svm':
 </section>
 <section id="turn-on-tune.out" class="level3">
 <h3 class="anchored" data-anchor-id="turn-on-tune.out">Turn on <code>tune.out</code></h3>
-<p>We see that <code>cost = 0.1</code> results in the lowest cross-validation error rate. The <code>tune()</code> function stores the best model obtained, which can be accessed as follows:</p>
+<p>We see that <code>cost = 0.1</code> (1e-01) results in the lowest cross-validation error rate. The <code>tune()</code> function stores the best model obtained, which can be accessed as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bestmod <span class="ot">&lt;-</span> tune.out<span class="sc">$</span>best.model</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bestmod) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -450,7 +455,9 @@ Levels:
  -1 1</code></pre>
 </div>
 </div>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream ### Testing with <code>predict()` ======= ### Testing with \</code>predict()` &gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</p>
+</section>
+<section id="testing-with-predict" class="level3">
+<h3 class="anchored" data-anchor-id="testing-with-predict">Testing with <code>predict()</code></h3>
 <p>The <code>predict()</code> function can be used to predict the class label on a set of test observations, at any given value of the cost parameter. We begin by generating a test data set.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>xtest <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">20</span> <span class="sc">*</span> <span class="dv">2</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
@@ -463,7 +470,7 @@ Levels:
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ypred <span class="ot">&lt;-</span> <span class="fu">predict</span>(bestmod, testdat)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#our own confusion matrix</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">predict =</span> ypred, <span class="at">truth =</span> testdat<span class="sc">$</span>y)  <span class="co">#not bad!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">predict =</span> ypred, <span class="at">truth =</span> testdat<span class="sc">$</span>y)  <span class="co">#not bad</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       truth
 predict -1 1
@@ -485,7 +492,6 @@ predict -1  1
      1   0  3</code></pre>
 </div>
 </div>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</p>
 <p>In this case three additional observations are misclassified.</p>
 </section>
 <section id="linear-separation" class="level3">
@@ -501,28 +507,32 @@ predict -1  1
 <p>Now the observations are just barely linearly separable. We fit the support vector classifier and plot the resulting hyperplane, using a very large value of cost so that no observations are misclassified.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">as.factor</span>(y)) </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>svmfit <span class="ot">&lt;-</span> <span class="fu">svm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> dat, <span class="at">kernel =</span> <span class="st">"linear"</span>, <span class="at">cost =</span> <span class="fl">1e5</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>svmfit <span class="ot">&lt;-</span> <span class="fu">svm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> dat, <span class="at">kernel =</span> <span class="st">"linear"</span>, <span class="at">cost =</span> <span class="fl">1e5</span> )</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(svmfit) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+svm(formula = y ~ ., data = dat, kernel = "linear", cost = 1e+05)
+
+
+Parameters:
+   SVM-Type:  C-classification 
+ SVM-Kernel:  linear 
+       cost:  1e+05 
+
+Number of Support Vectors:  3
+
+ ( 1 2 )
+
+
+Number of Classes:  2 
+
+Levels: 
+ -1 1</code></pre>
 </div>
-<p>In this case three additional observations are misclassified.</p>
-</section>
-<section id="linear-separation-1" class="level3">
-<h3 class="anchored" data-anchor-id="linear-separation-1">Linear separation</h3>
-<p>Now consider a situation in which the two classes are linearly separable. Then we can find a separating hyperplane using the svm() function. We first further separate the two classes in our simulated data so that they are linearly separable:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x[y <span class="sc">==</span> <span class="dv">1</span>, ] <span class="ot">&lt;-</span> x[y <span class="sc">==</span> <span class="dv">1</span>, ] <span class="sc">+</span> <span class="fl">0.5</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span> (x, <span class="at">col =</span> (y <span class="sc">+</span> <span class="dv">5</span>) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(svmfit, dat) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab09-svm_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Now the observations are just barely linearly separable. We fit the support vector classifier and plot the resulting hyperplane, using a very large value of cost so that no observations are misclassified.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">as.factor</span>(y)) </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>svmfit <span class="ot">&lt;-</span> <span class="fu">svm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> dat, <span class="at">kernel =</span> <span class="st">"linear"</span>, <span class="at">cost =</span> <span class="fl">1e5</span> )</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(svmfit , dat) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="lab09-svm_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab09-svm_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>No training errors were made and only three support vectors were used. However, we can see from the figure that the margin is very narrow (because the observations that are not support vectors, indicated as circles, are very close to the decision boundary). It seems likely that this model will perform poorly on test data. We now try a smaller value of <code>cost</code>:</p>
@@ -540,9 +550,9 @@ Parameters:
  SVM-Kernel:  linear 
        cost:  1 
 
-Number of Support Vectors:  5
+Number of Support Vectors:  7
 
- ( 2 3 )
+ ( 4 3 )
 
 
 Number of Classes:  2 
@@ -552,7 +562,7 @@ Levels:
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(svmfit, dat) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab09-svm_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab09-svm_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Using <code>cost = 1</code>, we misclassify a training observation, but we also obtain a much wider margin and make use of seven support vectors. It seems likely that this model will perform better on test data than the model with <code>cost = 1e5</code>.</p>
@@ -560,7 +570,7 @@ Levels:
 </section>
 <section id="non-linear-svm" class="level2">
 <h2 class="anchored" data-anchor-id="non-linear-svm">2 Non-linear SVM</h2>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream In order to fit an SVM using a non-linear kernel, we once again use the <code>svm()</code> function. However, now we use a diﬀerent value of the parameter <code>kernel</code>. ======= In order to fit an SVM using a non-linear kernel, we once again use the <code>svm()</code> function. However, now we use a diﬀerent value of the parameter <code>kernel</code>. &gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</p>
+<p>In order to fit an SVM using a non-linear kernel, we once again use the <code>svm()</code> function. However, now we use a diﬀerent value of the parameter <code>kernel</code>.</p>
 <p>To fit an SVM with a polynomial kernel we use <code>kernel = "polynomial"</code>, and to fit an SVM with a radial kernel we use <code>kernel = "radial"</code>. In the former case we also use the degree argument to specify a <code>degree</code> for the polynomial kernel (the degree of “bendiness” in the separator), and in the latter case we use <code>gamma</code> to specify a value of <span class="math inline">\(\gamma\)</span> for the radial basis kernel. For details on these, see James et al.&nbsp;2021 Ch 9.</p>
 <p>We first generate some data with a non-linear class boundary, as follows:</p>
 <div class="cell">
@@ -574,7 +584,7 @@ Levels:
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># always plot</span></span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span> (x, <span class="at">col =</span> y, <span class="at">pch =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab09-svm_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab09-svm_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The data is randomly split into training and testing groups. We then fit the training data using the <code>svm()</code> function with a radial kernel and <span class="math inline">\(\gamma\)</span> = 1:</p>
@@ -584,7 +594,7 @@ Levels:
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">kernel =</span> <span class="st">"radial"</span>, <span class="at">gamma =</span> <span class="dv">1</span> ,<span class="at">cost =</span> <span class="dv">1</span>)</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(svmfit, dat[train, ]) <span class="co"># ok!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab09-svm_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab09-svm_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The plot shows that the resulting SVM has a decidedly non-linear boundary. The <code>summary()</code> function can be used to obtain some information about the SVM fit:</p>
@@ -619,12 +629,12 @@ Levels:
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">gamma =</span> <span class="dv">1</span>, <span class="at">cost =</span> <span class="fl">1e5</span> )</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(svmfit, dat[train, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab09-svm_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab09-svm_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <section id="tune-it" class="level3">
 <h3 class="anchored" data-anchor-id="tune-it">Tune it</h3>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream We can perform cross-validation using <code>tune()</code> to select the best choice of <span class="math inline">\(\gamma\)</span> and <code>cost</code> for an SVM with a radial kernel: ======= We can perform cross-validation using <code>tune()</code> to select the best choice of <span class="math inline">\(\gamma\)</span> and <code>cost</code> for an SVM with a radial kernel: &gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</p>
+<p>We can perform cross-validation using <code>tune()</code> to select the best choice of <span class="math inline">\(\gamma\)</span> and <code>cost</code> for an SVM with a radial kernel:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>tune.out <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, y <span class="sc">~</span> ., <span class="at">data =</span> dat[train, ], <span class="at">kernel =</span> <span class="st">"radial"</span>,</span>
@@ -698,22 +708,187 @@ true  1  2
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ROCR)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>rocplot <span class="ot">&lt;-</span> <span class="cf">function</span>(pred, truth , ...) {</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  predob <span class="ot">&lt;-</span> <span class="fu">prediction</span> (pred , truth )</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  perf <span class="ot">&lt;-</span> <span class="fu">performance</span> (predob , <span class="st">" tpr "</span>, <span class="st">" fpr "</span>)</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span> (perf , ...)</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># make function we will use below</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>rocplot <span class="ot">&lt;-</span> <span class="cf">function</span>(pred, truth , ...){</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  predob <span class="ot">&lt;-</span> <span class="fu">prediction</span> (pred, truth)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  perf <span class="ot">&lt;-</span> <span class="fu">performance</span> (predob , <span class="st">"tpr"</span>, <span class="st">"fpr"</span>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span> (perf, ...)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream SVMs and support vector classifiers output class labels for each observation. However, it is also possible to obtain fitted values for each observation, which are the numerical scores used to obtain the class labels. For instance, in the case of a support vector classifier, the fitted value for an observation <span class="math inline">\(X = (X_1, X_2,. .., X_p)^T\)</span> takes the form <span class="math inline">\(\hat\beta_0 + \hat\beta_1X_1 + \hat\beta_2X_2 + + \hat\beta_pX_p\)</span>. ======= SVMs and support vector classifiers output class labels for each observation. However, it is also possible to obtain fitted values for each observation, which are the numerical scores used to obtain the class labels. For instance, in the case of a support vector classifier, the fitted value for an observation <span class="math inline">\(X = (X_1, X_2,. .., X_p)^T\)</span> takes the form <span class="math inline">\(\hat\beta_0 + \hat\beta_1X_1 + \hat\beta_2X_2 + + \hat\beta_pX_p\)</span>. &gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</p>
+<p>SVMs and support vector classifiers output class labels for each observation. However, it is also possible to obtain fitted values for each observation, which are the numerical scores used to obtain the class labels. For instance, in the case of a support vector classifier, the fitted value for an observation <span class="math inline">\(X = (X_1, X_2,. .., X_p)^T\)</span> takes the form <span class="math inline">\(\hat\beta_0 + \hat\beta_1X_1 + \hat\beta_2X_2 + + \hat\beta_pX_p\)</span>.</p>
 <p>In essence, the sign of the fitted value determines on which side of the decision boundary the observation lies. Therefore, the relationship between the fitted value and the class prediction for a given observation is simple: if the fitted value exceeds zero then the observation is assigned to one class, and if it is less than zero then it is assigned to the other. In order to obtain the fitted values for a given SVM model fit, we use <code>decision.values = TRUE</code> when fitting <code>svm()</code>. Then the <code>predict()</code> function will output the fitted values.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>svmfit.opt <span class="ot">&lt;-</span> <span class="fu">svm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> dat[train, ], </span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="at">kernel =</span> <span class="st">"radial"</span>, <span class="at">gamma =</span> <span class="dv">2</span>, <span class="at">cost =</span> <span class="dv">1</span>, <span class="at">decision.values =</span> T)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>fitted <span class="ot">&lt;-</span> <span class="fu">attributes</span>(</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(svmfit.opt, dat[ train, ], <span class="at">decision.values =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">$</span>decision.values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">kernel =</span> <span class="st">"radial"</span>, <span class="at">gamma =</span> <span class="dv">2</span>, <span class="at">cost =</span> <span class="dv">1</span>, </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">decision.values =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># another utility function</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>fitted <span class="ot">&lt;-</span> <span class="fu">attributes</span>(</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(svmfit.opt, dat[train, ], <span class="at">decision.values =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">$</span>decision.values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Now we can produce the ROC plot. Note we use the negative of the fitted values so that negative values correspond to class 1 and positive values to class 2.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># gamma = 2</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rocplot</span>(<span class="sc">-</span>fitted, dat[train, <span class="st">"y"</span>], <span class="at">main =</span> <span class="st">"Training Data"</span>)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>svmfit.flex <span class="ot">&lt;-</span> <span class="fu">svm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> dat [train, ], </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">kernel =</span> <span class="st">"radial"</span>, <span class="at">gamma =</span> <span class="dv">50</span> , </span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cost =</span> <span class="dv">1</span>, <span class="at">decision.values =</span> T)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>fitted <span class="ot">&lt;-</span> <span class="fu">attributes</span>(</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(svmfit.flex, dat[train, ], <span class="at">decision.values =</span> T)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">$</span>decision.values</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="co"># gamma = 50</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rocplot</span>(<span class="sc">-</span>fitted, dat[train, <span class="st">"y"</span>], <span class="at">add =</span> T, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> .<span class="dv">6</span>, <span class="at">y=</span>.<span class="dv">8</span>,</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">'gamma = 2'</span>, <span class="st">'gamma = 50'</span>),</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">'n'</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab09-svm_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The SVM appears to be producing accurate predictionsmade much better here by increasing <span class="math inline">\(\gamma\)</span> to produce a more flexible fit and generate further improvements in accuracy.</p>
+<section id="train-test" class="level3">
+<h3 class="anchored" data-anchor-id="train-test">Train &amp; TEST</h3>
+<p>However, these ROC curves are all on the training data. We are really more interested in the level of prediction accuracy on the test data. When we compute the ROC curves on the test data, the model with <span class="math inline">\(\gamma\)</span> = 2 appears to provide the most accurate results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>fitted <span class="ot">&lt;-</span> <span class="fu">attributes</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(svmfit.opt, dat[<span class="sc">-</span>train, ], <span class="at">decision.values =</span> T)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">$</span>decision.values</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rocplot</span>(<span class="sc">-</span>fitted, dat[<span class="sc">-</span>train , <span class="st">"y"</span>], <span class="at">main =</span> <span class="st">"Test Data"</span>)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>fitted <span class="ot">&lt;-</span> <span class="fu">attributes</span>(</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(svmfit.flex, dat[<span class="sc">-</span>train, ], <span class="at">decision.values =</span> T)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">$</span>decision.values</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rocplot</span>(<span class="sc">-</span>fitted, dat[<span class="sc">-</span>train , <span class="st">"y"</span>], <span class="at">add =</span> T, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> .<span class="dv">6</span>, <span class="at">y=</span>.<span class="dv">8</span>,</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">'gamma = 2'</span>, <span class="st">'gamma = 50'</span>),</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">'n'</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab09-svm_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="svm-with-multiple-classes" class="level2">
+<h2 class="anchored" data-anchor-id="svm-with-multiple-classes">4 SVM with multiple classes</h2>
+<p>If the response is a factor containing more than two levels, then the <code>svm()</code> function will perform multi-class classification using the one-versus-one approach. We explore that setting here by generating a third class of observations and fit an SVM to the data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbind</span>(x, <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">50</span> <span class="sc">*</span> <span class="dv">2</span>), <span class="at">ncol =</span> <span class="dv">2</span>))</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(y, <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">50</span>))</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>x[y <span class="sc">==</span> <span class="dv">0</span> , <span class="dv">2</span>] <span class="ot">&lt;-</span> x[y <span class="sc">==</span> <span class="dv">0</span> , <span class="dv">2</span>] <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">as.factor</span>(y)) </span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span> , <span class="dv">1</span>))</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">col =</span> ( y <span class="sc">+</span> <span class="dv">1</span>), <span class="at">pch =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab09-svm_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit svm</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>svmfit <span class="ot">&lt;-</span> <span class="fu">svm</span> (y <span class="sc">~</span>., <span class="at">data =</span> dat, <span class="at">kernel =</span> <span class="st">"radial"</span>,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">cost =</span> <span class="dv">10</span> , <span class="at">gamma =</span> <span class="dv">1</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span> (svmfit, dat) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab09-svm_files/figure-html/unnamed-chunk-26-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The <code>{e1071}</code> library can also be used to perform support vector regression, if the response vector that is passed in to <code>svm()</code> is numerical rather than a factor.</p>
+</section>
+<section id="gene-expression-example" class="level2">
+<h2 class="anchored" data-anchor-id="gene-expression-example">5 Gene expression example</h2>
+<p>We now examine the <code>Khan</code> data set, which consists of a number of tissue samples corresponding to four distinct types of small round blue cell tu- mors. For each tissue sample, gene expression measurements are available. The data set consists of training data, <code>xtrain</code> and <code>ytrain</code>, and testing data, <code>xtest</code> and <code>ytest</code>.</p>
+<p>We examine the dimension of the data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Khan) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "xtrain" "xtest"  "ytrain" "ytest" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Khan<span class="sc">$</span>xtrain) <span class="co"># lots of features/loci</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   63 2308</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Khan<span class="sc">$</span>xtest) <span class="co"># each row is a patient</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   20 2308</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(Khan<span class="sc">$</span>ytrain)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 63</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(Khan<span class="sc">$</span>ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+</div>
+<p>This data set consists of expression measurements for 2,308 genes. The training and test sets consist of 63 and 20 observations respectively.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Khan<span class="sc">$</span>ytrain)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 1  2  3  4 
+ 8 23 12 20 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Khan<span class="sc">$</span>ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+1 2 3 4 
+3 6 6 5 </code></pre>
+</div>
+</div>
+<p>We will explore a support vector approach to predict cancer subtype using gene expression measurements. In this data set, there are a very large number of features relative to the number of observations. This suggests that we should use a linear kernel, because the additional flexibility that will result from using a polynomial or radial kernel is unnecessary.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> Khan<span class="sc">$</span>xtrain,</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">as.factor</span>(Khan<span class="sc">$</span>ytrain )</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">svm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> dat, <span class="at">kernel =</span> <span class="st">"linear"</span>, <span class="at">cost =</span> <span class="dv">10</span>)</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+svm(formula = y ~ ., data = dat, kernel = "linear", cost = 10)
+
+
+Parameters:
+   SVM-Type:  C-classification 
+ SVM-Kernel:  linear 
+       cost:  10 
+
+Number of Support Vectors:  58
+
+ ( 20 20 11 7 )
+
+
+Number of Classes:  4 
+
+Levels: 
+ 1 2 3 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(out<span class="sc">$</span>fitted, dat<span class="sc">$</span>y) <span class="co"># Boom</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   
+     1  2  3  4
+  1  8  0  0  0
+  2  0 23  0  0
+  3  0  0 12  0
+  4  0  0  0 20</code></pre>
+</div>
+</div>
+<p>We see that there are no training errors. In fact, this is not surprising, because the large number of variables relative to the number of observations makes it easy to find <em>hyperplanes</em> that fully separate the classes. We are most interested not in the support vector classifier’s performance on the training observations, but rather its performance on the test observations…</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">6 Exercises</h2>
