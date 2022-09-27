@@ -245,8 +245,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
           <li class="sidebar-item">
-  lab10-unsupervised.qmd
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="./lab10-unsupervised.html" class="sidebar-item-text sidebar-link">Lab 10 Unsupervised</a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -348,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>Vectors in R are always printed in the ‘row format’, regardless of math notation.</p>
@@ -411,7 +413,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 </section>
@@ -439,7 +441,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 </section>
@@ -872,25 +874,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="solving-linear-equations">4.1 Solving linear equations</h3>
 <p>Matrix math is related to math that can be used to solve linear equation systems. This is a very large topic and we will only briefly touch upon it, but it is core in statistics and in machine learning. We can sometimes ignore the details, but awareness of this area of math will likely be beneficial.</p>
 <p>Consider these two linear equations</p>
-<p><span class="math inline">\(x_1 + 3x_2 = 7\)</span></p>
-<p><span class="math inline">\(2x_1 + 4x_2 = 10\)</span></p>
+<p>Eq 1: <span class="math inline">\(x_1 + 3x_2 = 7\)</span></p>
+<p>Eq 2: <span class="math inline">\(2x_1 + 4x_2 = 10\)</span></p>
 <p>We can write this “system” of equations in matrix form, from which is derived the notation for statistical linear models. Let’s define the matrices <span class="math inline">\(A\)</span>, <span class="math inline">\(x\)</span> and <span class="math inline">\(b\)</span> as:</p>
 <p><span class="math inline">\(\begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 4 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 7 \\ 10 \end{bmatrix}\)</span>, i.e.&nbsp;<span class="math inline">\(Ax = b\)</span></p>
 <p>Because <span class="math inline">\(A^{-1}A = I\)</span> and <span class="math inline">\(Ix=x\)</span>:</p>
 <p><span class="math inline">\(x = A^{-1}b = \begin{bmatrix} -2 &amp; 1.5 \\ 1 &amp; -0.5 \end{bmatrix} \begin{bmatrix} 7 \\ 10 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}\)</span></p>
 <p>This way of thinking is the fountation of the linear model and we can exploit it to isolate and “solve” for the x values. E.g. we can isolate and solve for <span class="math inline">\(x_2\)</span> as:</p>
-<p><span class="math inline">\(x_2 = \frac{7}{3}-\frac{1}{3}x_1\)</span>, <span class="math inline">\(x_2 = \frac{10}{4}-\frac{2}{4}x_1\)</span></p>
+<p>Eq 1 (rerarranged): <span class="math inline">\(x_2 = \frac{7}{3}-\frac{1}{3}x_1\)</span></p>
+<p>Eq 2 (rerarranged): <span class="math inline">\(x_2 = \frac{10}{4}-\frac{2}{4}x_1\)</span></p>
 <p>Now we can graphically represent these equations, which are two lines and which demonstrate the solutions</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="cn">NULL</span>, <span class="at">y=</span><span class="cn">NULL</span>,</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">3</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">3</span>),</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>, </span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="fu">expression</span>(<span class="st">'x'</span>[<span class="dv">1</span>]), </span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="fu">expression</span>(<span class="st">'x'</span>[<span class="dv">2</span>]))</span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),<span class="at">v=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">'green3'</span>)</span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">v=</span><span class="dv">0</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">7</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">b=</span><span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">10</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">b=</span><span class="sc">-</span><span class="dv">2</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>The lines represent the solved equations above, and it can be seen that they cross at a single point, the solutions for <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, <span class="math inline">\(x_1 = 1\)</span> and <span class="math inline">\(x_2=2\)</span>, respectively.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">10</span>)</span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>(x <span class="ot">&lt;-</span> <span class="fu">solve</span>(A) <span class="sc">%*%</span> b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">10</span>)</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>(x <span class="ot">&lt;-</span> <span class="fu">solve</span>(A) <span class="sc">%*%</span> b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1]
 [1,]    1
@@ -919,9 +933,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="least-squares">4.3 Least squares</h3>
 <p>Consider the following paired values</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y=</span><span class="fu">c</span>(<span class="fl">3.7</span>, <span class="fl">4.2</span>,<span class="fl">4.9</span>,<span class="fl">5.7</span>,<span class="fl">6.0</span>))</span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y=</span><span class="fu">c</span>(<span class="fl">3.7</span>, <span class="fl">4.2</span>,<span class="fl">4.9</span>,<span class="fl">5.7</span>,<span class="fl">6.0</span>))</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  x   y
 1 1 3.7
@@ -934,7 +948,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can plot these values and note that the relationship is approvimately linear (i.e., a straight line can be drawn that comes close to all the values)</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="480"></p>
+<p><img src="lab01-lin-alg_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 <p>We can notate the linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> with</p>
@@ -948,16 +962,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The solution to this problem is the basis of linear regression and other linear statistical models:</p>
 <p><span class="math inline">\(\hat{\beta} = (X^\intercal X)^{-1} X^\intercal y\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.7</span>, <span class="fl">4.2</span>,<span class="fl">4.9</span>,<span class="fl">5.7</span>,<span class="fl">6.0</span>)</span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>), x), <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span>F)</span>
-<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">''</span>,<span class="st">'x'</span>)</span>
-<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.7</span>, <span class="fl">4.2</span>,<span class="fl">4.9</span>,<span class="fl">5.7</span>,<span class="fl">6.0</span>)</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>), x), <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span>F)</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">''</span>,<span class="st">'x'</span>)</span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.7 4.2 4.9 5.7 6.0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>X</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>X</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       x
 [1,] 1 1
@@ -966,9 +980,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [4,] 1 4
 [5,] 1 5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this solves "Beta hat"</span></span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="co"># NB, the intercept and slope coeeficients for linear regression!</span></span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>(beta.hat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this solves "Beta hat"</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="co"># NB, the intercept and slope coeeficients for linear regression!</span></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>(beta.hat <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [,1]
   3.07

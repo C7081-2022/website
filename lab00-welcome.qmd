@@ -2,6 +2,10 @@
 title: "Lab Welcome"
 ---
 
+## Solution and paper
+
+[Yanai et al 2021](bmi/Yanai_2020.pdf) :: [R script](bmi/bmi.R) :: [Markdown](bmi/bmi.Rmd) :: [final data xlsx](bmi/bmi_male_and_female.xlsx)
+
 ## Lab welcome exercise
 
 This is a simple activity with a few parts to help get you into the mindset of practicing working with data. We will be doing work to allow you to use some specific skills, but the real point of this exercise is to begin to think about beginning to **take responsibility for information you construct using data**.

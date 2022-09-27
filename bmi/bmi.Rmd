@@ -1,0 +1,57 @@
+---
+title: "BMI data swag"
+author: "Ed Harris"
+date: "9/27/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(openxlsx)
+```
+
+## Read data
+
+This is my BMI data
+
+
+```{r read_data}
+bmi <- read.xlsx("bmi_male_and_female.xlsx")
+```
+
+## Plot BMI data
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+par(mfrow=c(2,1))
+hist(bmi$bmi[which(bmi$gender == 'male')], col = 'navy')
+hist(bmi$bmi[which(bmi$gender == 'female')], col = 'HotPink')
+par(mfrow=c(1,1))
+```
+
+## Gorilla plot
+
+```{r}
+plot(bmi ~ steps, data = bmi, 
+     pch = 16, cex = .7, 
+     col = c(rep("HotPink", 921), 
+             rep("navy", 865)))
+
+
+```
+
+## Statistical results
+
+Raw ANOVA table.
+
+```{r, echo=FALSE}
+lm0 <- lm(bmi ~ steps + gender, data = bmi)
+anova(lm0)
+```
+
+## Matt's summary
+
+```{r}
+paste('Your R-sqared is: ', round(summary(lm0)$r.squared, 2))
+```
