@@ -313,7 +313,8 @@ sum(a*b) # yep, a and b are orthogonal!
 
 Matrices are described by the number of rows and columns they have. We may say a matrix $A$ to have dimensions $r \times c$, (rows $\times$ columns).
 
-$ A =  \begin{bmatrix} a_{11} & a_{12} & \dots & a_{1c} \\ a_{21} & a_{22} & \dots & a_{2c} \\ \vdots & \vdots & \ddots & \vdots \\ a_{r1} & a_{r2} & \dots & a_{rc} \end{bmatrix} $
+$A = \begin{bmatrix} a_{11} & a_{12} & \dots & a_{1c} \\ a_{21} & a_{22} & \dots & a_{2c} \\ \vdots & \vdots & \ddots & \vdots \\ a_{r1} & a_{r2} & \dots & a_{rc} \end{bmatrix}$
+
 
 ```{r}
 # make matrix, vector assembled "by column"
@@ -337,12 +338,9 @@ For a number $\alpha$ and a matrix $A$, the product of $\alpha A$ is the matrix 
 
 $\alpha = 3$
 
-$A = \begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix}$
+$A = \begin{bmatrix} 1 & 3 \\ 2 & 4 \\ 1 & 1 \end{bmatrix}$
 
-
-$3 \times\begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix} = \begin{bmatrix} 3 & 9 \\  6 & 12 \\ 3 & 3 \end{bmatrix}$
-
-
+$3 \times\begin{bmatrix} 1 & 3 \\ 2 & 4 \\ 1 & 1 \end{bmatrix} = \begin{bmatrix} 3 & 9 \\ 6 & 12 \\ 3 & 3 \end{bmatrix}$
 
 ```{r}
 # matrix multiplication in R
@@ -355,8 +353,7 @@ alpha*A
 
 Matrix trasposition works similarly to vector transpostiion and is also denoted by $\intercal$
 
-$\begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix}^ \intercal = \begin{bmatrix} 1 & 2 & 1 \\  3 & 4 & 1 \end{bmatrix}$
-
+$\begin{bmatrix} 1 & 3 \\ 2 & 4 \\ 1 & 1 \end{bmatrix}^ \intercal = \begin{bmatrix} 1 & 2 & 1 \\ 3 & 4 & 1 \end{bmatrix}$
 
 ```{r}
 # Matrix transpose in R
@@ -368,9 +365,7 @@ t(A)
 
 Let $A$ and $B$ be matrices of dimensions $r \times c$. We sum the matrices together element-wise. The matrices must be of exactly the same dimensions.
 
-$\begin{bmatrix} 1 & 3 \\  2 & 4 \\ 1 & 1 \end{bmatrix} - \begin{bmatrix} 7 & 1 \\  1 & 1 \\ 4 & 4 \end{bmatrix} =   \begin{bmatrix} 8 & 4 \\  3 & 5 \\ 5 & 5 \end{bmatrix}$
-
-
+$\begin{bmatrix} 1 & 3 \\ 2 & 4 \\ 1 & 1 \end{bmatrix} - \begin{bmatrix} 7 & 1 \\ 1 & 1 \\ 4 & 4 \end{bmatrix} = \begin{bmatrix} 8 & 4 \\ 3 & 5 \\ 5 & 5 \end{bmatrix}$
 
 ```{r}
 # Adding matrices in R
@@ -384,7 +379,7 @@ A +B
 
 Let $A$ be an $r \times c$ matrix and let $B$ be a column vector with $c$ dimensions Note the number of elements in one dimension (here $c$) must be the same.
 
-$\begin{bmatrix} a_{11} & a_{12} & \dots & a_{1c} \\ a_{21} & a_{22} & \dots & a_{2c} \\ \vdots & \vdots & \ddots & \vdots \\ a_{r1} & a_{r2} & \dots & a_{rc} \end{bmatrix} \times \begin{bmatrix} b_{1} \\  b_{2} \\  \vdots \\ b_{c} \end{bmatrix} = \begin{bmatrix} a_{11} b_{1} + a_{12} b_{2} +  \dots + a_{1c}b_{c} \\ a_{21} b_{1} + a_{22} b_{2} + \dots + a_{2c} b_{c} \\ \vdots  \\ a_{r1} b_{1} + a_{r2} b_{2} +  \dots   + a_{rc} b_{c} \end{bmatrix}$
+$\begin{bmatrix} a_{11} & a_{12} & \dots & a_{1c} \\ a_{21} & a_{22} & \dots & a_{2c} \\ \vdots & \vdots & \ddots & \vdots \\ a_{r1} & a_{r2} & \dots & a_{rc} \end{bmatrix} \times \begin{bmatrix} b_{1} \\ b_{2} \\ \vdots \\ b_{c} \end{bmatrix} = \begin{bmatrix} a_{11} b_{1} + a_{12} b_{2} + \dots + a_{1c}b_{c} \\ a_{21} b_{1} + a_{22} b_{2} + \dots + a_{2c} b_{c} \\ \vdots \\ a_{r1} b_{1} + a_{r2} b_{2} + \dots + a_{rc} b_{c} \end{bmatrix}$
 
 For example:
 
@@ -485,6 +480,7 @@ Numeric example
 
 $ A = \begin{bmatrix} 1 & 3 \\  2 & 4 \end{bmatrix}$ 
 
+
 $ B = \begin{bmatrix} -2 & 1.5 \\  1 & -0.5 \end{bmatrix}$
 
 We can show $AB = BA = I$, thus $B=A^{-1}$
@@ -536,7 +532,6 @@ $x = A^{-1}b = \begin{bmatrix} -2 & 1.5 \\ 1 & -0.5 \end{bmatrix} \begin{bmatrix
 
 This way of thinking is the foundation of the linear model and we can exploit it to isolate and "solve" for the x values. E.g. we can isolate and solve for $x_2$ as:
 
-
 Eq 1 (rerarranged): $x_2 = \frac{7}{3}-\frac{1}{3}x_1$
 
 Eq 2 (rerarranged): $x_2 = \frac{10}{4}-\frac{2}{4}x_1$
@@ -544,7 +539,6 @@ Eq 2 (rerarranged): $x_2 = \frac{10}{4}-\frac{2}{4}x_1$
 $x_2 = \frac{7}{3}-\frac{1}{3}x_1$
 
 $x_2 = \frac{10}{4}-\frac{2}{4}x_1$
-
 
 Now we can graphically represent these equations, which are two lines and which demonstrate the solutions
 
@@ -659,11 +653,9 @@ X
 
 ### 5.1 The bird table
 
+On a sunny day, two tables are standing in an English country garden. On each table are \*birds of unknown species are sitting having the time of their lives. A bird from the first table says to those on the second table: "Hi -- if one of you come to our table then there will be the same number of us on each table". "Yeah, right", says a bird from the second table, "but if one of you comes to our table, then we will be twice as many on our table as on yours".
 
-
-On a sunny day, two tables are standing in an English country garden. On each table are *birds of unknown species are sitting having the time of their lives. A bird from the first table says to those on the second table: "Hi -- if one of you come to our table then there will be the same number of us on each table". "Yeah, right", says a bird from the second table, "but if one of you comes to our table, then we will be twice as many on our table as on yours".
-
-*(because this is a maths question, here we have the ability to assume by birds we may mean something theoretical, and the count of which may assume any value from the infinite set of integers positive or negative...)
+\*(because this is a maths question, here we have the ability to assume by birds we may mean something theoretical, and the count of which may assume any value from the infinite set of integers positive or negative...)
 
 Question: How many birds are on each table?
 
