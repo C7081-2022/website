@@ -10,7 +10,7 @@ In this lab, we explore the resampling techniques covered in this chapter. Some 
 
 We explore the use of the validation set approach in order to estimate the test error rates that result from ﬁtting various linear models on the `Auto` data set.
 
-Before we begin, we use the `set.seed()` function in order to set a *seed* for `R`’s random number generator, so that the reader of this book will obtain precisely the same results as those shown below. It is generally a good idea to set a random seed when performing an analysis such as cross-validation that contains an element of randomness, so that the results obtained can be reproduced precisely at a later time.
+Before we begin, we use the `set.seed()` function in order to set a *seed* for `R`'s random number generator, so that the reader of this book will obtain precisely the same results as those shown below. It is generally a good idea to set a random seed when performing an analysis such as cross-validation that contains an element of randomness, so that the results obtained can be reproduced precisely at a later time.
 
 ### `sample()`
 
@@ -35,7 +35,7 @@ attach(Auto)
 mean((mpg - predict(lm.fit, Auto))[-train]^2)
 ```
 
-Therefore, the estimated test MSE for the linear regression ﬁt is 26.14. 
+Therefore, the estimated test MSE for the linear regression ﬁt is 26.14.
 
 ### `poly()`
 
@@ -76,7 +76,7 @@ Although the values are slightly different, these results are consistent with ou
 
 ### Leave-one-out CV
 
-T leave-one-out Cross-validation (LOOCV) estimate can be automatically computed for any generalized linear model using the `glm()` and `cv.glm()` functions. We can  use the `glm()` function to perform logistic regression by passing in the `family="binomial"` argument. But if we use `glm()` to ﬁt a model without passing in the family argument, then it performs linear regression, just like the `lm()` function. So for instance,
+T leave-one-out Cross-validation (LOOCV) estimate can be automatically computed for any generalized linear model using the `glm()` and `cv.glm()` functions. We can use the `glm()` function to perform logistic regression by passing in the `family="binomial"` argument. But if we use `glm()` to ﬁt a model without passing in the family argument, then it performs linear regression, just like the `lm()` function. So for instance,
 
 ### `cv.glm()`
 
@@ -208,14 +208,13 @@ boot.fn(Auto, sample(392, 392, replace = T))
 boot.fn(Auto, sample(392, 392, replace = T)) 
 ```
 
-
 ### Bootstrap
 
 ```{r}
 boot(Auto, boot.fn, 1000)
 ```
 
- and 
+and
 
 This indicates that the bootstrap estimate for $SE(\hat\beta_0)$ is 0.84, and that the bootstrap estimate for $SE(\hat\beta_1)$ is 0.0074. Standard formulas can be used to compute the standard errors for the regression coefficients in a linear model. These can be obtained using the `summary()` function.
 
@@ -255,14 +254,13 @@ Fit a logistic regression model that uses `income` and `balance` to predict `def
 
 Using the validation set approach, estimate the test error of this model. In order to do this, you must perform the following steps:
 
-- Split the sample set into a training set and a validation set.
+-   Split the sample set into a training set and a validation set.
 
-- Fit a multiple logistic regression model using only the training observations.
+-   Fit a multiple logistic regression model using only the training observations.
 
-- Obtain a prediction of default status for each individual in the validation set by computing the posterior probability of default for that individual, and classifying the individual to the default category if the posterior probability is greater than 0.5.
+-   Obtain a prediction of default status for each individual in the validation set by computing the posterior probability of default for that individual, and classifying the individual to the default category if the posterior probability is greater than 0.5.
 
-- Compute the validation set error, which is the fraction of the observations in the validation set that are misclassified.
-
+-   Compute the validation set error, which is the fraction of the observations in the validation set that are misclassified.
 
 #### 1.3
 
@@ -272,9 +270,7 @@ Repeat the process in 1.2 three times, using three diﬀerent splits of the obse
 
 Now consider a logistic regression model that predicts the probability of `default` using `income`, `balance`, and a dummy variable for `student.` Estimate the test error for this model using the validation set approach. Comment on whether or not including a dummy variable for student leads to a reduction in the test error rate.
 
-
 ## Resources
-
 
 <br><br>
 

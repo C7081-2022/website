@@ -6,12 +6,12 @@ title: "Lab 06 Model selection"
 
 ### Best subset
 
-Here we apply the best subset selection approach to the `Hitters` data. We wish to predict a baseball player’s `Salary` on the basis of various statistics associated with performance in the previous year.
+Here we apply the best subset selection approach to the `Hitters` data. We wish to predict a baseball player's `Salary` on the basis of various statistics associated with performance in the previous year.
 
 ### `is.na()`
 
 First of all, we note that the Salary variable is missing for some of the players. The `is.na()` function can be used to identify the missing observations. It returns a vector of the same length as the input vector, with a `TRUE` for any elements that are missing, and a `FALSE` for non-missing elements.
- 
+
 The `sum()` function can then be used to count all of the missing elements.
 
 ```{r}
@@ -54,7 +54,7 @@ regfit.full <- regsubsets(Salary ~ .,
 reg.summary <- summary(regfit.full)
 ```
 
-The `summary() `function also returns $R^2$, RSS, adjusted $R^2$, $C_p$, and BIC. We can examine these to try to select the *best* overall model.
+The `summary()`function also returns $R^2$, RSS, adjusted $R^2$, $C_p$, and BIC. We can examine these to try to select the *best* overall model.
 
 ```{r}
 names(reg.summary)
@@ -106,7 +106,6 @@ par(mfrow = c(1, 1))
 
 The `points()` command works like the `plot()` command, except that it puts points on a plot that has already been created, instead of creating a new plot. The `which.max()` function can be used to identify the location of the maximum point of a vector. We will now plot a red dot to indicate the model with the largest adjusted $R^2$ statistic.
 
-
 ### `plot()` with `regfit()`
 
 ```{r}
@@ -156,7 +155,7 @@ rbind(
 
 So, it is possible to choose among a set of models of diﬀerent sizes using $C_p$, BIC, and adjusted $R^2$. We will now consider how to do this using the validation set and cross-validation approaches.
 
-In order for these approaches to yield accurate estimates of the test error, we must use only the training observations to perform all aspects of model fitting, including variable selection. Therefore, the determination of which model of a given size is best must be made using only the training observations. **This point is subtle but important.** 
+In order for these approaches to yield accurate estimates of the test error, we must use only the training observations to perform all aspects of model fitting, including variable selection. Therefore, the determination of which model of a given size is best must be made using only the training observations. **This point is subtle but important.**
 
 If the full data set is used to perform the best subset selection step, the validation set errors and cross-validation errors that we obtain will not be accurate estimates of the test error.
 
@@ -183,7 +182,7 @@ Notice that we subset the `Hitters` data frame directly in the call in order to 
 test.mat <- model.matrix(Salary ~., data = Hitters[test, ]) 
 ```
 
-The `model.matrix()` function is used in many regression packages for building an “X” matrix from data. Now we run a loop, and for each size `i`, we extract the coeﬃcients from `regfit.best` for the best model of that size, multiply them into the appropriate columns of the test model matrix to form the predictions, and compute the test MSE.
+The `model.matrix()` function is used in many regression packages for building an "X" matrix from data. Now we run a loop, and for each size `i`, we extract the coeﬃcients from `regfit.best` for the best model of that size, multiply them into the appropriate columns of the test model matrix to form the predictions, and compute the test MSE.
 
 ```{r}
 val.errors <- rep(NA, 19)
@@ -222,10 +221,9 @@ predict.regsubsets <- function(object, newdata , id , ...) {
   }
 ```
 
-This function pretty much mimics what we did above. The only complex part is how we extracted the formula used in the call to `regsubsets()`. We wioll explore how we use this function below, when we do cross-validation. 
+This function pretty much mimics what we did above. The only complex part is how we extracted the formula used in the call to `regsubsets()`. We wioll explore how we use this function below, when we do cross-validation.
 
-Finally, we perform best subset selection on the full data set, and select the best seven-variable model. It is important that we make use of the full data set in order to obtain more accurate coefficient estimates. Note that we perform best subset selection on the full data set and select the best seven-variable model, rather than simply using the variables that were obtained from the training set, because the best seven-variable model on the full data set may diﬀer from the corresponding model on the training
-set.
+Finally, we perform best subset selection on the full data set, and select the best seven-variable model. It is important that we make use of the full data set in order to obtain more accurate coefficient estimates. Note that we perform best subset selection on the full data set and select the best seven-variable model, rather than simply using the variables that were obtained from the training set, because the best seven-variable model on the full data set may diﬀer from the corresponding model on the training set.
 
 ```{r}
 regfit.best <- regsubsets(Salary ~ ., 
@@ -291,7 +289,7 @@ plot(Salary ~ Hits, data = Hitters)
 abline(lm(Salary ~ Hits, data = Hitters))
 
 plot(Salary ~ Walks, data = Hitters)
-abline(lm(Salary ~ Hits, data = Hitters))
+abline(lm(Salary ~ Walks, data = Hitters))
 
 par(mfrow=c(1,1))
 ```
@@ -353,7 +351,7 @@ predict(ridge.mod, s = 50, type = "coefficients")[1:20, ]
 
 ### Test error
 
-We now split the samples into a training set and a test set in order to estimate the test error of ridge regression and the lasso. There are two common ways to randomly split a data set. The first is to produce a random vector of `TRUE`, `FALSE` elements and select the observations corresponding to `TRUE` for the training data. The second is to randomly choose a subset of numbers between 1 and `n`; these can then be used as the indices for the training observations. The two approaches work equally well. 
+We now split the samples into a training set and a test set in order to estimate the test error of ridge regression and the lasso. There are two common ways to randomly split a data set. The first is to produce a random vector of `TRUE`, `FALSE` elements and select the observations corresponding to `TRUE` for the training data. The second is to randomly choose a subset of numbers between 1 and `n`; these can then be used as the indices for the training observations. The two approaches work equally well.
 
 Here we will demonstrate the latter approach. We first set a random seed so that the results obtained will be reproducible.
 
@@ -416,7 +414,7 @@ bestlam <- cv.out$lambda.min
 bestlam
 ```
 
-Therefore, we see that the value of $\lambda$ that results in the smallest cross- validation error is 326 (`log(326)` = ~5.8 on the graph). What is the test MSE associated with this value of $\lambda$?
+Therefore, we see that the value of $\lambda$ that results in the smallest cross- validation error is 326 (`log(326)` = \~5.8 on the graph). What is the test MSE associated with this value of $\lambda$?
 
 ```{r}
 ridge.pred <- predict(ridge.mod, s = bestlam, newx = x[test, ])
@@ -430,7 +428,7 @@ out <- glmnet(x, y, alpha = 0)
 predict(out, type = "coefficients", s =	bestlam)[1:20, ]
 ```
 
-As expected, none of the coeﬃcients are zero—ridge regression does not perform variable selection!
+As expected, none of the coeﬃcients are zero---ridge regression does not perform variable selection!
 
 ## 5 The lasso
 
@@ -454,7 +452,7 @@ mean((lasso.pred - y.test)^2)
 
 This is substantially lower than the test set MSE of the null model and of least squares, and very similar to the test MSE of ridge regression with $\lambda$ chosen by cross-validation.
 
-However, the lasso has a substantial advantage over ridge regression in that the resulting coefficient estimates are sparse. Here we see that 8 of the 19 coeﬃcient estimates are exactly zero. So the lasso model with $\lambda$ chosen by cross-validation contains only eleven variables.  This results in a model that tends to be both easier to compute, and easier to interpret.
+However, the lasso has a substantial advantage over ridge regression in that the resulting coefficient estimates are sparse. Here we see that 8 of the 19 coeﬃcient estimates are exactly zero. So the lasso model with $\lambda$ chosen by cross-validation contains only eleven variables. This results in a model that tends to be both easier to compute, and easier to interpret.
 
 ```{r}
 out <- glmnet (x, y, alpha = 1, lambda = grid )
@@ -490,7 +488,7 @@ validationplot(pcr.fit, val.type = "MSEP")
 
 We see that the smallest cross-validation error occurs when M = 18 components are used. This is barely fewer than M = 19, which amounts to simply performing least squares, because when all of the components are used in PCR no dimension reduction occurs. However, from the plot we also see that the cross-validation error is roughly the same when only one component is included in the model. This suggests that a model that uses just a small number of components might suﬃce.
 
-The `summary()` function also provides the *percentage of variance explained* in the predictors and in the response using diﬀerent numbers of components.  Briefly, we can think of this as the amount of information about the predictors or the response that is captured using M principal components. For example, setting M = 1 only captures 38.31% of all the variance, or information, in the predictors. In contrast, using M = 5 increases the value to 84.29%. If we were to use all M = p = 19 components, this would increase to 100%.
+The `summary()` function also provides the *percentage of variance explained* in the predictors and in the response using diﬀerent numbers of components. Briefly, we can think of this as the amount of information about the predictors or the response that is captured using M principal components. For example, setting M = 1 only captures 38.31% of all the variance, or information, in the predictors. In contrast, using M = 5 increases the value to 84.29%. If we were to use all M = p = 19 components, this would increase to 100%.
 
 We now perform PCR on the training data and evaluate its test set performance.
 
@@ -534,7 +532,6 @@ summary(pls.fit)
 validationplot(pls.fit, val.type = "MSEP")
 ```
 
-
 The lowest cross-validation error occurs when only M = 1 partial least squares directions are used. We now evaluate the corresponding test set MSE.
 
 ```{r}
@@ -561,9 +558,7 @@ For the next few questions, we will generate simulated data, and will then use t
 
 #### 1.1
 
-Use the `rnorm()` function to generate a predictor X of length
-n = 100, as well as a noise vector $\epsilon$ of length n = 100.
-
+Use the `rnorm()` function to generate a predictor X of length n = 100, as well as a noise vector $\epsilon$ of length n = 100.
 
 #### 1.2
 
@@ -572,7 +567,6 @@ Generate a response vector Y of length n = 100 according to the model
 $Y=\beta_0 + \beta_1 X + \beta_2 X^2 + \beta_3 X^3 + \epsilon$
 
 where $Y=\beta_0$, $\beta_1$, $\beta_2$, and $\beta_3$ are constants of your choice
-
 
 #### 1.3
 
@@ -594,10 +588,7 @@ $Y = \beta_0 + \beta_7X^7 + \epsilon$,
 
 and perform best subset selection and the lasso. Discuss the results obtained.
 
-
-
 ## Resources
-
 
 <br><br>
 

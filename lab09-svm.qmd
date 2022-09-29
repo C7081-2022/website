@@ -331,16 +331,18 @@ svmfit <- svm (y ~., data = dat, kernel = "radial",
 plot (svmfit, dat) 
 
 ```
+
 The `{e1071}` library can also be used to perform support vector regression, if the response vector that is passed in to `svm()` is numerical rather than a factor.
 
 ## 5 Gene expression example
 
-We now examine the `Khan` data set, which consists of a number of tissue samples corresponding to four distinct types of small round blue cell tu- mors. For each tissue sample, gene expression measurements are available. The data set consists of training data, `xtrain` and `ytrain`, and testing data, `xtest` and `ytest`.
+We now examine the `Khan` data set, which consists of a number of tissue samples corresponding to four distinct types of small round blue cell tumors. For each tissue sample, gene expression measurements are available. The data set consists of training data, `xtrain` and `ytrain`, and testing data, `xtest` and `ytest`.
 
 We examine the dimension of the data:
 
 ```{r}
 library(ISLR2)
+library(e1071)
 
 names(Khan) 
 dim(Khan$xtrain) # lots of features/loci
@@ -349,14 +351,15 @@ dim(Khan$xtest) # each row is a patient
 length(Khan$ytrain)
 length(Khan$ytest)
 ```
-This data set consists of expression measurements for 2,308 genes. The training and test sets consist of 63 and 20 observations respectively.
+
+This data set consists of expression measurements for 2,308 genes. The training and test sets consist of 63 and 20 (patient) observations respectively.
 
 ```{r}
-table(Khan$ytrain)
-table(Khan$ytest)
+table(Khan$ytrain) # train patient count in each classification
+table(Khan$ytest) # test patient count in each classification
 ```
 
-We will explore a support vector approach to predict cancer subtype using gene expression measurements. In this data set, there are a very large number of features relative to the number of observations. This suggests that we should use a linear kernel, because the additional flexibility that will result from using a polynomial or radial kernel is unnecessary.
+We will explore a support vector approach to predict cancer subtype using gene expression measurements. In this data set, there are a very large number of features relative to the number of observations. For this we should use a linear kernel, because the additional flexibility that will result from using a polynomial or radial kernel is unnecessary.  
 
 ```{r}
 dat <- data.frame(
@@ -367,14 +370,89 @@ dat <- data.frame(
 out <- svm(y ~ ., data = dat, kernel = "linear", cost = 10)
 summary(out)
 
-table(out$fitted, dat$y) # Boom
+table(out$fitted, dat$y) # Boom...?
 ```
 
 We see that there are no training errors. In fact, this is not surprising, because the large number of variables relative to the number of observations makes it easy to find *hyperplanes* that fully separate the classes. We are most interested not in the support vector classifier’s performance on the training observations, but rather its performance on the test observations...
 
+```{r}
+dat.te <- data.frame(x = Khan$xtest, y = as.factor(Khan$ytest))
+
+pred.te <- predict(out, newdata = dat.te)
+
+table(pred.te, dat.te$y) # ok.. not bad*
+
+# *For cancer prediction it is of utmost importance to construct
+# perfect predictions.  This is not just a difficult technical
+# problem, but an ethical one of monumental consequences
+```
+
+We see that using `cost = 10` yields two test set errors on this data.
+
+
+
+
+
+
+
+
 ## 6 Exercises
 
 ### Exercise 1
+
+#### 1.1
+
+Generate a simulated two-class data set with 100 observations and two features in which there is a visible but non-linear separation be- tween the two classes. Show that in this setting, a support vector machine with a polynomial kernel (with degree greater than 1) or a radial kernel will outperform a support vector classifier on the training data. Which technique performs best on the test data? Make plots and report training and test error rates in order to back up your assertions.
+
+
+### Exercise 2
+
+We have seen that we can fit an SVM with a non-linear kernel in order to perform classification using a non-linear decision boundary. We will now see that we can also obtain a non-linear decision boundary by performing logistic regression using non-linear transformations of the features.
+
+#### 2.1
+
+Generate a data set with *n* = 500 and *p* = 2, such that the observations belong to two classes with a quadratic decision boundary between them. For instance, you can do this as follows:
+
+```{r}
+# Although it is beyond what is possible in this lab,
+# the practice of simulating data like this is 
+# hugely powerful and useful
+x1 <- runif(500) - 0.5
+x2 <- runif(500) - 0.5
+y <- 1 * (x1^2 - x2^2 > 0)
+```
+
+#### 2.2
+
+Plot the observations, colored according to their class labels. Your plot should display $X_1$ on the x-axis, and $X_2$ on the y-axis.
+
+#### 2.3
+
+Fit a logistic regression model to the data, using $X_1$ and $X_2$ as predictors.
+
+#### 2.4
+
+Apply this model to the training data in order to obtain a predicted class label for each training observation. Plot the observations, colored according to the predicted class labels. The decision boundary should be linear.
+
+#### 2.5
+
+Now fit a logistic regression model to the data using non-linear functions of $X_1$ and $X_2$ as predictors (e.g. $X^2$, $X_1 \times X_2$, log($X_2$), and so forth).
+
+#### 2.6
+
+Apply this model to the *training* data in order to obtain a *predicted* class label for each training observation. Plot the observations, colored according to the predicted class labels. The decision boundary should be obviously non-linear. If it is not, then repeat (2.1)-(2.5) to see if you can come up with an example in which the predicted class labels are obviously non-linear.
+
+#### 2.7
+
+Fit a support vector classifier to the data with $X_1$ and $X_2$ as predictors. Obtain a class prediction for each training observation. Plot the observations, colored according to the *predicted class labels*.
+
+#### 2.8
+
+Fit a SVM using a non-linear kernel to the data. Obtain a class prediction for each training observation. Plot the observations, colored according to the *predicted class labels*.
+
+#### 2.9
+
+Comment on your results.
 
 ## Resources
 
