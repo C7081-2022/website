@@ -4,15 +4,9 @@ title: "Lab 10 Unsupervised"
 
 ## 1 Unsupervised learning
 
-
 ## 6 Exercises
 
-
 ### Exercise 1
-
-
-
-
 
 ## Resources
 
