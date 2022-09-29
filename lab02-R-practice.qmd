@@ -273,11 +273,17 @@ Once the data has been loaded, the fix() function can be used to view it in a sp
 # Auto <- read.csv("Auto.csv")
 # fix(Auto)
 
+
 ```
 
 Peek at the data (note the view may wrap around the lines)
 
-![](data/Auto.txt)
+
+```{r, echo=FALSE}
+Auto <- read.csv("data/Auto.csv")
+head(Auto)
+```
+
 
 Note that data like these are usually simply a text ﬁle, which you could alternatively open on your computer using a standard text editor. **It is often a good idea to view a data set using a text editor or other software such as Excel before loading it into R...**
 
