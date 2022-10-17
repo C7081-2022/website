@@ -370,7 +370,6 @@ table(glm.pred, test.Y)
 
 ## xx Naive Bayes (consider adding)
 
-
 ## 6 Exercises
 
 ### Exercise 1

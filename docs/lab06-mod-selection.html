@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.179">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>C7081-2022 Statistical analysis for data science - Lab 06 Model selection</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Lab 06 Model selection</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./img/C7081-pad.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Information</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Home</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./schedule.html" class="sidebar-item-text sidebar-link">Schedule</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Labs</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab00-guidance.html" class="sidebar-item-text sidebar-link">Lab Guidance</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab00-welcome.html" class="sidebar-item-text sidebar-link">Lab Welcome</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab01-lin-alg.html" class="sidebar-item-text sidebar-link">Lab 01 Linear alg.</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab02-R-practice.html" class="sidebar-item-text sidebar-link">Lab 02 R practice</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab03-lin-reg.html" class="sidebar-item-text sidebar-link">Lab 03 Linear regression</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab04-classification.html" class="sidebar-item-text sidebar-link">Lab 04 Classification</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab05-resampling.html" class="sidebar-item-text sidebar-link">Lab 05 Resampling</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab06-mod-selection.html" class="sidebar-item-text sidebar-link active">Lab 06 Model selection</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab07-non-linear.html" class="sidebar-item-text sidebar-link">Lab 07 Non-linear models</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab08-trees.html" class="sidebar-item-text sidebar-link">Lab 08 Decision trees</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab09-svm.html" class="sidebar-item-text sidebar-link">Lab 09 SVM</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab10-unsupervised.html" class="sidebar-item-text sidebar-link">Lab 10 Unsupervised</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#subset-selection" id="toc-subset-selection" class="nav-link active" data-scroll-target="#subset-selection">1 Subset selection</a>
+  <ul class="collapse">
+  <li><a href="#best-subset" id="toc-best-subset" class="nav-link" data-scroll-target="#best-subset">Best subset</a></li>
+  <li><a href="#is.na" id="toc-is.na" class="nav-link" data-scroll-target="#is.na"><code>is.na()</code></a></li>
+  <li><a href="#regsubsets" id="toc-regsubsets" class="nav-link" data-scroll-target="#regsubsets"><code>regsubsets()</code></a></li>
+  <li><a href="#big-model" id="toc-big-model" class="nav-link" data-scroll-target="#big-model">Big model</a></li>
+  <li><a href="#points" id="toc-points" class="nav-link" data-scroll-target="#points"><code>points()</code></a></li>
+  <li><a href="#plot-with-regfit" id="toc-plot-with-regfit" class="nav-link" data-scroll-target="#plot-with-regfit"><code>plot()</code> with <code>regfit()</code></a></li>
+  </ul></li>
+  <li><a href="#stepwise-regression" id="toc-stepwise-regression" class="nav-link" data-scroll-target="#stepwise-regression">2 Stepwise regression</a></li>
+  <li><a href="#validation-sets-for-model-selection" id="toc-validation-sets-for-model-selection" class="nav-link" data-scroll-target="#validation-sets-for-model-selection">3 Validation sets for model selection</a>
+  <ul class="collapse">
+  <li><a href="#model.matrix" id="toc-model.matrix" class="nav-link" data-scroll-target="#model.matrix"><code>model.matrix()</code></a></li>
+  <li><a href="#automating-it" id="toc-automating-it" class="nav-link" data-scroll-target="#automating-it">Automating it</a></li>
+  <li><a href="#cross-val" id="toc-cross-val" class="nav-link" data-scroll-target="#cross-val">Cross-val</a></li>
+  <li><a href="#nested-for-loops" id="toc-nested-for-loops" class="nav-link" data-scroll-target="#nested-for-loops">Nested <code>for()</code> loops</a></li>
+  </ul></li>
+  <li><a href="#ridge-regression-and-lasso" id="toc-ridge-regression-and-lasso" class="nav-link" data-scroll-target="#ridge-regression-and-lasso">4 Ridge regression and lasso</a>
+  <ul class="collapse">
+  <li><a href="#glmnet" id="toc-glmnet" class="nav-link" data-scroll-target="#glmnet"><code>glmnet()</code></a></li>
+  <li><a href="#ridge-reg." id="toc-ridge-reg." class="nav-link" data-scroll-target="#ridge-reg.">Ridge reg.</a></li>
+  <li><a href="#ridge-predict" id="toc-ridge-predict" class="nav-link" data-scroll-target="#ridge-predict">Ridge <code>predict()</code></a></li>
+  <li><a href="#test-error" id="toc-test-error" class="nav-link" data-scroll-target="#test-error">Test error</a></li>
+  <li><a href="#explore-model-results-space" id="toc-explore-model-results-space" class="nav-link" data-scroll-target="#explore-model-results-space">Explore model <em>results space</em></a></li>
+  <li><a href="#cv.glmnet" id="toc-cv.glmnet" class="nav-link" data-scroll-target="#cv.glmnet"><code>cv.glmnet()</code></a></li>
+  </ul></li>
+  <li><a href="#the-lasso" id="toc-the-lasso" class="nav-link" data-scroll-target="#the-lasso">5 The lasso</a></li>
+  <li><a href="#pcr" id="toc-pcr" class="nav-link" data-scroll-target="#pcr">6 PCR</a>
+  <ul class="collapse">
+  <li><a href="#principal-components-regression" id="toc-principal-components-regression" class="nav-link" data-scroll-target="#principal-components-regression">Principal Components Regression</a></li>
+  </ul></li>
+  <li><a href="#pls" id="toc-pls" class="nav-link" data-scroll-target="#pls">7 PLS</a>
+  <ul class="collapse">
+  <li><a href="#partial-least-squares" id="toc-partial-least-squares" class="nav-link" data-scroll-target="#partial-least-squares">Partial Least Squares</a></li>
+  <li><a href="#plsr" id="toc-plsr" class="nav-link" data-scroll-target="#plsr"><code>plsr()</code></a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">8 Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  </ul></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#harper-adams-data-science" id="toc-harper-adams-data-science" class="nav-link" data-scroll-target="#harper-adams-data-science">Harper Adams Data Science</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Lab 06 Model selection</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="subset-selection" class="level2">
+<h2 class="anchored" data-anchor-id="subset-selection">1 Subset selection</h2>
+<section id="best-subset" class="level3">
+<h3 class="anchored" data-anchor-id="best-subset">Best subset</h3>
+<p>Here we apply the best subset selection approach to the <code>Hitters</code> data. We wish to predict a baseball player’s <code>Salary</code> on the basis of various statistics associated with performance in the previous year.</p>
+</section>
+<section id="is.na" class="level3">
+<h3 class="anchored" data-anchor-id="is.na"><code>is.na()</code></h3>
+<p>First of all, we note that the Salary variable is missing for some of the players. The <code>is.na()</code> function can be used to identify the missing observations. It returns a vector of the same length as the input vector, with a <code>TRUE</code> for any elements that are missing, and a <code>FALSE</code> for non-missing elements.</p>
+<p>The <code>sum()</code> function can then be used to count all of the missing elements.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span> (ISLR2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ISLR2' was built under R version 4.1.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View(Hitters) </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Hitters) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "AtBat"     "Hits"      "HmRun"     "Runs"      "RBI"       "Walks"    
+ [7] "Years"     "CAtBat"    "CHits"     "CHmRun"    "CRuns"     "CRBI"     
+[13] "CWalks"    "League"    "Division"  "PutOuts"   "Assists"   "Errors"   
+[19] "Salary"    "NewLeague"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Hitters) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 322  20</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Hitters<span class="sc">$</span>Salary))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 59</code></pre>
+</div>
+</div>
+<p>Hence we see that <code>Salary</code> is missing for 59 players. The <code>na.omit()</code> function removes all of the rows that have missing values in any variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Hitters <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(Hitters)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Hitters) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 263  20</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Hitters))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+</section>
+<section id="regsubsets" class="level3">
+<h3 class="anchored" data-anchor-id="regsubsets"><code>regsubsets()</code></h3>
+<p>The <code>regsubsets()</code> function (part of the leaps library) performs best subset selection by identifying the best model that contains a given number of predictors, where best is quantified using RSS. The syntax is the same as for <code>lm()</code>. The <code>summary()</code> command outputs the best set of variables for each model size.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'leaps' was built under R version 4.1.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>regfit.full <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(Salary <span class="sc">~</span> ., Hitters)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(regfit.full) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Subset selection object
+Call: regsubsets.formula(Salary ~ ., Hitters)
+19 Variables  (and intercept)
+           Forced in Forced out
+AtBat          FALSE      FALSE
+Hits           FALSE      FALSE
+HmRun          FALSE      FALSE
+Runs           FALSE      FALSE
+RBI            FALSE      FALSE
+Walks          FALSE      FALSE
+Years          FALSE      FALSE
+CAtBat         FALSE      FALSE
+CHits          FALSE      FALSE
+CHmRun         FALSE      FALSE
+CRuns          FALSE      FALSE
+CRBI           FALSE      FALSE
+CWalks         FALSE      FALSE
+LeagueN        FALSE      FALSE
+DivisionW      FALSE      FALSE
+PutOuts        FALSE      FALSE
+Assists        FALSE      FALSE
+Errors         FALSE      FALSE
+NewLeagueN     FALSE      FALSE
+1 subsets of each size up to 8
+Selection Algorithm: exhaustive
+         AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun CRuns CRBI
+1  ( 1 ) " "   " "  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+2  ( 1 ) " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+3  ( 1 ) " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+4  ( 1 ) " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+5  ( 1 ) "*"   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+6  ( 1 ) "*"   "*"  " "   " "  " " "*"   " "   " "    " "   " "    " "   "*" 
+7  ( 1 ) " "   "*"  " "   " "  " " "*"   " "   "*"    "*"   "*"    " "   " " 
+8  ( 1 ) "*"   "*"  " "   " "  " " "*"   " "   " "    " "   "*"    "*"   " " 
+         CWalks LeagueN DivisionW PutOuts Assists Errors NewLeagueN
+1  ( 1 ) " "    " "     " "       " "     " "     " "    " "       
+2  ( 1 ) " "    " "     " "       " "     " "     " "    " "       
+3  ( 1 ) " "    " "     " "       "*"     " "     " "    " "       
+4  ( 1 ) " "    " "     "*"       "*"     " "     " "    " "       
+5  ( 1 ) " "    " "     "*"       "*"     " "     " "    " "       
+6  ( 1 ) " "    " "     "*"       "*"     " "     " "    " "       
+7  ( 1 ) " "    " "     "*"       "*"     " "     " "    " "       
+8  ( 1 ) "*"    " "     "*"       "*"     " "     " "    " "       </code></pre>
+</div>
+</div>
+<p>An asterisk indicates that a given variable is included in the corresponding model. For instance, this output indicates that the best two-variable model contains only Hits and CRBI. By default, <code>regsubsets()</code> only reports results up to the best eight-variable model. But the <code>nvmax</code> option can be used in order to return as many variables as are desired. Here we fit up to a 19-variable model.</p>
+</section>
+<section id="big-model" class="level3">
+<h3 class="anchored" data-anchor-id="big-model">Big model</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>regfit.full <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(Salary <span class="sc">~</span> ., </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">data =</span> Hitters,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nvmax =</span> <span class="dv">19</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>reg.summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(regfit.full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>summary()</code>function also returns <span class="math inline">\(R^2\)</span>, RSS, adjusted <span class="math inline">\(R^2\)</span>, <span class="math inline">\(C_p\)</span>, and BIC. We can examine these to try to select the <em>best</em> overall model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(reg.summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "which"  "rsq"    "rss"    "adjr2"  "cp"     "bic"    "outmat" "obj"   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>reg.summary<span class="sc">$</span>rsq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.3214501 0.4252237 0.4514294 0.4754067 0.4908036 0.5087146 0.5141227
+ [8] 0.5285569 0.5346124 0.5404950 0.5426153 0.5436302 0.5444570 0.5452164
+[15] 0.5454692 0.5457656 0.5459518 0.5460945 0.5461159</code></pre>
+</div>
+</div>
+<p>For instance, we see that the <span class="math inline">\(R^2\)</span> statistic increases from 32%, when only one variable is included in the model, to almost 55%, when all variables are included. As expected, the <span class="math inline">\(R^2\)</span> statistic increases monotonically as more variables are included.</p>
+<p>Plotting RSS, adjusted <span class="math inline">\(R^2\)</span>, <span class="math inline">\(C_p\)</span>, and BIC for all of the models at once will help us decide which model to select. Note the <code>type = "l"</code> option tells <code>R</code> to connect the plotted points with lines.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reg.summary<span class="sc">$</span>rss, </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of Variables"</span>, </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"RSS "</span>, </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reg.summary<span class="sc">$</span>adjr2, </span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of Variables"</span>, </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Adjusted RSq"</span>, </span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(reg.summary<span class="sc">$</span>adjr2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">11</span>, reg.summary<span class="sc">$</span>adjr2[<span class="dv">11</span>], </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="dv">2</span> , <span class="at">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reg.summary<span class="sc">$</span>cp, </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of Variables"</span>, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Cp"</span>, </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">which.min</span>(reg.summary<span class="sc">$</span>cp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">10</span>, reg.summary<span class="sc">$</span>cp[<span class="dv">10</span>],</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="dv">2</span>, <span class="at">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">which.min</span>(reg.summary<span class="sc">$</span>bic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reg.summary<span class="sc">$</span>bic, <span class="at">xlab =</span> <span class="st">"Number of Variables"</span>, </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"BIC"</span>, <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span> (<span class="dv">6</span>, reg.summary<span class="sc">$</span>bic[<span class="dv">6</span>], </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="dv">2</span>, <span class="at">pch =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="points" class="level3">
+<h3 class="anchored" data-anchor-id="points"><code>points()</code></h3>
+<p>The <code>points()</code> command works like the <code>plot()</code> command, except that it puts points on a plot that has already been created, instead of creating a new plot. The <code>which.max()</code> function can be used to identify the location of the maximum point of a vector. We will now plot a red dot to indicate the model with the largest adjusted <span class="math inline">\(R^2\)</span> statistic.</p>
+</section>
+<section id="plot-with-regfit" class="level3">
+<h3 class="anchored" data-anchor-id="plot-with-regfit"><code>plot()</code> with <code>regfit()</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for each plot, one row per model</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(regfit.full, <span class="at">scale =</span> <span class="st">"r2"</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(regfit.full, <span class="at">scale =</span> <span class="st">"adjr2"</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(regfit.full, <span class="at">scale =</span> <span class="st">"Cp"</span>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(regfit.full, <span class="at">scale =</span> <span class="st">"bic"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The top row of each plot contains a black square for each variable selected according to the optimal model associated with that statistic. For instance, we see that several models share a BIC close to -150. However, the model with the lowest BIC is the six-variable model that contains only <code>AtBat</code>, <code>Hits</code>, <code>Walks</code>, <code>CRBI</code>, <code>DivisionW</code>, and <code>PutOuts.</code> We can use the <code>coef()</code> function to see the coeﬃcient estimates associated with this model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(regfit.full, <span class="dv">6</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept)        AtBat         Hits        Walks         CRBI    DivisionW 
+  91.5117981   -1.8685892    7.6043976    3.6976468    0.6430169 -122.9515338 
+     PutOuts 
+   0.2643076 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="stepwise-regression" class="level2">
+<h2 class="anchored" data-anchor-id="stepwise-regression">2 Stepwise regression</h2>
+<p>We can also use the <code>regsubsets()</code> function to perform forward stepwise, or backward stepwise selection, using the argument <code>method = "forward"</code> or <code>method = "backward"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>regfit.fwd <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">nvmax =</span> <span class="dv">19</span>, <span class="at">method =</span> <span class="st">"forward"</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(regfit.fwd )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Subset selection object
+Call: regsubsets.formula(Salary ~ ., data = Hitters, nvmax = 19, method = "forward")
+19 Variables  (and intercept)
+           Forced in Forced out
+AtBat          FALSE      FALSE
+Hits           FALSE      FALSE
+HmRun          FALSE      FALSE
+Runs           FALSE      FALSE
+RBI            FALSE      FALSE
+Walks          FALSE      FALSE
+Years          FALSE      FALSE
+CAtBat         FALSE      FALSE
+CHits          FALSE      FALSE
+CHmRun         FALSE      FALSE
+CRuns          FALSE      FALSE
+CRBI           FALSE      FALSE
+CWalks         FALSE      FALSE
+LeagueN        FALSE      FALSE
+DivisionW      FALSE      FALSE
+PutOuts        FALSE      FALSE
+Assists        FALSE      FALSE
+Errors         FALSE      FALSE
+NewLeagueN     FALSE      FALSE
+1 subsets of each size up to 19
+Selection Algorithm: forward
+          AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun CRuns CRBI
+1  ( 1 )  " "   " "  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+2  ( 1 )  " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+3  ( 1 )  " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+4  ( 1 )  " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+5  ( 1 )  "*"   "*"  " "   " "  " " " "   " "   " "    " "   " "    " "   "*" 
+6  ( 1 )  "*"   "*"  " "   " "  " " "*"   " "   " "    " "   " "    " "   "*" 
+7  ( 1 )  "*"   "*"  " "   " "  " " "*"   " "   " "    " "   " "    " "   "*" 
+8  ( 1 )  "*"   "*"  " "   " "  " " "*"   " "   " "    " "   " "    "*"   "*" 
+9  ( 1 )  "*"   "*"  " "   " "  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+10  ( 1 ) "*"   "*"  " "   " "  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+11  ( 1 ) "*"   "*"  " "   " "  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+12  ( 1 ) "*"   "*"  " "   "*"  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+13  ( 1 ) "*"   "*"  " "   "*"  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+14  ( 1 ) "*"   "*"  "*"   "*"  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+15  ( 1 ) "*"   "*"  "*"   "*"  " " "*"   " "   "*"    "*"   " "    "*"   "*" 
+16  ( 1 ) "*"   "*"  "*"   "*"  "*" "*"   " "   "*"    "*"   " "    "*"   "*" 
+17  ( 1 ) "*"   "*"  "*"   "*"  "*" "*"   " "   "*"    "*"   " "    "*"   "*" 
+18  ( 1 ) "*"   "*"  "*"   "*"  "*" "*"   "*"   "*"    "*"   " "    "*"   "*" 
+19  ( 1 ) "*"   "*"  "*"   "*"  "*" "*"   "*"   "*"    "*"   "*"    "*"   "*" 
+          CWalks LeagueN DivisionW PutOuts Assists Errors NewLeagueN
+1  ( 1 )  " "    " "     " "       " "     " "     " "    " "       
+2  ( 1 )  " "    " "     " "       " "     " "     " "    " "       
+3  ( 1 )  " "    " "     " "       "*"     " "     " "    " "       
+4  ( 1 )  " "    " "     "*"       "*"     " "     " "    " "       
+5  ( 1 )  " "    " "     "*"       "*"     " "     " "    " "       
+6  ( 1 )  " "    " "     "*"       "*"     " "     " "    " "       
+7  ( 1 )  "*"    " "     "*"       "*"     " "     " "    " "       
+8  ( 1 )  "*"    " "     "*"       "*"     " "     " "    " "       
+9  ( 1 )  "*"    " "     "*"       "*"     " "     " "    " "       
+10  ( 1 ) "*"    " "     "*"       "*"     "*"     " "    " "       
+11  ( 1 ) "*"    "*"     "*"       "*"     "*"     " "    " "       
+12  ( 1 ) "*"    "*"     "*"       "*"     "*"     " "    " "       
+13  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    " "       
+14  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    " "       
+15  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    " "       
+16  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    " "       
+17  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    "*"       
+18  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    "*"       
+19  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    "*"       </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>regfit.bwd <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">nvmax =</span> <span class="dv">19</span> , <span class="at">method =</span> <span class="st">"backward"</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(regfit.bwd )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Subset selection object
+Call: regsubsets.formula(Salary ~ ., data = Hitters, nvmax = 19, method = "backward")
+19 Variables  (and intercept)
+           Forced in Forced out
+AtBat          FALSE      FALSE
+Hits           FALSE      FALSE
+HmRun          FALSE      FALSE
+Runs           FALSE      FALSE
+RBI            FALSE      FALSE
+Walks          FALSE      FALSE
+Years          FALSE      FALSE
+CAtBat         FALSE      FALSE
+CHits          FALSE      FALSE
+CHmRun         FALSE      FALSE
+CRuns          FALSE      FALSE
+CRBI           FALSE      FALSE
+CWalks         FALSE      FALSE
+LeagueN        FALSE      FALSE
+DivisionW      FALSE      FALSE
+PutOuts        FALSE      FALSE
+Assists        FALSE      FALSE
+Errors         FALSE      FALSE
+NewLeagueN     FALSE      FALSE
+1 subsets of each size up to 19
+Selection Algorithm: backward
+          AtBat Hits HmRun Runs RBI Walks Years CAtBat CHits CHmRun CRuns CRBI
+1  ( 1 )  " "   " "  " "   " "  " " " "   " "   " "    " "   " "    "*"   " " 
+2  ( 1 )  " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    "*"   " " 
+3  ( 1 )  " "   "*"  " "   " "  " " " "   " "   " "    " "   " "    "*"   " " 
+4  ( 1 )  "*"   "*"  " "   " "  " " " "   " "   " "    " "   " "    "*"   " " 
+5  ( 1 )  "*"   "*"  " "   " "  " " "*"   " "   " "    " "   " "    "*"   " " 
+6  ( 1 )  "*"   "*"  " "   " "  " " "*"   " "   " "    " "   " "    "*"   " " 
+7  ( 1 )  "*"   "*"  " "   " "  " " "*"   " "   " "    " "   " "    "*"   " " 
+8  ( 1 )  "*"   "*"  " "   " "  " " "*"   " "   " "    " "   " "    "*"   "*" 
+9  ( 1 )  "*"   "*"  " "   " "  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+10  ( 1 ) "*"   "*"  " "   " "  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+11  ( 1 ) "*"   "*"  " "   " "  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+12  ( 1 ) "*"   "*"  " "   "*"  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+13  ( 1 ) "*"   "*"  " "   "*"  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+14  ( 1 ) "*"   "*"  "*"   "*"  " " "*"   " "   "*"    " "   " "    "*"   "*" 
+15  ( 1 ) "*"   "*"  "*"   "*"  " " "*"   " "   "*"    "*"   " "    "*"   "*" 
+16  ( 1 ) "*"   "*"  "*"   "*"  "*" "*"   " "   "*"    "*"   " "    "*"   "*" 
+17  ( 1 ) "*"   "*"  "*"   "*"  "*" "*"   " "   "*"    "*"   " "    "*"   "*" 
+18  ( 1 ) "*"   "*"  "*"   "*"  "*" "*"   "*"   "*"    "*"   " "    "*"   "*" 
+19  ( 1 ) "*"   "*"  "*"   "*"  "*" "*"   "*"   "*"    "*"   "*"    "*"   "*" 
+          CWalks LeagueN DivisionW PutOuts Assists Errors NewLeagueN
+1  ( 1 )  " "    " "     " "       " "     " "     " "    " "       
+2  ( 1 )  " "    " "     " "       " "     " "     " "    " "       
+3  ( 1 )  " "    " "     " "       "*"     " "     " "    " "       
+4  ( 1 )  " "    " "     " "       "*"     " "     " "    " "       
+5  ( 1 )  " "    " "     " "       "*"     " "     " "    " "       
+6  ( 1 )  " "    " "     "*"       "*"     " "     " "    " "       
+7  ( 1 )  "*"    " "     "*"       "*"     " "     " "    " "       
+8  ( 1 )  "*"    " "     "*"       "*"     " "     " "    " "       
+9  ( 1 )  "*"    " "     "*"       "*"     " "     " "    " "       
+10  ( 1 ) "*"    " "     "*"       "*"     "*"     " "    " "       
+11  ( 1 ) "*"    "*"     "*"       "*"     "*"     " "    " "       
+12  ( 1 ) "*"    "*"     "*"       "*"     "*"     " "    " "       
+13  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    " "       
+14  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    " "       
+15  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    " "       
+16  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    " "       
+17  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    "*"       
+18  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    "*"       
+19  ( 1 ) "*"    "*"     "*"       "*"     "*"     "*"    "*"       </code></pre>
+</div>
+</div>
+<p>For instance, we see that using forward stepwise selection, the best one-variable model contains only <code>CRBI</code>, and the best two-variable model additionally includes <code>Hits.</code> For this data, the best one-variable through six- variable models are each identical for best subset and forward selection. However, the best seven-variable models identified by forward stepwise selection, backward stepwise selection, and best subset selection are different.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(regfit.full, <span class="dv">7</span>),</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(regfit.fwd, <span class="dv">7</span>),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(regfit.bwd, <span class="dv">7</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     (Intercept)      Hits    Walks    CAtBat     CHits     CHmRun DivisionW
+[1,]    79.45095  1.283351 3.227426 -0.375235 1.4957073  1.4420538 -129.9866
+[2,]   109.78731 -1.958885 7.449877  4.913140 0.8537622 -0.3053070 -127.1224
+[3,]   105.64875 -1.976284 6.757491  6.055869 1.1293095 -0.7163346 -116.1692
+       PutOuts
+[1,] 0.2366813
+[2,] 0.2533404
+[3,] 0.3028847</code></pre>
+</div>
+</div>
+</section>
+<section id="validation-sets-for-model-selection" class="level2">
+<h2 class="anchored" data-anchor-id="validation-sets-for-model-selection">3 Validation sets for model selection</h2>
+<p>So, it is possible to choose among a set of models of diﬀerent sizes using <span class="math inline">\(C_p\)</span>, BIC, and adjusted <span class="math inline">\(R^2\)</span>. We will now consider how to do this using the validation set and cross-validation approaches.</p>
+<p>In order for these approaches to yield accurate estimates of the test error, we must use only the training observations to perform all aspects of model fitting, including variable selection. Therefore, the determination of which model of a given size is best must be made using only the training observations. <strong>This point is subtle but important.</strong></p>
+<p>If the full data set is used to perform the best subset selection step, the validation set errors and cross-validation errors that we obtain will not be accurate estimates of the test error.</p>
+<p>In order to use the validation set approach, we begin by splitting the observations into a training set and a test set. We do this by creating a random vector, train, of elements equal to <code>TRUE</code> if the corresponding observation is in the training set, and <code>FALSE</code> otherwise. The vector test has a <code>TRUE</code> if the observation is in the test set, and a <code>FALSE</code> otherwise. Note the <code>!</code> in the command to create test causes <code>TRUE</code>s to be switched to <code>FALSE</code>s and vice versa. We also set a random seed so that you can obtain the same training set/test set split, i.e so that you analysis will be repeatable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="fu">nrow</span> (Hitters), <span class="at">replace =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> (<span class="sc">!</span>train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, we apply <code>regsubsets()</code> to the training set in order to perform best subset selection.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>regfit.best <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(Salary <span class="sc">~</span> .,</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">data =</span> Hitters[train, ], <span class="at">nvmax =</span> <span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that we subset the <code>Hitters</code> data frame directly in the call in order to access only the training subset of the data, using the expression <code>Hitters[train, ]</code>. We now compute the validation set error for the best model of each model size. We first make a model matrix from the test data.</p>
+<section id="model.matrix" class="level3">
+<h3 class="anchored" data-anchor-id="model.matrix"><code>model.matrix()</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>test.mat <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(Salary <span class="sc">~</span>., <span class="at">data =</span> Hitters[test, ]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>model.matrix()</code> function is used in many regression packages for building an “X” matrix from data. Now we run a loop, and for each size <code>i</code>, we extract the coeﬃcients from <code>regfit.best</code> for the best model of that size, multiply them into the appropriate columns of the test model matrix to form the predictions, and compute the test MSE.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>val.errors <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">19</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">19</span>) {</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  coefi <span class="ot">&lt;-</span> <span class="fu">coef</span>(regfit.best, <span class="at">id =</span> i)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  pred <span class="ot">&lt;-</span> test.mat [ , <span class="fu">names</span>(coefi)] <span class="sc">%*%</span> coefi</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  val.errors[i] <span class="ot">&lt;-</span> <span class="fu">mean</span> ((Hitters<span class="sc">$</span>Salary[test] <span class="sc">-</span> pred )<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We find that the best model is the one that contains seven variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>val.errors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 164377.3 144405.5 152175.7 145198.4 137902.1 139175.7 126849.0 136191.4
+ [9] 132889.6 135434.9 136963.3 140694.9 140690.9 141951.2 141508.2 142164.4
+[17] 141767.4 142339.6 142238.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.min</span>(val.errors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(regfit.best, <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept)        AtBat         Hits        Walks        CRuns       CWalks 
+  67.1085369   -2.1462987    7.0149547    8.0716640    1.2425113   -0.8337844 
+   DivisionW      PutOuts 
+-118.4364998    0.2526925 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can graph it too</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(val.errors, <span class="at">type =</span> <span class="st">'b'</span>, </span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">'goldenrod'</span>,</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Lower is better"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="automating-it" class="level3">
+<h3 class="anchored" data-anchor-id="automating-it">Automating it</h3>
+<p>This was a little tedious, partly because there is no <code>predict()</code> method for <code>regsubsets()</code>. Since we will be using this function again, we can capture our steps above and write our own predict method.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>predict.regsubsets <span class="ot">&lt;-</span> <span class="cf">function</span>(object, newdata , id , ...) {</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  form <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(object<span class="sc">$</span> call[[ <span class="dv">2</span> ]])</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">model.matrix</span> (form, newdata )</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  coefi <span class="ot">&lt;-</span> <span class="fu">coef</span> (object , <span class="at">id =</span> id)</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  xvars <span class="ot">&lt;-</span> <span class="fu">names</span> (coefi) </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  mat [, xvars ] <span class="sc">%*%</span> coefi</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This function pretty much mimics what we did above. The only complex part is how we extracted the formula used in the call to <code>regsubsets()</code>. We wioll explore how we use this function below, when we do cross-validation.</p>
+<p>Finally, we perform best subset selection on the full data set, and select the best seven-variable model. It is important that we make use of the full data set in order to obtain more accurate coefficient estimates. Note that we perform best subset selection on the full data set and select the best seven-variable model, rather than simply using the variables that were obtained from the training set, because the best seven-variable model on the full data set may diﬀer from the corresponding model on the training set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>regfit.best <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(Salary <span class="sc">~</span> ., </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">data =</span> Hitters, <span class="at">nvmax =</span> <span class="dv">19</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(regfit.best, <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept)         Hits        Walks       CAtBat        CHits       CHmRun 
+  79.4509472    1.2833513    3.2274264   -0.3752350    1.4957073    1.4420538 
+   DivisionW      PutOuts 
+-129.9866432    0.2366813 </code></pre>
+</div>
+</div>
+<p>In fact, we see that the best seven-variable model on the full data set has a diﬀerent set of variables than the best seven-variable model on the training set.</p>
+</section>
+<section id="cross-val" class="level3">
+<h3 class="anchored" data-anchor-id="cross-val">Cross-val</h3>
+<p>We now try to choose among the models of diﬀerent sizes using cross- validation. This approach is somewhat involved, as we must perform best subset selection within each of the k training sets. Despite this, we see that with its clever subsetting syntax, R makes this job quite easy. First, we create a vector that allocates each observation to one of k = 10 folds, and we create a matrix in which we will store the results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(Hitters) </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>folds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>k, <span class="at">length =</span> n))</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>cv.errors <span class="ot">&lt;-</span> <span class="fu">matrix</span> (<span class="cn">NA</span>, k, <span class="dv">19</span>, <span class="at">dimnames =</span> <span class="fu">list</span> (<span class="cn">NULL</span>, <span class="fu">paste</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">19</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we write a for loop that performs cross-validation. In the <span class="math inline">\(j_{th}\)</span> fold, the elements of <code>folds</code> that equal <code>j</code> are in the test set, and the remainder are in the training set. We make our predictions for each model size (using our new <code>predict()</code> method), compute the test errors on the appropriate subset, and store them in the appropriate slot in the matrix <code>cv.errors</code>. Note that in the following code R will automatically use our <code>predict.regsubsets()</code> function when we call <code>predict()</code> because the <code>best.fit</code> object has class <code>regsubsets</code>.</p>
+</section>
+<section id="nested-for-loops" class="level3">
+<h3 class="anchored" data-anchor-id="nested-for-loops">Nested <code>for()</code> loops</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k){</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  best.fit <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(Salary <span class="sc">~</span> .,</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> Hitters[folds <span class="sc">!=</span> j, ], <span class="at">nvmax =</span> <span class="dv">19</span>)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span> <span class="dv">19</span>) {</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(best.fit, Hitters[ folds <span class="sc">==</span> j, ], <span class="at">id =</span> i)</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    cv.errors[j, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>((Hitters<span class="sc">$</span>Salary[folds <span class="sc">==</span> j] <span class="sc">-</span> pred )<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This has given us a 10 <span class="math inline">\(\times\)</span> 19 matrix, of which the (<code>j</code>, <code>i</code>)th element corresponds to the test MSE for the <span class="math inline">\(j_{th}\)</span> cross-validation fold for the best <code>j</code>-variable model. We use the <code>apply()</code> function to average over the columns of this matrix in order to obtain a vector for which the <span class="math inline">\(i_{th}\)</span> element is the cross-validation error for the <code>i</code>-variable model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>mean.cv.errors <span class="ot">&lt;-</span> <span class="fu">apply</span>(cv.errors ,<span class="dv">2</span> , mean)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>mean.cv.errors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1        2        3        4        5        6        7        8 
+143439.8 126817.0 134214.2 131782.9 130765.6 120382.9 121443.1 114363.7 
+       9       10       11       12       13       14       15       16 
+115163.1 109366.0 112738.5 113616.5 115557.6 115853.3 115630.6 116050.0 
+      17       18       19 
+116117.0 116419.3 116299.1 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span> , <span class="dv">1</span>))</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mean.cv.errors, <span class="at">type =</span> <span class="st">"b"</span>,</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">'goldenrod'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We see that cross-validation selects a 10-variable model. We now perform best subset selection on the full data set in order to obtain the 10-variable model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>reg.best <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters,</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">nvmax =</span> <span class="dv">19</span>)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(reg.best, <span class="dv">10</span>)          </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept)        AtBat         Hits        Walks       CAtBat        CRuns 
+ 162.5354420   -2.1686501    6.9180175    5.7732246   -0.1300798    1.4082490 
+        CRBI       CWalks    DivisionW      PutOuts      Assists 
+   0.7743122   -0.8308264 -112.3800575    0.2973726    0.2831680 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># It is always a good idea to examine the coefficients graphically</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Salary <span class="sc">~</span> Hits, <span class="at">data =</span> Hitters)</span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(Salary <span class="sc">~</span> Hits, <span class="at">data =</span> Hitters))</span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Salary <span class="sc">~</span> Walks, <span class="at">data =</span> Hitters)</span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(Salary <span class="sc">~</span> Walks, <span class="at">data =</span> Hitters))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="ridge-regression-and-lasso" class="level2">
+<h2 class="anchored" data-anchor-id="ridge-regression-and-lasso">4 Ridge regression and lasso</h2>
+<section id="glmnet" class="level3">
+<h3 class="anchored" data-anchor-id="glmnet"><code>glmnet()</code></h3>
+<p>We will use the <code>{glmnet}</code> package in order to perform ridge regression and the lasso. The main function in this package is <code>glmnet()</code>, which can be used to fit ridge regression models, lasso models, and more. This function has slightly diﬀerent syntax from other model-fitting functions that we have encountered thus far in this book. In particular, we must pass in an x matrix as well as a y vector, and we do not use the <code>y ∼ x</code> syntax. We will now perform ridge regression and the lasso in order to predict Salary on the Hitters data. Before proceeding ensure that the missing values have been removed from the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data prep</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(Salary <span class="sc">~</span> ., Hitters )[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> Hitters<span class="sc">$</span>Salary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>model.matrix()</code> function is particularly useful for creating <code>x</code>; not only does it produce a matrix corresponding to the 19 predictors but it also automatically transforms any qualitative variables into dummy variables. The latter property is important because <code>glmnet()</code> can only take numerical, quantitative inputs.</p>
+</section>
+<section id="ridge-reg." class="level3">
+<h3 class="anchored" data-anchor-id="ridge-reg.">Ridge reg.</h3>
+<p>The <code>glmnet()</code> function has an <code>alpha</code> argument that determines what type of model is fit. If <code>alpha=0</code> then a ridge regression model is fit, and if <code>alpha=1</code> then a lasso model is fit. We first fit a ridge regression model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'glmnet' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loaded glmnet 4.1-3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="dv">10</span> , <span class="sc">-</span><span class="dv">2</span> , <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>ridge.mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">0</span> , <span class="at">lambda =</span> grid )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>By default the <code>glmnet()</code> function performs ridge regression for an automatically selected range of <span class="math inline">\(\lambda\)</span> values. However, here we have chosen to implement the function over a grid of values ranging from <span class="math inline">\(\lambda=1010\)</span> to <span class="math inline">\(\lambda = 10^2\)</span>, essentially covering the full range of scenarios from the null model containing only the intercept, to the least squares fit. As we will see, we can also compute model fits for a particular value of <span class="math inline">\(\lambda\)</span> that is not one of the original grid values. Note that by default, the <code>glmnet()</code> function standardizes the variables so that they are on the same scale. To turn off this default setting, use the argument <code>standardize = FALSE</code>.</p>
+<p>Associated with each value of <span class="math inline">\(\lambda\)</span> is a vector of ridge regression coefficients, stored in a matrix that can be accessed by <code>coef()</code>. In this case, it is a 20 <span class="math inline">\(\times\)</span> 100 matrix, with 20 rows (one for each predictor, plus an intercept) and 100 columns (one for each value of <span class="math inline">\(\lambda\)</span>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">coef</span>(ridge.mod ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  20 100</code></pre>
+</div>
+</div>
+<p>We expect the coefficient estimates to be much smaller, in terms of <span class="math inline">\(\ell_2\)</span> norm, when a large value of <span class="math inline">\(\lambda\)</span> is used, as compared to when a small value of <span class="math inline">\(\lambda\)</span> is used. These are the coefficients when<span class="math inline">\(\lambda = 11,498\)</span>, along with their <span class="math inline">\(\ell_2\)</span> norm:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>ridge.mod<span class="sc">$</span>lambda[<span class="dv">50</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11497.57</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">coef</span>(ridge.mod )[<span class="sc">-</span><span class="dv">1</span> , <span class="dv">50</span>]<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.360612</code></pre>
+</div>
+</div>
+<p>In contrast, here are the coeﬃcients when <span class="math inline">\(\lambda=705\)</span>, along with their <span class="math inline">\(\ell_2\)</span> norm. Note the much larger <span class="math inline">\(\ell_2\)</span> norm of the coeﬃcients associated with this smaller value of <span class="math inline">\(\lambda\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>ridge.mod<span class="sc">$</span>lambda[<span class="dv">60</span>] <span class="co"># lambda</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 705.4802</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(ridge.mod )[ , <span class="dv">60</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+ 54.32519950   0.11211115   0.65622409   1.17980910   0.93769713   0.84718546 
+       Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+  1.31987948   2.59640425   0.01083413   0.04674557   0.33777318   0.09355528 
+        CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+  0.09780402   0.07189612  13.68370191 -54.65877750   0.11852289   0.01606037 
+      Errors   NewLeagueN 
+ -0.70358655   8.61181213 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">coef</span>(ridge.mod)[<span class="sc">-</span><span class="dv">1</span> , <span class="dv">60</span> ]<span class="sc">^</span><span class="dv">2</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 57.11001</code></pre>
+</div>
+</div>
+</section>
+<section id="ridge-predict" class="level3">
+<h3 class="anchored" data-anchor-id="ridge-predict">Ridge <code>predict()</code></h3>
+<p>We can use the <code>predict()</code> function for a number of purposes. For instance, we can obtain the ridge regression coeﬃcients for a new value of <span class="math inline">\(\lambda\)</span>, say 50:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridge.mod, <span class="at">s =</span> <span class="dv">50</span>, <span class="at">type =</span> <span class="st">"coefficients"</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept)         AtBat          Hits         HmRun          Runs 
+ 4.876610e+01 -3.580999e-01  1.969359e+00 -1.278248e+00  1.145892e+00 
+          RBI         Walks         Years        CAtBat         CHits 
+ 8.038292e-01  2.716186e+00 -6.218319e+00  5.447837e-03  1.064895e-01 
+       CHmRun         CRuns          CRBI        CWalks       LeagueN 
+ 6.244860e-01  2.214985e-01  2.186914e-01 -1.500245e-01  4.592589e+01 
+    DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+-1.182011e+02  2.502322e-01  1.215665e-01 -3.278600e+00 -9.496680e+00 </code></pre>
+</div>
+</div>
+</section>
+<section id="test-error" class="level3">
+<h3 class="anchored" data-anchor-id="test-error">Test error</h3>
+<p>We now split the samples into a training set and a test set in order to estimate the test error of ridge regression and the lasso. There are two common ways to randomly split a data set. The first is to produce a random vector of <code>TRUE</code>, <code>FALSE</code> elements and select the observations corresponding to <code>TRUE</code> for the training data. The second is to randomly choose a subset of numbers between 1 and <code>n</code>; these can then be used as the indices for the training observations. The two approaches work equally well.</p>
+<p>Here we will demonstrate the latter approach. We first set a random seed so that the results obtained will be reproducible.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span> (x), <span class="fu">nrow</span>(x)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> (<span class="sc">-</span>train )</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>y.test <span class="ot">&lt;-</span> y[test]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next we fit a ridge regression model on the training set, and evaluate its MSE on the test set, using <span class="math inline">\(\lambda = 4\)</span>. Note the use of the <code>predict()</code> function again. This time we get predictions for a test set, by replacing <code>type="coefficients"</code> with the <code>newx</code> argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>ridge.mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x[train, ], y[train], <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda =</span> grid , <span class="at">thresh =</span> <span class="fl">1e-12</span>)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>ridge.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(ridge.mod, <span class="at">s =</span> <span class="dv">4</span>, <span class="at">newx =</span> x[ test, ])</span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge.pred <span class="sc">-</span> y.test)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 142199.2</code></pre>
+</div>
+</div>
+</section>
+<section id="explore-model-results-space" class="level3">
+<h3 class="anchored" data-anchor-id="explore-model-results-space">Explore model <em>results space</em></h3>
+<p>The test MSE is 142,199. Note that if we had instead simply fit a model with just an intercept, we would have predicted each test observation using the mean of the training observations. In that case, we could compute the test set MSE like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((<span class="fu">mean</span>(y[train ]) <span class="sc">-</span> y.test)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 224669.9</code></pre>
+</div>
+</div>
+<p>We could also get the same result by fitting a ridge regression model with a very large value of <span class="math inline">\(\lambda\)</span>. Note that <code>1e10</code> means <span class="math inline">\(10^10\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>ridge.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(ridge.mod, <span class="at">s =</span> <span class="fl">1e10</span>, <span class="at">newx =</span> x[test, ])</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge.pred <span class="sc">-</span> y.test )<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 224669.8</code></pre>
+</div>
+</div>
+<p>So fitting a ridge regression model with <span class="math inline">\(\lambda = 4\)</span> leads to a much lower test MSE than fitting a model with just an intercept. We now check whether there is any benefit to performing ridge regression with <span class="math inline">\(\lambda = 4\)</span> instead of just performing least squares regression. Recall that least squares is simply ridge regression with <span class="math inline">\(\lambda = 0\)</span></p>
+<p>In order for <code>glmnet()</code> to yield the exact least squares coeﬃcients when λ = 0, we use the argument <code>exact = T</code> when calling the <code>predict()</code> function. Otherwise, the <code>predict()</code> function will interpolate over the grid of <span class="math inline">\(\lambda\)</span> values used in fitting the <code>glmnet()</code> model, yielding approximate results. When we use <code>exact = T</code>, there remains a slight discrepancy in the third decimal place between the output of <code>glmnet()</code> when <span class="math inline">\(\lambda = 0\)</span> and the output of <code>lm()</code>; this is due to numerical approximation on the part of <code>glmnet()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>ridge.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(ridge.mod, <span class="at">s =</span> <span class="dv">0</span>, </span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">newx =</span> x[test, ], <span class="at">exact =</span> T, </span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">x =</span> x[train , ], <span class="at">y =</span> y[ train ])</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge.pred <span class="sc">-</span> y.test )<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 168588.6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">subset =</span> train )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x, subset = train)
+
+Coefficients:
+(Intercept)       xAtBat        xHits       xHmRun        xRuns         xRBI  
+   274.0145      -0.3521      -1.6377       5.8145       1.5424       1.1243  
+     xWalks       xYears      xCAtBat       xCHits      xCHmRun       xCRuns  
+     3.7287     -16.3773      -0.6412       3.1632       3.4008      -0.9739  
+      xCRBI      xCWalks     xLeagueN   xDivisionW     xPutOuts     xAssists  
+    -0.6005       0.3379     119.1486    -144.0831       0.1976       0.6804  
+    xErrors  xNewLeagueN  
+    -4.7128     -71.0951  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(ridge.mod, <span class="at">s =</span> <span class="dv">0</span>, <span class="at">exact =</span> T, <span class="at">type =</span> <span class="st">"coefficients"</span>, </span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> x[train, ], <span class="at">y =</span> y[train])[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span> , ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+ 274.0200994   -0.3521900   -1.6371383    5.8146692    1.5423361    1.1241837 
+       Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+   3.7288406  -16.3795195   -0.6411235    3.1629444    3.4005281   -0.9739405 
+        CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+  -0.6003976    0.3378422  119.1434637 -144.0853061    0.1976300    0.6804200 
+      Errors   NewLeagueN 
+  -4.7127879  -71.0898914 </code></pre>
+</div>
+</div>
+</section>
+<section id="cv.glmnet" class="level3">
+<h3 class="anchored" data-anchor-id="cv.glmnet"><code>cv.glmnet()</code></h3>
+<p>In general, if we want to fit a (unpenalized) least squares model, then we should use the <code>lm()</code> function, since that function provides more useful outputs, such as standard errors and p-values for the coefficients.</p>
+<p>In general, instead of arbitrarily choosing <span class="math inline">\(\lambda = 4\)</span>, it would be better to use cross-validation to choose the tuning parameter <span class="math inline">\(\lambda\)</span>. We can do this using the built-in cross-validation function, <code>cv.glmnet()</code>. By default, the function performs ten-fold cross-validation, though this can be changed using the argument <code>nfolds.</code> Note that we set a random seed first so our results will be reproducible, since the choice of the cross-validation folds is random.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x[train, ], y[train], <span class="at">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.out )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-68-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>bestlam <span class="ot">&lt;-</span> cv.out<span class="sc">$</span>lambda.min</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>bestlam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 326.0828</code></pre>
+</div>
+</div>
+<p>Therefore, we see that the value of <span class="math inline">\(\lambda\)</span> that results in the smallest cross- validation error is 326 (<code>log(326)</code> = ~5.8 on the graph). What is the test MSE associated with this value of <span class="math inline">\(\lambda\)</span>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>ridge.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(ridge.mod, <span class="at">s =</span> bestlam, <span class="at">newx =</span> x[test, ])</span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((ridge.pred <span class="sc">-</span> y.test)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 139856.6</code></pre>
+</div>
+</div>
+<p>This represents a further improvement over the test MSE that we got using <span class="math inline">\(\lambda = 4\)</span>. Finally, we refit our ridge regression model on the full data set, using the value of <span class="math inline">\(\lambda\)</span> chosen by cross-validation, and examine the coeﬃcient estimates.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">"coefficients"</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept)        AtBat         Hits        HmRun         Runs          RBI 
+ 15.44383120   0.07715547   0.85911582   0.60103106   1.06369007   0.87936105 
+       Walks        Years       CAtBat        CHits       CHmRun        CRuns 
+  1.62444617   1.35254778   0.01134999   0.05746654   0.40680157   0.11456224 
+        CRBI       CWalks      LeagueN    DivisionW      PutOuts      Assists 
+  0.12116504   0.05299202  22.09143197 -79.04032656   0.16619903   0.02941950 
+      Errors   NewLeagueN 
+ -1.36092945   9.12487765 </code></pre>
+</div>
+</div>
+<p>As expected, none of the coeﬃcients are zero—ridge regression does not perform variable selection!</p>
+</section>
+</section>
+<section id="the-lasso" class="level2">
+<h2 class="anchored" data-anchor-id="the-lasso">5 The lasso</h2>
+<p>We saw that ridge regression with a wise choice of <span class="math inline">\(\lambda\)</span> can outperform least squares as well as the null model on the <code>Hitters</code> data set. We now ask whether the lasso can yield either a more accurate or a more interpretable model than ridge regression. In order to fit a lasso model, we once again use the <code>glmnet()</code> function; however, this time we use the argument <code>alpha=1</code>. Other than that change, we proceed just as we did in fitting a ridge model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>lasso.mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x[train, ], y[train ], <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid )</span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lasso.mod )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-74-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can see from the coefficient plot that depending on the choice of tuning parameter, some of the coefficients will be exactly equal to zero. We now perform cross-validation and compute the associated test error.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x[train , ], y[train ], <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.out )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>bestlam <span class="ot">&lt;-</span> cv.out<span class="sc">$</span>lambda.min</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>lasso.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(lasso.mod , <span class="at">s =</span> bestlam , <span class="at">newx =</span> x[test, ])</span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((lasso.pred <span class="sc">-</span> y.test)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 143673.6</code></pre>
+</div>
+</div>
+<p>This is substantially lower than the test set MSE of the null model and of least squares, and very similar to the test MSE of ridge regression with <span class="math inline">\(\lambda\)</span> chosen by cross-validation.</p>
+<p>However, the lasso has a substantial advantage over ridge regression in that the resulting coefficient estimates are sparse. Here we see that 8 of the 19 coeﬃcient estimates are exactly zero. So the lasso model with <span class="math inline">\(\lambda\)</span> chosen by cross-validation contains only eleven variables. This results in a model that tends to be both easier to compute, and easier to interpret.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">glmnet</span> (x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid )</span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>lasso.coef <span class="ot">&lt;-</span> <span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">"coefficients"</span>, <span class="at">s =</span> bestlam )[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, ]</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>lasso.coef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept)         AtBat          Hits         HmRun          Runs 
+   1.27479059   -0.05497143    2.18034583    0.00000000    0.00000000 
+          RBI         Walks         Years        CAtBat         CHits 
+   0.00000000    2.29192406   -0.33806109    0.00000000    0.00000000 
+       CHmRun         CRuns          CRBI        CWalks       LeagueN 
+   0.02825013    0.21628385    0.41712537    0.00000000   20.28615023 
+    DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+-116.16755870    0.23752385    0.00000000   -0.85629148    0.00000000 </code></pre>
+</div>
+</div>
+</section>
+<section id="pcr" class="level2">
+<h2 class="anchored" data-anchor-id="pcr">6 PCR</h2>
+<section id="principal-components-regression" class="level3">
+<h3 class="anchored" data-anchor-id="principal-components-regression">Principal Components Regression</h3>
+<p>Principal components regression (PCR) can be performed using the <code>pcr()</code> function, which is part of the <code>{pls}</code> library. We now apply PCR to the <code>Hitters</code> data, in order to predict <code>Salary.</code> Again, we ensure that the missing values have been removed from the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pls) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'pls' was built under R version 4.1.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'pls'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    loadings</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>pcr.fit <span class="ot">&lt;-</span> <span class="fu">pcr</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters, <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">validation =</span> <span class="st">"CV"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The syntax for the <code>pcr()</code> function is similar to that for <code>lm()</code>, with a few additional options. Setting <code>scale = TRUE</code> has the effect of standardizing each predictor, prior to generating the principal components, so that the scale on which each variable is measured will not have an eﬀect. Setting <code>validation = "CV"</code> causes <code>pcr()</code> to compute the ten-fold cross-validation error for each possible value of <code>M</code>, the number of principal components used. The resulting fit can be examined using <code>summary()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pcr.fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data:   X dimension: 263 19 
+    Y dimension: 263 1
+Fit method: svdpc
+Number of components considered: 19
+
+VALIDATION: RMSEP
+Cross-validated using 10 random segments.
+       (Intercept)  1 comps  2 comps  3 comps  4 comps  5 comps  6 comps
+CV             452    351.9    353.2    355.0    352.8    348.4    343.6
+adjCV          452    351.6    352.7    354.4    352.1    347.6    342.7
+       7 comps  8 comps  9 comps  10 comps  11 comps  12 comps  13 comps
+CV       345.5    347.7    349.6     351.4     352.1     353.5     358.2
+adjCV    344.7    346.7    348.5     350.1     350.7     352.0     356.5
+       14 comps  15 comps  16 comps  17 comps  18 comps  19 comps
+CV        349.7     349.4     339.9     341.6     339.2     339.6
+adjCV     348.0     347.7     338.2     339.7     337.2     337.6
+
+TRAINING: % variance explained
+        1 comps  2 comps  3 comps  4 comps  5 comps  6 comps  7 comps  8 comps
+X         38.31    60.16    70.84    79.03    84.29    88.63    92.26    94.96
+Salary    40.63    41.58    42.17    43.22    44.90    46.48    46.69    46.75
+        9 comps  10 comps  11 comps  12 comps  13 comps  14 comps  15 comps
+X         96.28     97.26     97.98     98.65     99.15     99.47     99.75
+Salary    46.86     47.76     47.82     47.85     48.10     50.40     50.55
+        16 comps  17 comps  18 comps  19 comps
+X          99.89     99.97     99.99    100.00
+Salary     53.01     53.85     54.61     54.61</code></pre>
+</div>
+</div>
+<p>The CV score is provided for each possible number of components, ranging from M = 0 onwards. Note that <code>pcr()</code> reports the root mean squared error ; in order to obtain the usual MSE, we must square this quantity. For instance, a root mean squared error of 352.8 corresponds to an MSE of 352.82 = 124,468.</p>
+<p>One can also plot the cross-validation scores using the <code>validationplot()</code> function. Using <code>val.type = "MSEP"</code> will cause the cross-validation MSE to be plotted.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">validationplot</span>(pcr.fit, <span class="at">val.type =</span> <span class="st">"MSEP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-84-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We see that the smallest cross-validation error occurs when M = 18 components are used. This is barely fewer than M = 19, which amounts to simply performing least squares, because when all of the components are used in PCR no dimension reduction occurs. However, from the plot we also see that the cross-validation error is roughly the same when only one component is included in the model. This suggests that a model that uses just a small number of components might suﬃce.</p>
+<p>The <code>summary()</code> function also provides the <em>percentage of variance explained</em> in the predictors and in the response using diﬀerent numbers of components. Briefly, we can think of this as the amount of information about the predictors or the response that is captured using M principal components. For example, setting M = 1 only captures 38.31% of all the variance, or information, in the predictors. In contrast, using M = 5 increases the value to 84.29%. If we were to use all M = p = 19 components, this would increase to 100%.</p>
+<p>We now perform PCR on the training data and evaluate its test set performance.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>pcr.fit <span class="ot">&lt;-</span> <span class="fu">pcr</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters, <span class="at">subset =</span> train, </span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">validation =</span> <span class="st">"CV"</span>)</span>
+<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a><span class="fu">validationplot</span>(pcr.fit, <span class="at">val.type =</span> <span class="st">"MSEP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-86-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now we find that the lowest cross-validation error occurs when M = 5 components are used. We compute the test MSE as follows.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>pcr.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(pcr.fit, x[test, ], <span class="at">ncomp =</span> <span class="dv">5</span>)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((pcr.pred <span class="sc">-</span> y.test )<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 142811.8</code></pre>
+</div>
+</div>
+<p>This test set MSE is competitive with the results obtained using ridge regression and the lasso. <strong>However, as a result of the way PCR is implemented, the final model is more difficult to interpret because it does not perform any kind of variable selection or even directly produce coeﬃcient estimates.</strong></p>
+<p>Finally, we fit PCR on the full data set, using M = 5, the number of components identified by cross-validation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>pcr.fit <span class="ot">&lt;-</span> <span class="fu">pcr</span>(y <span class="sc">~</span> x, <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">ncomp =</span> <span class="dv">5</span>)</span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pcr.fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data:   X dimension: 263 19 
+    Y dimension: 263 1
+Fit method: svdpc
+Number of components considered: 5
+TRAINING: % variance explained
+   1 comps  2 comps  3 comps  4 comps  5 comps
+X    38.31    60.16    70.84    79.03    84.29
+y    40.63    41.58    42.17    43.22    44.90</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="pls" class="level2">
+<h2 class="anchored" data-anchor-id="pls">7 PLS</h2>
+<section id="partial-least-squares" class="level3">
+<h3 class="anchored" data-anchor-id="partial-least-squares">Partial Least Squares</h3>
+<p>We implement partial least squares (PLS) using the <code>plsr()</code> function, also in the <code>{pls}</code> library. The syntax is just like that of the <code>pcr()</code> function.</p>
+</section>
+<section id="plsr" class="level3">
+<h3 class="anchored" data-anchor-id="plsr"><code>plsr()</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>pls.fit <span class="ot">&lt;-</span> <span class="fu">plsr</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters, <span class="at">subset =</span> train, </span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">scale =</span> <span class="cn">TRUE</span> , <span class="at">validation =</span> <span class="st">"CV"</span>)</span>
+<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pls.fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data:   X dimension: 131 19 
+    Y dimension: 131 1
+Fit method: kernelpls
+Number of components considered: 19
+
+VALIDATION: RMSEP
+Cross-validated using 10 random segments.
+       (Intercept)  1 comps  2 comps  3 comps  4 comps  5 comps  6 comps
+CV           428.3    325.5    329.9    328.8    339.0    338.9    340.1
+adjCV        428.3    325.0    328.2    327.2    336.6    336.1    336.6
+       7 comps  8 comps  9 comps  10 comps  11 comps  12 comps  13 comps
+CV       339.0    347.1    346.4     343.4     341.5     345.4     356.4
+adjCV    336.2    343.4    342.8     340.2     338.3     341.8     351.1
+       14 comps  15 comps  16 comps  17 comps  18 comps  19 comps
+CV        348.4     349.1     350.0     344.2     344.5     345.0
+adjCV     344.2     345.0     345.9     340.4     340.6     341.1
+
+TRAINING: % variance explained
+        1 comps  2 comps  3 comps  4 comps  5 comps  6 comps  7 comps  8 comps
+X         39.13    48.80    60.09    75.07    78.58    81.12    88.21    90.71
+Salary    46.36    50.72    52.23    53.03    54.07    54.77    55.05    55.66
+        9 comps  10 comps  11 comps  12 comps  13 comps  14 comps  15 comps
+X         93.17     96.05     97.08     97.61     97.97     98.70     99.12
+Salary    55.95     56.12     56.47     56.68     57.37     57.76     58.08
+        16 comps  17 comps  18 comps  19 comps
+X          99.61     99.70     99.95    100.00
+Salary     58.17     58.49     58.56     58.62</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">validationplot</span>(pls.fit, <span class="at">val.type =</span> <span class="st">"MSEP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="lab06-mod-selection_files/figure-html/unnamed-chunk-92-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The lowest cross-validation error occurs when only M = 1 partial least squares directions are used. We now evaluate the corresponding test set MSE.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>pls.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(pls.fit, x[test, ], <span class="at">ncomp =</span> <span class="dv">1</span>)</span>
+<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((pls.pred <span class="sc">-</span> y.test)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 151995.3</code></pre>
+</div>
+</div>
+<p>The test MSE is comparable to, but slightly higher than, the test MSE obtained using ridge regression, the lasso, and PCR.</p>
+<p>Finally, we perform PLS using the full data set, using M = 1, the number of components identified by cross-validation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>pls.fit <span class="ot">&lt;-</span> <span class="fu">plsr</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> Hitters, <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">ncomp =</span> <span class="dv">1</span>)</span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span> (pls.fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data:   X dimension: 263 19 
+    Y dimension: 263 1
+Fit method: kernelpls
+Number of components considered: 1
+TRAINING: % variance explained
+        1 comps
+X         38.08
+Salary    43.05</code></pre>
+</div>
+</div>
+<p>Notice that the percentage of variance in Salary that the one-component PLS fit explains, 43.05%, is almost as much as that explained using the final five-component model PCR fit, 44.90%. This is because PCR only attempts to maximize the amount of variance explained in the predictors, while PLS searches for directions that explain variance in both the predictors and the response.</p>
+</section>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">8 Exercises</h2>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
+<p>For the next few questions, we will generate simulated data, and will then use this data to perform best subset selection.</p>
+<section id="section" class="level4">
+<h4 class="anchored" data-anchor-id="section">1.1</h4>
+<p>Use the <code>rnorm()</code> function to generate a predictor X of length n = 100, as well as a noise vector <span class="math inline">\(\epsilon\)</span> of length n = 100.</p>
+</section>
+<section id="section-1" class="level4">
+<h4 class="anchored" data-anchor-id="section-1">1.2</h4>
+<p>Generate a response vector Y of length n = 100 according to the model</p>
+<p><span class="math inline">\(Y=\beta_0 + \beta_1 X + \beta_2 X^2 + \beta_3 X^3 + \epsilon\)</span></p>
+<p>where <span class="math inline">\(Y=\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, and <span class="math inline">\(\beta_3\)</span> are constants of your choice</p>
+</section>
+<section id="section-2" class="level4">
+<h4 class="anchored" data-anchor-id="section-2">1.3</h4>
+<p>Use the <code>regsubsets()</code> function to perform best subset selection in order to choose the best model containing the predictors <span class="math inline">\(X\)</span>, <span class="math inline">\(X^2\)</span>,. .., <span class="math inline">\(X^{10}\)</span>. What is the best model obtained according to <span class="math inline">\(C_p\)</span>, BIC, and adjusted <span class="math inline">\(R^2\)</span>? Show some plots to provide evidence for your answer, and report the coeﬃcients of the best model obtained. Note you will need to use the <code>data.frame()</code> function to create a single data set containing both X and Y.</p>
+</section>
+<section id="section-3" class="level4">
+<h4 class="anchored" data-anchor-id="section-3">1.4</h4>
+<p>Repeat 1.3, using forward stepwise selection and also using backwards stepwise selection. How does your answer compare to the results in 1.3?</p>
+</section>
+<section id="section-4" class="level4">
+<h4 class="anchored" data-anchor-id="section-4">1.5</h4>
+<p>Now fit a lasso model to the simulated data, again using <span class="math inline">\(X\)</span>, <span class="math inline">\(X^2\)</span>,. .., <span class="math inline">\(X^{10}\)</span> as predictors. Use cross-validation to select the optimal value of <span class="math inline">\(\lambda\)</span>. Create plots of the cross-validation error as a function of <span class="math inline">\(\lambda\)</span>. Report the resulting coefficient estimates, and discuss the results obtained.</p>
+</section>
+<section id="section-5" class="level4">
+<h4 class="anchored" data-anchor-id="section-5">1.6</h4>
+<p>Now generate a response vector <span class="math inline">\(Y\)</span> according to the model</p>
+<p><span class="math inline">\(Y = \beta_0 + \beta_7X^7 + \epsilon\)</span>,</p>
+<p>and perform best subset selection and the lasso. Discuss the results obtained.</p>
+</section>
+</section>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<p><br><br></p>
+</section>
+<section id="harper-adams-data-science" class="level2">
+<h2 class="anchored" data-anchor-id="harper-adams-data-science">Harper Adams Data Science</h2>
+<p><img src="img/HDS.png" class="img-fluid" alt="Harper Data Science" width="125"></p>
+<p>This module is a part of the <a href="https://www.harper-adams.ac.uk/courses/postgraduate/201194/data-science-for-global-agriculture-food-and-environment" title="MSc in Data Science">MSc in Data Science for Global Agriculture, Food, and Environment</a> at <a href="https://www.harper-adams.ac.uk/" title="Harper Adams University">Harper Adams University</a>, led by <a href="https://www.harper-adams.ac.uk/general/staff/profile/201620/Edwin-Harris/" title="Ed's Faculty page">Ed Harris</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
