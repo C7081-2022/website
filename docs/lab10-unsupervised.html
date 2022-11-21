@@ -431,7 +431,7 @@ Rape     -0.5434321 -0.1673186  0.8177779  0.08902432</code></pre>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pr.out, <span class="at">scale =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The <code>scale = 0</code> argument to <code>biplot()</code> ensures that the arrows are scaled to represent the loadings; other values for scale give slightly diﬀerent biplots with different interpretations.</p>
@@ -468,7 +468,7 @@ Rape     -0.5434321 -0.1673186  0.8177779  0.08902432</code></pre>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>) , <span class="at">type =</span> <span class="st">"b"</span>,</span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -575,7 +575,7 @@ California -2.499 -1.527  0.593 -0.339</code></pre>
 <span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">'goldenrod'</span>,</span>
 <span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">'Can you see any clusters?'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We now perform K-means clustering with K = 2.</p>
@@ -596,7 +596,7 @@ California -2.499 -1.527  0.593 -0.339</code></pre>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"K- Means Clustering Results with K = 2"</span>, </span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>, <span class="at">pch =</span> <span class="dv">20</span> , <span class="at">cex =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Here the observations can be easily plotted because they are two-dimensional. If there were more than two variables then we could instead perform PCA and plot the first two principal components score vectors.</p>
@@ -631,7 +631,7 @@ Available components:
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"K- Means Clustering Results with K = 3"</span>, </span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>, <span class="at">pch =</span> <span class="dv">20</span> , <span class="at">cex =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>When K = 3, K-means clustering splits up the “manufactured” clusters.</p>
@@ -688,7 +688,7 @@ Available components:
 <span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span> (hc.single, <span class="at">main =</span> <span class="st">"Single Linkage"</span>, </span>
 <span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">sub =</span> <span class="st">""</span>, <span class="at">cex =</span> .<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -731,7 +731,7 @@ Available components:
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( <span class="fu">hclust</span>(<span class="fu">dist</span>(xsc), <span class="at">method =</span> <span class="st">"complete"</span>), </span>
 <span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"Hierarchical Clustering with Scaled Features"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -748,7 +748,7 @@ Available components:
 <span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Complete Linkage with Correlation - Based Distance"</span>, </span>
 <span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">sub =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -760,30 +760,27 @@ Available components:
 <p>Unsupervised techniques are often used in the analysis of genomic data. In particular, PCA and hierarchical clustering are popular tools. We illustrate these techniques on the <code>NCI60</code> cancer cell line microarray data, which consists of 6,830 gene expression measurements on 64 cancer cell lines.</p>
 <p>The question here is whether there are any genes that cluster by cell line.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ISLR2' was built under R version 4.1.1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>nci.labs <span class="ot">&lt;-</span> NCI60<span class="sc">$</span>labs</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>nci.data <span class="ot">&lt;-</span> NCI60<span class="sc">$</span>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>nci.labs <span class="ot">&lt;-</span> NCI60<span class="sc">$</span>labs</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>nci.data <span class="ot">&lt;-</span> NCI60<span class="sc">$</span>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Each cell line is labeled with a cancer type, given in <code>nci.labs</code>. We do not make use of the cancer types in performing PCA and clustering, as these are unsupervised techniques. But after performing PCA and clustering, we will check to see the extent to which these cancer types agree with the results of these unsupervised techniques.</p>
 <p>The data has 64 rows and 6,830 columns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(nci.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(nci.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]   64 6830</code></pre>
 </div>
 </div>
 <p>We begin by examining the cancer types for the cell lines.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cancer type labels for the lines</span></span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>nci.labs[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cancer type labels for the lines</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>nci.labs[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "CNS"   "CNS"   "CNS"   "RENAL"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count of types</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(nci.labs) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count of types</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(nci.labs) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>nci.labs
      BREAST         CNS       COLON K562A-repro K562B-repro    LEUKEMIA 
@@ -799,39 +796,39 @@ MCF7A-repro MCF7D-repro    MELANOMA       NSCLC     OVARIAN    PROSTATE
 <h3 class="anchored" data-anchor-id="pca-nc160">PCA NC160</h3>
 <p>We first perform PCA on the data after scaling the variables (genes) to have standard deviation one, although one might reasonably argue that it is better not to scale the genes (i.e.&nbsp;this is somewhat subjective).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>pr.out <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(nci.data, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>pr.out <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(nci.data, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We now plot the first few principal component score vectors, in order to visualize the data. The observations (cell lines) corresponding to a given cancer type will be plotted in the same color, so that we can see to what extent the observations within a cancer type are similar to each other. We first create a simple function that assigns a distinct color to each element of a numeric vector. The function will be used to assign a color to each of the 64 cell lines, based on the cancer type to which it corresponds.</p>
 </section>
 <section id="rainbow-function" class="level3">
 <h3 class="anchored" data-anchor-id="rainbow-function"><code>rainbow()</code> function</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make function to set different colour palette for categories</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>Cols <span class="ot">&lt;-</span> <span class="cf">function</span>(vec){</span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  cols <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="fu">length</span>(<span class="fu">unique</span>(vec)))</span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cols[<span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(vec))])</span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make function to set different colour palette for categories</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>Cols <span class="ot">&lt;-</span> <span class="cf">function</span>(vec){</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  cols <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="fu">length</span>(<span class="fu">unique</span>(vec)))</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cols[<span class="fu">as.numeric</span>(<span class="fu">as.factor</span>(vec))])</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that the <code>rainbow()</code> function takes as its argument a positive integer, and returns a vector containing that number of distinct colors. We now can plot the principal component score vectors.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization of clusters for PC1 and PC2</span></span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr.out<span class="sc">$</span>x[ , <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col =</span> <span class="fu">Cols</span>(nci.labs), <span class="at">pch =</span> <span class="dv">19</span>, </span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Z1"</span>, <span class="at">ylab =</span> <span class="st">"Z2"</span>)</span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization of clusters for PC1 and PC3</span></span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span> (pr.out<span class="sc">$</span>x[ , <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)], <span class="at">col =</span> <span class="fu">Cols</span> (nci.labs), <span class="at">pch =</span> <span class="dv">19</span>, </span>
-<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"Z1"</span>, <span class="at">ylab =</span> <span class="st">"Z3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization of clusters for PC1 and PC2</span></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr.out<span class="sc">$</span>x[ , <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col =</span> <span class="fu">Cols</span>(nci.labs), <span class="at">pch =</span> <span class="dv">19</span>, </span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Z1"</span>, <span class="at">ylab =</span> <span class="st">"Z2"</span>)</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization of clusters for PC1 and PC3</span></span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span> (pr.out<span class="sc">$</span>x[ , <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)], <span class="at">col =</span> <span class="fu">Cols</span> (nci.labs), <span class="at">pch =</span> <span class="dv">19</span>, </span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"Z1"</span>, <span class="at">ylab =</span> <span class="st">"Z3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-72-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>On the whole, cell lines corresponding to a single cancer type do tend to have similar values on the first few principal component score vectors. This indicates that cell lines from the same cancer type tend to have pretty similar gene expression levels.</p>
 <p>We can obtain a summary of the proportion of variance explained (PVE) of the first few principal components using the <code>summary()</code> method for a <code>prcomp</code> object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># just slice out first 5 PCs to peek</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pr.out)<span class="sc">$</span>importance[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># just slice out first 5 PCs to peek</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pr.out)<span class="sc">$</span>importance[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                            PC1      PC2      PC3      PC4      PC5
 Standard deviation     27.85347 21.48136 19.82046 17.03256 15.97181
@@ -841,10 +838,10 @@ Cumulative Proportion   0.11359  0.18115  0.23867  0.28115  0.31850</code></pre>
 </div>
 <p>Using the <code>plot()</code> function, we can also plot the variance explained by the first few principal components.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr.out, <span class="at">xlab =</span> <span class="st">'PC1 through PC10'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr.out, <span class="at">xlab =</span> <span class="st">'PC1 through PC10'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -852,16 +849,16 @@ Cumulative Proportion   0.11359  0.18115  0.23867  0.28115  0.31850</code></pre>
 <h3 class="anchored" data-anchor-id="fancier-var-plots">Fancier var plots</h3>
 <p>Note that the height of each bar in the bar plot is given by squaring the corresponding element of <code>pr.out$sdev</code>. However, it is more informative to plot the PVE of each principal component (i.e.&nbsp;a scree plot) and the cumulative PVE of each principal component. This can be done with just a little work.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>pve <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> pr.out<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(pr.out<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pve, <span class="at">type =</span> <span class="st">"o"</span>, </span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"PVE"</span>, <span class="at">xlab =</span> <span class="st">"Principal Component"</span>, </span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
-<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cumsum</span>(pve), <span class="at">type =</span> <span class="st">"o"</span>, </span>
-<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Cumulative PVE"</span>, <span class="at">xlab =</span> <span class="st">"Principal Component"</span>, </span>
-<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>pve <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> pr.out<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(pr.out<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pve, <span class="at">type =</span> <span class="st">"o"</span>, </span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"PVE"</span>, <span class="at">xlab =</span> <span class="st">"Principal Component"</span>, </span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cumsum</span>(pve), <span class="at">type =</span> <span class="st">"o"</span>, </span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Cumulative PVE"</span>, <span class="at">xlab =</span> <span class="st">"Principal Component"</span>, </span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-78-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We see that together, the first seven principal components explain around 40% of the variance in the data. This is not a huge amount of the variance. However, looking at the scree plot, we see that while each of the first seven principal components explain a substantial amount of variance, there is a marked decrease in the variance explained by further principal components. That is, there is an elbow in the plot after approximately the seventh principal component. This suggests that there may be little benefit to examining more than seven or so principal components (though even examining seven principal components may be difficult in itself).</p>
@@ -870,25 +867,25 @@ Cumulative Proportion   0.11359  0.18115  0.23867  0.28115  0.31850</code></pre>
 <h3 class="anchored" data-anchor-id="clustering-nc160">clustering NC160</h3>
 <p>We now proceed to hierarchically cluster the cell lines in the NCI60 data, with the goal of finding out whether or not the observations cluster into distinct types of cancer. To begin, we standardize the variables to have mean zero and standard deviation one. As mentioned earlier, this step is optional and should be performed only if we want each gene to be on the same scale.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>sd.data <span class="ot">&lt;-</span> <span class="fu">scale</span>(nci.data )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>sd.data <span class="ot">&lt;-</span> <span class="fu">scale</span>(nci.data )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We now perform hierarchical clustering of the observations using complete, single, and average linkage. Euclidean distance is used as the dissimilarity measure.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>data.dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(sd.data)</span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hclust</span>(data.dist), <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">sub =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>, </span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> nci.labs, <span class="at">main =</span> <span class="st">"Complete Linkage"</span>)</span>
-<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hclust</span>(data.dist, <span class="at">method =</span> <span class="st">"average"</span>),</span>
-<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> nci.labs, <span class="at">main =</span> <span class="st">"Average Linkage"</span>, </span>
-<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">sub =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>)</span>
-<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hclust</span>(data.dist, <span class="at">method =</span> <span class="st">"single"</span>), </span>
-<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> nci.labs , <span class="at">main =</span> <span class="st">"Single Linkage"</span>, </span>
-<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">sub =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>data.dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(sd.data)</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hclust</span>(data.dist), <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">sub =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>, </span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> nci.labs, <span class="at">main =</span> <span class="st">"Complete Linkage"</span>)</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hclust</span>(data.dist, <span class="at">method =</span> <span class="st">"average"</span>),</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> nci.labs, <span class="at">main =</span> <span class="st">"Average Linkage"</span>, </span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">sub =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>)</span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hclust</span>(data.dist, <span class="at">method =</span> <span class="st">"single"</span>), </span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> nci.labs , <span class="at">main =</span> <span class="st">"Single Linkage"</span>, </span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">sub =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-82-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>These figures are not aesthetically pleasing, but we can still see that the three methods resulted in very different clustering.</p>
@@ -898,9 +895,9 @@ Cumulative Proportion   0.11359  0.18115  0.23867  0.28115  0.31850</code></pre>
 <h3 class="anchored" data-anchor-id="cutting-clusters">Cutting clusters</h3>
 <p>We can cut the dendrogram at the height that will yield a particular number of clusters, say four:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>hc.out <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(sd.data ))</span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>hc.clusters <span class="ot">&lt;-</span> <span class="fu">cutree</span> (hc.out, <span class="dv">4</span>)</span>
-<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(hc.clusters , nci.labs )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>hc.out <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(sd.data ))</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>hc.clusters <span class="ot">&lt;-</span> <span class="fu">cutree</span> (hc.out, <span class="dv">4</span>)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(hc.clusters , nci.labs )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           nci.labs
 hc.clusters BREAST CNS COLON K562A-repro K562B-repro LEUKEMIA MCF7A-repro
@@ -918,17 +915,17 @@ hc.clusters MCF7D-repro MELANOMA NSCLC OVARIAN PROSTATE RENAL UNKNOWN
 </div>
 <p>There are some clear patterns. All the leukemia cell lines fall in cluster 3, while the breast cancer cell lines are spread out over three different clusters. We can plot the cut on the dendrogram that produces these four clusters:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span> (hc.out, <span class="at">labels =</span> nci.labs )</span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">139</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span> (hc.out, <span class="at">labels =</span> nci.labs )</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">139</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-86-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The <code>abline()</code> function draws a straight line on top of any existing plot in R. The argument <code>h = 139</code> plots a horizontal line at height 139 on the dendrogram; this is the height that results in four distinct clusters. It is easy to verify that the resulting clusters are the same as the ones we obtained using <code>cutree(hc.out, 4)</code>.</p>
 <p>Printing the output of <code>hclust</code> gives a useful brief summary of the object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>hc.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>hc.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -941,10 +938,10 @@ Number of objects: 64 </code></pre>
 </div>
 <p>K-means clustering and hierarchical clustering with the dendrogram cut to obtain the same number of clusters can yield very diﬀerent results. How do these NCI60 hierarchical clustering results compare to what we get if we perform K-means clustering with K = 4?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span> (<span class="dv">2</span>)</span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>km.out <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(sd.data, <span class="dv">4</span>, <span class="at">nstart =</span> <span class="dv">20</span>)</span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>km.clusters <span class="ot">&lt;-</span> km.out<span class="sc">$</span>cluster</span>
-<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(km.clusters, hc.clusters ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span> (<span class="dv">2</span>)</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>km.out <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(sd.data, <span class="dv">4</span>, <span class="at">nstart =</span> <span class="dv">20</span>)</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>km.clusters <span class="ot">&lt;-</span> km.out<span class="sc">$</span>cluster</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(km.clusters, hc.clusters ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           hc.clusters
 km.clusters  1  2  3  4
@@ -957,13 +954,13 @@ km.clusters  1  2  3  4
 <p>We see that the four clusters obtained using hierarchical clustering and K-means clustering are somewhat diﬀerent. Cluster 4 in K-means clustering is identical to cluster 3 in hierarchical clustering. However, the other clusters diﬀer: for instance, cluster 2 in K-means clustering contains a portion of the observations assigned to cluster 1 by hierarchical clustering, as well as all of the observations assigned to cluster 2 by hierarchical clustering.</p>
 <p>Rather than performing hierarchical clustering on the entire data matrix, we can simply perform hierarchical clustering on the first few principal component score vectors, as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>hc.out <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(pr.out<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]) )</span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span> (hc.out, <span class="at">labels =</span> nci.labs,</span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"Hier. Clust. on First Five Score Vectors"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>hc.out <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(pr.out<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]) )</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span> (hc.out, <span class="at">labels =</span> nci.labs,</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"Hier. Clust. on First Five Score Vectors"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-92-1.png" class="img-fluid" width="672"></p>
+<p><img src="lab10-unsupervised_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">cutree</span>(hc.out, <span class="dv">4</span>), nci.labs )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">cutree</span>(hc.out, <span class="dv">4</span>), nci.labs )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   nci.labs
     BREAST CNS COLON K562A-repro K562B-repro LEUKEMIA MCF7A-repro MCF7D-repro
