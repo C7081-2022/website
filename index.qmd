@@ -12,7 +12,9 @@ Welcome to C7081. This module is a survey of machine learning and statistical me
 
 ## C7081 Resources
 
--   **Textbook**: [James et al. 2021 Introduction to statistical learning 2ed](https://www.statlearning.com/)
+-   **Textbook**: [James et al. 2023 Introduction to statistical learning for Python](https://www.statlearning.com/)
+
+-   **Textbook**: [James et al. 2021 Introduction to statistical learning for R 2ed](https://www.statlearning.com/)
 
 -   **Slack workspace** (for enrolled students)
 
