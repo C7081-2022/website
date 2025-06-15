@@ -1,0 +1,36 @@
+cff-version: 1.0.0
+message: "If you use this software, please cite it as below."
+title: "Statistical analysis for data science"
+abstract: "This module is a survey of machine learning and statistical methods including supervised and unsupervised classification, regression, and tree-based methods. There is an emphasis on practical applications using a series of data stories and lab exercises, along with lectures on selected topics and readings. A prerequisite is a basic working knowledge of R programming and introductory statistics."
+authors:
+- family-names: "Harris"
+  given-names: "W. E."
+  orcid: "https://orcid.org/0000-0002-9038-8656"
+title: "R Stats Bootcamp"
+version: 2022.1.0
+doi: 10.5281/zenodo.15668388
+date-released: 2022-08-01
+url: "https://c7081-2022.github.io/website/"
+license: MIT
+keywords:
+  - R programming
+  - python programming
+  - statistics
+  - machine learning
+  - data analysis
+  - reproducible research
+  - educational materials
+  - self-paced learning
+preferred-citation:
+  type: misc
+  authors:
+  - family-names: "Harris"
+    given-names: "W. E."
+    orcid: "https://orcid.org/0000-0002-9038-8656"
+    affiliation: "Centre for Agricultural Data Science, Harper Adams University"
+  title: "Statistical analysis for data science: A self-paced course for machine and statistical learning"
+  year: 2022  # Update to your publication year
+  url: "https://c7081-2022.github.io/website//"
+  doi: "10.5281/zenodo.15668388"
+  publisher: "Centre for Agricultural Data Science, Harper Adams University"
+  notes: "Open educational resource for learning machne and statistical learning"
