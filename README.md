@@ -1,5 +1,7 @@
 # C7081 Statistical Analysis for Data Science - Course Website
 
+Harris, W. E. (2022). Statistical analysis for data science: A self-paced course for machine and statistical learning. https://c7081-2022.github.io/website/ https://github.com/C7081-2022/website [![DOI](https://zenodo.org/badge/537510345.svg)](https://doi.org/10.5281/zenodo.15668388)
+
 This repository contains the course website for **C7081 Statistical Analysis for Data Science** (2022) at Harper Adams University.
 
 ## About
